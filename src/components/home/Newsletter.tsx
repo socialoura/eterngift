@@ -5,10 +5,12 @@ import { motion } from 'framer-motion'
 import { Mail, Heart, Sparkles, Gift } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
+import { useTranslation } from '@/components/providers/I18nProvider'
 
 export function Newsletter() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const { t } = useTranslation()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -90,11 +92,11 @@ export function Newsletter() {
                 </motion.div>
 
                 <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-4">
-                  Get <span className="text-[#D4AF88]">10% Off</span> Your First Order
+                  {t('newsletter.title')}
                 </h2>
                 
                 <p className="text-white/80 mb-6">
-                  Join our community of romantics! Get exclusive offers, gift ideas, and early access to new collections.
+                  {t('newsletter.subtitle')}
                 </p>
 
                 <div className="flex flex-wrap gap-4 justify-center md:justify-start">
@@ -137,7 +139,7 @@ export function Newsletter() {
                       <div>
                         <Input
                           type="email"
-                          placeholder="Enter your email address"
+                          placeholder={t('newsletter.placeholder')}
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           required
@@ -152,13 +154,13 @@ export function Newsletter() {
                           className="w-full bg-gradient-to-r from-[#B71C1C] to-[#D4AF88] hover:from-[#8B1538] hover:to-[#B71C1C] text-white py-4 text-lg font-semibold"
                         >
                           <Gift className="w-5 h-5 mr-2" />
-                          Get My 10% Discount
+                          {t('newsletter.subscribe')}
                         </Button>
                       </motion.div>
                     </form>
 
                     <p className="text-gray-400 text-xs mt-4 text-center">
-                      No spam, ever. Unsubscribe anytime.
+                      {t('newsletter.privacy')}
                     </p>
                   </div>
                 )}

@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/Input'
 import { PaymentModal } from '@/components/checkout/PaymentModal'
 import { useCartStore } from '@/store/cart'
 import { useCurrencyStore } from '@/store/currency'
+import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 import { ShippingInfo } from '@/lib/types'
 
 const shippingSchema = z.object({
@@ -48,6 +49,8 @@ export default function CheckoutPage() {
 
   const { items, getSubtotalUsd, clearCart } = useCartStore()
   const { formatPrice, currency } = useCurrencyStore()
+  const { t } = useTranslation()
+  const locale = useLocale()
 
   const subtotalUsd = getSubtotalUsd()
   const shippingUsd = subtotalUsd > 50 ? 0 : 9.99
@@ -70,11 +73,11 @@ export default function CheckoutPage() {
 
   const handlePaymentSuccess = (orderId: string) => {
     clearCart()
-    router.push(`/order-confirmation?orderId=${orderId}`)
+    router.push(`/${locale}/order-confirmation?orderId=${orderId}`)
   }
 
   if (items.length === 0) {
-    router.push('/cart')
+    router.push(`/${locale}/cart`)
     return null
   }
 
@@ -84,11 +87,11 @@ export default function CheckoutPage() {
         {/* Header */}
         <div className="mb-8">
           <Link
-            href="/cart"
+            href={`/${locale}/cart`}
             className="inline-flex items-center text-gray-600 hover:text-primary transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Cart
+            {t('cart.yourCart')}
           </Link>
         </div>
 
@@ -99,19 +102,19 @@ export default function CheckoutPage() {
             animate={{ opacity: 1, x: 0 }}
           >
             <h1 className="text-2xl font-heading font-bold text-gray-900 mb-6">
-              Shipping Information
+              {t('checkout.shipping')}
             </h1>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <Input
-                  label="First Name"
+                  label={t('checkout.firstName')}
                   placeholder="John"
                   {...register('firstName')}
                   error={errors.firstName?.message}
                 />
                 <Input
-                  label="Last Name"
+                  label={t('checkout.lastName')}
                   placeholder="Doe"
                   {...register('lastName')}
                   error={errors.lastName?.message}
@@ -119,7 +122,7 @@ export default function CheckoutPage() {
               </div>
 
               <Input
-                label="Email"
+                label={t('checkout.email')}
                 type="email"
                 placeholder="john@example.com"
                 {...register('email')}
@@ -127,7 +130,7 @@ export default function CheckoutPage() {
               />
 
               <Input
-                label="Address"
+                label={t('checkout.address')}
                 placeholder="123 Love Street"
                 {...register('address')}
                 error={errors.address?.message}
@@ -135,13 +138,13 @@ export default function CheckoutPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <Input
-                  label="City"
+                  label={t('checkout.city')}
                   placeholder="New York"
                   {...register('city')}
                   error={errors.city?.message}
                 />
                 <Input
-                  label="Postal Code"
+                  label={t('checkout.postalCode')}
                   placeholder="10001"
                   {...register('postalCode')}
                   error={errors.postalCode?.message}
@@ -150,7 +153,7 @@ export default function CheckoutPage() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Country
+                  {t('checkout.country')}
                 </label>
                 <select
                   {...register('country')}
@@ -178,7 +181,7 @@ export default function CheckoutPage() {
                   disabled={!isValid}
                 >
                   <CreditCard className="w-5 h-5 mr-2" />
-                  Continue to Payment
+                  {t('common.continueToPayment')}
                 </Button>
               </div>
 
@@ -196,7 +199,7 @@ export default function CheckoutPage() {
           >
             <div className="bg-white rounded-xl p-6 shadow-card sticky top-24">
               <h2 className="text-xl font-heading font-semibold text-gray-900 mb-6">
-                Order Summary
+                {t('cart.yourCart')}
               </h2>
 
               {/* Items */}

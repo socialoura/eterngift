@@ -46,16 +46,15 @@ export function middleware(request: NextRequest) {
   }
 
   // Determine the locale to use
-  let locale = defaultLocale
-
-  // 1. Check for saved preference in cookie
-  const savedLocale = request.cookies.get('preferred-locale')?.value
-  if (savedLocale && isValidLocale(savedLocale)) {
-    locale = savedLocale
-  } else {
-    // 2. Use Accept-Language header
-    const acceptLanguage = request.headers.get('accept-language')
-    locale = getLocaleFromAcceptLanguage(acceptLanguage)
+  // Always use Accept-Language header for automatic detection
+  // Cookie is only used when user manually selects a language
+  const acceptLanguage = request.headers.get('accept-language')
+  let locale = getLocaleFromAcceptLanguage(acceptLanguage)
+  
+  // Only override with cookie if user explicitly changed language (has 'user-selected-locale' cookie)
+  const userSelectedLocale = request.cookies.get('user-selected-locale')?.value
+  if (userSelectedLocale && isValidLocale(userSelectedLocale)) {
+    locale = userSelectedLocale
   }
 
   // Redirect to the localized version

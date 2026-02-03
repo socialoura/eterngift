@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Heart, Sparkles, Gift } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 
 function FloatingHeart({ delay, duration, left, size, opacity }: { 
   delay: number; duration: number; left: string; size: number; opacity: number 
@@ -62,6 +63,9 @@ export function HeroSection() {
   const y1 = useTransform(scrollY, [0, 500], [0, 150])
   const y2 = useTransform(scrollY, [0, 500], [0, -100])
   const opacity = useTransform(scrollY, [0, 300], [1, 0])
+  
+  const { t } = useTranslation()
+  const locale = useLocale()
 
   const floatingHearts = [
     { delay: 0, duration: 8, left: '5%', size: 20, opacity: 0.4 },
@@ -138,7 +142,7 @@ export function HeroSection() {
                 className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 mb-6"
               >
                 <Heart className="w-4 h-4 text-pink-300 fill-pink-300" />
-                <span className="text-white/90 text-sm font-medium">Valentine's Day Collection 2026</span>
+                <span className="text-white/90 text-sm font-medium">{t('collections.badge')}</span>
                 <Sparkles className="w-4 h-4 text-[#D4AF88]" />
               </motion.div>
 
@@ -148,7 +152,7 @@ export function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white leading-[1.1]"
               >
-                Make This
+                {t('hero.title')}
                 <motion.span 
                   className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-200 via-[#D4AF88] to-pink-300"
                   animate={{ 
@@ -157,9 +161,8 @@ export function HeroSection() {
                   transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
                   style={{ backgroundSize: '200% 200%' }}
                 >
-                  Valentine's Day
+                  {t('hero.titleHighlight')}
                 </motion.span>
-                <span className="block">Unforgettable</span>
               </motion.h1>
 
               <motion.p
@@ -168,8 +171,7 @@ export function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="mt-8 text-lg md:text-xl text-white/80 max-w-xl mx-auto lg:mx-0 leading-relaxed"
               >
-                Discover our handcrafted eternal roses and personalized jewelry. 
-                Each gift tells a story of love that lasts forever.
+                {t('hero.subtitle')}
               </motion.p>
 
               <motion.div
@@ -178,7 +180,7 @@ export function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
               >
-                <Link href="/products">
+                <Link href={`/${locale}/collections`}>
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -188,11 +190,11 @@ export function HeroSection() {
                       className="w-full sm:w-auto bg-white text-[#8B1538] hover:bg-[#D4AF88] hover:text-white px-8 py-6 text-lg font-semibold shadow-2xl"
                     >
                       <Gift className="w-5 h-5 mr-2" />
-                      Shop Collection
+                      {t('hero.shopNow')}
                     </Button>
                   </motion.div>
                 </Link>
-                <Link href="/products/eternal-rose-bear">
+                <Link href={`/${locale}/products/eternal-rose-bear`}>
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -202,7 +204,7 @@ export function HeroSection() {
                       variant="outline"
                       className="w-full sm:w-auto border-2 border-white/50 text-white hover:bg-white/10 px-8 py-6 text-lg"
                     >
-                      View Bestseller
+                      {t('hero.learnMore')}
                     </Button>
                   </motion.div>
                 </Link>
@@ -216,13 +218,13 @@ export function HeroSection() {
                 className="mt-12 flex flex-wrap gap-6 justify-center lg:justify-start"
               >
                 {[
-                  { icon: '🚚', text: 'Free Shipping' },
-                  { icon: '💎', text: 'Premium Quality' },
-                  { icon: '🎁', text: 'Gift Wrapped' },
+                  { icon: '🚚', textKey: 'common.freeShipping' },
+                  { icon: '💎', textKey: 'common.handcraftedQuality' },
+                  { icon: '🎁', textKey: 'common.giftWrapping' },
                 ].map((badge, i) => (
                   <div key={i} className="flex items-center gap-2 text-white/70 text-sm">
                     <span className="text-lg">{badge.icon}</span>
-                    <span>{badge.text}</span>
+                    <span>{t(badge.textKey)}</span>
                   </div>
                 ))}
               </motion.div>

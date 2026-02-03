@@ -5,10 +5,13 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { CheckCircle, Heart, Mail, ShoppingBag, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 
 export default function OrderConfirmationPage() {
   const searchParams = useSearchParams()
   const orderId = searchParams.get('orderId') || 'EG-XXXXXX'
+  const { t } = useTranslation()
+  const locale = useLocale()
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-b from-white to-light-pink/30">
@@ -38,12 +41,12 @@ export default function OrderConfirmationPage() {
 
         {/* Title */}
         <h1 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">
-          Thank You for Your Order!
+          {t('common.orderConfirmed')}
         </h1>
 
         {/* Order Number */}
         <div className="bg-white rounded-xl p-6 shadow-card mb-6">
-          <p className="text-gray-600 mb-2">Your order number is:</p>
+          <p className="text-gray-600 mb-2">{t('common.thankYou')}</p>
           <p className="text-2xl font-bold text-primary font-mono">{orderId}</p>
         </div>
 
@@ -51,25 +54,21 @@ export default function OrderConfirmationPage() {
         <div className="space-y-4 mb-8">
           <div className="flex items-center justify-center gap-3 text-gray-600">
             <Mail className="w-5 h-5 text-rose-gold" />
-            <p>A confirmation email has been sent to your inbox</p>
+            <p>{t('common.confirmationEmail')}</p>
           </div>
-          <p className="text-gray-500 text-sm">
-            We&apos;re preparing your order with love and care. You&apos;ll receive 
-            shipping updates via email.
-          </p>
         </div>
 
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/products">
+          <Link href={`/${locale}/collections`}>
             <Button size="lg">
               <ShoppingBag className="w-5 h-5 mr-2" />
-              Continue Shopping
+              {t('common.continueShopping')}
             </Button>
           </Link>
-          <Link href="/">
+          <Link href={`/${locale}`}>
             <Button variant="outline" size="lg">
-              Back to Home
+              {t('common.home')}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>

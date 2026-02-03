@@ -10,6 +10,7 @@ import { useCartStore } from '@/store/cart'
 import { useCurrencyStore } from '@/store/currency'
 import { SUPPORTED_CURRENCIES } from '@/lib/currency'
 import { locales, localeNames, localeFlags, localeCurrencies, type Locale } from '@/lib/i18n/config'
+import { useTranslation } from '@/components/providers/I18nProvider'
 import { cn } from '@/lib/utils'
 
 export function Header() {
@@ -31,7 +32,11 @@ export function Header() {
   const isHomepage = pathnameWithoutLocale === '/'
   const useTransparentHeader = isHomepage && !isScrolled
 
+  const { t } = useTranslation()
+
   const switchLocale = (newLocale: Locale) => {
+    // Set user-selected-locale to indicate manual selection (overrides Accept-Language)
+    document.cookie = `user-selected-locale=${newLocale};path=/;max-age=31536000`
     document.cookie = `preferred-locale=${newLocale};path=/;max-age=31536000`
     document.cookie = `preferred-currency=${localeCurrencies[newLocale]};path=/;max-age=31536000`
     setCurrency(localeCurrencies[newLocale] as 'USD' | 'EUR' | 'GBP' | 'CAD' | 'AUD')
@@ -48,12 +53,12 @@ export function Header() {
   }, [])
 
   const navLinks = [
-    { href: `/${currentLocale}`, label: 'Home' },
-    { href: `/${currentLocale}/collections`, label: 'Collections' },
-    { href: `/${currentLocale}/products/eternal-rose-bear`, label: 'Rose Bear' },
-    { href: `/${currentLocale}/products/eternal-rose-box`, label: 'Rose Box' },
-    { href: `/${currentLocale}/faq`, label: 'FAQ' },
-    { href: `/${currentLocale}/contact`, label: 'Contact' },
+    { href: `/${currentLocale}`, labelKey: 'common.home' },
+    { href: `/${currentLocale}/collections`, labelKey: 'common.collections' },
+    { href: `/${currentLocale}/products/eternal-rose-bear`, labelKey: 'common.roseBear' },
+    { href: `/${currentLocale}/products/eternal-rose-box`, labelKey: 'common.roseBox' },
+    { href: `/${currentLocale}/faq`, labelKey: 'common.faq' },
+    { href: `/${currentLocale}/contact`, labelKey: 'common.contact' },
   ]
 
   return (
@@ -74,7 +79,7 @@ export function Header() {
       )}>
         <p className="flex items-center justify-center gap-2">
           <span>💝</span>
-          <span className="font-medium">Valentine&apos;s Special: Free Shipping on Orders $50+</span>
+          <span className="font-medium">{t('header.promo')}</span>
           <span>💝</span>
         </p>
       </div>
@@ -110,7 +115,7 @@ export function Header() {
                 'text-[10px] font-medium tracking-widest uppercase hidden sm:block transition-all',
                 useTransparentHeader ? 'text-white/70' : 'text-gray-400'
               )}>
-                Forever in Love
+                {t('header.foreverInLove')}
               </span>
             </div>
           </Link>
@@ -128,7 +133,7 @@ export function Header() {
                     : 'text-gray-600 hover:text-[#B71C1C]'
                 )}
               >
-                <span className="relative z-10">{link.label}</span>
+                <span className="relative z-10">{t(link.labelKey)}</span>
                 <span className={cn(
                   'absolute inset-0 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-200 origin-center',
                   useTransparentHeader ? 'bg-white/20' : 'bg-[#FFE5E5]'
@@ -326,7 +331,7 @@ export function Header() {
                       className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:text-[#B71C1C] hover:bg-[#FFE5E5] rounded-xl transition-all font-medium"
                     >
                       <span className="w-2 h-2 bg-gradient-to-r from-[#B71C1C] to-[#D4AF88] rounded-full" />
-                      {link.label}
+                      {t(link.labelKey)}
                     </Link>
                   </motion.div>
                 ))}

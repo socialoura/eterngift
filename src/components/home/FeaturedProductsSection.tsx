@@ -10,6 +10,7 @@ import { eternalRoseBear, eternalRoseBox, ProductVariant } from '@/lib/products-
 import { QuickBuyModal } from '@/components/checkout/QuickBuyModal'
 import { useCurrencyStore } from '@/store/currency'
 import { useCartStore } from '@/store/cart'
+import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 import { cn } from '@/lib/utils'
 
 function ProductCard({ product, index }: { product: ProductVariant; index: number }) {
@@ -23,6 +24,8 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
   
   const { formatPrice } = useCurrencyStore()
   const addItem = useCartStore((state) => state.addItem)
+  const { t } = useTranslation()
+  const locale = useLocale()
 
   const colorOption = product.options.find((o) => o.name.includes('Color') && !o.name.includes('Necklace'))
   const necklaceOption = product.options.find((o) => o.name.includes('Necklace'))
@@ -196,7 +199,7 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
                 <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400 drop-shadow-sm" />
               ))}
             </div>
-            <span className="text-sm text-gray-500 font-medium">(128 reviews)</span>
+            <span className="text-sm text-gray-500 font-medium">(128 {t('featured.reviews')})</span>
           </div>
 
           {/* Price with enhanced styling */}
@@ -215,7 +218,7 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
           {/* Color options */}
           {colorOption && (
             <div className="space-y-2">
-              <p className="text-sm font-medium text-gray-700">Color: <span className="text-[#B71C1C]">{selectedColor}</span></p>
+              <p className="text-sm font-medium text-gray-700">{t('product.color')}: <span className="text-[#B71C1C]">{selectedColor}</span></p>
               <div className="flex flex-wrap gap-2">
                 {colorOption.values.map((value) => (
                   <button
@@ -244,7 +247,7 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
           {/* Necklace options */}
           {necklaceOption && (
             <div className="space-y-2">
-              <p className="text-sm font-medium text-gray-700">Necklace: <span className="text-[#B71C1C]">{selectedNecklace}</span></p>
+              <p className="text-sm font-medium text-gray-700">{t('product.necklace')}: <span className="text-[#B71C1C]">{selectedNecklace}</span></p>
               <div className="flex flex-wrap gap-2">
                 {necklaceOption.values.map((necklace) => (
                   <button
@@ -271,7 +274,7 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
               className="flex-1 bg-gradient-to-r from-[#B71C1C] to-[#8B1538] hover:from-[#8B1538] hover:to-[#6B0F2A] shadow-lg shadow-[#B71C1C]/25"
             >
               <Sparkles className="w-4 h-4 mr-2" />
-              Buy Now
+              {t('common.buyNow')}
             </Button>
             <Button
               onClick={handleAddToCart}
@@ -291,11 +294,11 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
           <div className="flex items-center justify-center gap-4 pt-2 text-xs text-gray-500">
             <div className="flex items-center gap-1">
               <Truck className="w-3.5 h-3.5" />
-              <span>Free Shipping</span>
+              <span>{t('common.freeShipping')}</span>
             </div>
             <div className="flex items-center gap-1">
               <Shield className="w-3.5 h-3.5" />
-              <span>Secure</span>
+              <span>{t('common.secure')}</span>
             </div>
           </div>
         </div>
@@ -320,6 +323,9 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
 }
 
 export function FeaturedProductsSection() {
+  const { t } = useTranslation()
+  const locale = useLocale()
+  
   return (
     <section className="py-24 bg-gradient-to-b from-white via-[#FFF8F8] to-white relative overflow-hidden">
       {/* Subtle background decorations */}
@@ -366,11 +372,11 @@ export function FeaturedProductsSection() {
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-4">
-            Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B71C1C] to-[#D4AF88]">Eternal</span> Gifts
+            {t('featured.title')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B71C1C] to-[#D4AF88]">{t('featured.titleHighlight')}</span> {t('featured.titleEnd')}
           </h2>
           
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Handcrafted with love, designed to last forever. Each piece tells a unique story of eternal romance.
+            {t('featured.subtitle')}
           </p>
         </motion.div>
 
@@ -387,7 +393,7 @@ export function FeaturedProductsSection() {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <Link href="/collections">
+          <Link href={`/${locale}/collections`}>
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -398,7 +404,7 @@ export function FeaturedProductsSection() {
                 variant="outline"
                 className="border-2 border-[#B71C1C] text-[#B71C1C] hover:bg-[#B71C1C] hover:text-white px-8 group"
               >
-                View All Collection
+                {t('common.viewAllCollection')}
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </motion.div>

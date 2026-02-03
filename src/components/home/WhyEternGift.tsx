@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Heart, Shield, Truck, Gift, Sparkles, Clock } from 'lucide-react'
+import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 
 const features = [
   {
@@ -43,6 +44,9 @@ const features = [
 ]
 
 export function WhyEternGift() {
+  const { t } = useTranslation()
+  const locale = useLocale()
+  
   return (
     <section className="py-24 bg-gradient-to-b from-white via-[#FFFAFA] to-white relative overflow-hidden">
       {/* Background decorations */}
@@ -65,16 +69,15 @@ export function WhyEternGift() {
             viewport={{ once: true }}
             className="inline-block text-[#B71C1C] text-sm font-semibold tracking-wider uppercase mb-4"
           >
-            Why Choose Us
+            {t('whyUs.title')} {t('whyUs.titleHighlight')}
           </motion.span>
 
           <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-6">
-            The <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B71C1C] via-pink-500 to-[#D4AF88]">EternGift</span> Promise
+            {t('whyUs.title')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B71C1C] via-pink-500 to-[#D4AF88]">{t('whyUs.titleHighlight')}</span>
           </h2>
           
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            We're not just selling gifts – we're helping you create lasting memories. 
-            Here's what makes us different.
+            {t('whyUs.subtitle')}
           </p>
         </motion.div>
 
@@ -150,13 +153,13 @@ export function WhyEternGift() {
               </p>
 
               <motion.a
-                href="/products"
+                href={`/${locale}/collections`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-2 bg-white text-[#B71C1C] px-8 py-4 rounded-full font-semibold shadow-xl hover:shadow-2xl transition-shadow"
               >
                 <Gift className="w-5 h-5" />
-                Shop Now
+                {t('hero.shopNow')}
               </motion.a>
             </div>
           </div>

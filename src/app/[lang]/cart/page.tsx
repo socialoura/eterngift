@@ -7,10 +7,13 @@ import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, Heart } from 'lucide-reac
 import { Button } from '@/components/ui/Button'
 import { useCartStore } from '@/store/cart'
 import { useCurrencyStore } from '@/store/currency'
+import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, getTotalItems, getSubtotalUsd } = useCartStore()
   const { formatPrice } = useCurrencyStore()
+  const { t } = useTranslation()
+  const locale = useLocale()
 
   const subtotalUsd = getSubtotalUsd()
   const shippingUsd = subtotalUsd > 50 ? 0 : 9.99
@@ -28,14 +31,14 @@ export default function CartPage() {
             <ShoppingBag className="w-12 h-12 text-primary/50" />
           </div>
           <h1 className="text-2xl font-heading font-bold text-gray-900 mb-2">
-            Your cart is empty
+            {t('cart.empty')}
           </h1>
           <p className="text-gray-600 mb-6">
-            Looks like you haven&apos;t added any items yet
+            {t('cart.emptyDescription')}
           </p>
-          <Link href="/products">
+          <Link href={`/${locale}/collections`}>
             <Button>
-              Start Shopping
+              {t('cart.startShopping')}
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>
@@ -52,7 +55,7 @@ export default function CartPage() {
           animate={{ opacity: 1, y: 0 }}
         >
           <h1 className="text-3xl font-heading font-bold text-gray-900 mb-8">
-            Shopping Cart ({getTotalItems()} items)
+            {t('cart.yourCart')} ({getTotalItems()})
           </h1>
 
           <div className="grid lg:grid-cols-3 gap-8">
@@ -67,7 +70,7 @@ export default function CartPage() {
                   className="bg-white rounded-xl p-4 shadow-card flex gap-4"
                 >
                   {/* Product Image */}
-                  <Link href={`/products/${item.product.id === 1 ? 'eternal-rose-bear' : 'eternal-rose-box'}`}>
+                  <Link href={`/${locale}/products/${item.product.id === 1 ? 'eternal-rose-bear' : 'eternal-rose-box'}`}>
                     <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-lg overflow-hidden bg-cream shrink-0">
                       <Image
                         src={item.product.imageUrl || '/images/placeholder.jpg'}
@@ -81,7 +84,7 @@ export default function CartPage() {
                   {/* Product Info */}
                   <div className="flex-1 min-w-0">
                     <div className="flex justify-between gap-2">
-                      <Link href={`/products/${item.product.id === 1 ? 'eternal-rose-bear' : 'eternal-rose-box'}`}>
+                      <Link href={`/${locale}/products/${item.product.id === 1 ? 'eternal-rose-bear' : 'eternal-rose-box'}`}>
                         <h3 className="font-heading font-semibold text-gray-800 hover:text-primary transition-colors line-clamp-1">
                           {item.product.name}
                         </h3>
@@ -102,12 +105,12 @@ export default function CartPage() {
                       <div className="mt-2 text-xs text-gray-600 bg-light-pink/40 rounded-lg px-3 py-2">
                         {item.engravingLeftHeart && (
                           <p>
-                            <span className="font-medium">Left Heart:</span> {item.engravingLeftHeart}
+                            <span className="font-medium">{t('cart.leftHeart')}:</span> {item.engravingLeftHeart}
                           </p>
                         )}
                         {item.engravingRightHeart && (
                           <p>
-                            <span className="font-medium">Right Heart:</span> {item.engravingRightHeart}
+                            <span className="font-medium">{t('cart.rightHeart')}:</span> {item.engravingRightHeart}
                           </p>
                         )}
                       </div>
@@ -148,10 +151,10 @@ export default function CartPage() {
 
               {/* Continue Shopping */}
               <div className="pt-4">
-                <Link href="/products">
+                <Link href={`/${locale}/collections`}>
                   <Button variant="outline">
                     <ShoppingBag className="w-4 h-4 mr-2" />
-                    Continue Shopping
+                    {t('common.continueShopping')}
                   </Button>
                 </Link>
               </div>
@@ -165,19 +168,19 @@ export default function CartPage() {
                 className="bg-white rounded-xl p-6 shadow-card sticky top-24"
               >
                 <h2 className="text-xl font-heading font-semibold text-gray-900 mb-6">
-                  Order Summary
+                  {t('cart.yourCart')}
                 </h2>
 
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Subtotal</span>
+                    <span className="text-gray-600">{t('cart.subtotal')}</span>
                     <span className="font-medium">{formatPrice(subtotalUsd)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Shipping</span>
+                    <span className="text-gray-600">{t('cart.shipping')}</span>
                     <span className="font-medium">
                       {shippingUsd === 0 ? (
-                        <span className="text-green-600">Free</span>
+                        <span className="text-green-600">{t('cart.free')}</span>
                       ) : (
                         formatPrice(shippingUsd)
                       )}
@@ -190,15 +193,15 @@ export default function CartPage() {
                   )}
                   <div className="border-t border-gray-100 pt-3 mt-3">
                     <div className="flex justify-between text-lg font-bold">
-                      <span>Total</span>
+                      <span>{t('cart.total')}</span>
                       <span className="text-primary">{formatPrice(totalUsd)}</span>
                     </div>
                   </div>
                 </div>
 
-                <Link href="/checkout" className="block mt-6">
+                <Link href={`/${locale}/checkout`} className="block mt-6">
                   <Button className="w-full" size="lg">
-                    Proceed to Checkout
+                    {t('cart.proceedToCheckout')}
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
                 </Link>

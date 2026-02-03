@@ -4,10 +4,13 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Heart, Mail, Phone, MapPin, Facebook, Instagram, Twitter } from 'lucide-react'
+import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
   const [logoSrc, setLogoSrc] = useState('/logo.png')
+  const { t } = useTranslation()
+  const locale = useLocale()
 
   return (
     <footer className="bg-gray-900 text-white">
@@ -31,8 +34,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Express your love with our premium eternal roses and romantic gifts. 
-              Perfect for Valentine&apos;s Day, anniversaries, and special moments.
+              {t('footer.description')}
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-rose-gold transition-colors">
@@ -49,31 +51,31 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-heading font-semibold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-heading font-semibold mb-4">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/products" className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
-                  Shop All
+                <Link href={`/${locale}/collections`} className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
+                  {t('footer.shopAll')}
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=roses" className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
-                  Eternal Roses
+                <Link href={`/${locale}/products/eternal-rose-box`} className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
+                  {t('footer.eternalRoses')}
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=jewelry" className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
-                  Jewelry
+                <Link href={`/${locale}/products/eternal-rose-bear`} className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
+                  {t('footer.jewelry')}
                 </Link>
               </li>
               <li>
-                <Link href="/products?category=gift-sets" className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
-                  Gift Sets
+                <Link href={`/${locale}/collections`} className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
+                  {t('footer.giftSets')}
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
-                  About Us
+                <Link href={`/${locale}/contact`} className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
+                  {t('footer.aboutUs')}
                 </Link>
               </li>
             </ul>
@@ -81,31 +83,31 @@ export function Footer() {
 
           {/* Customer Service */}
           <div>
-            <h3 className="text-lg font-heading font-semibold mb-4">Customer Service</h3>
+            <h3 className="text-lg font-heading font-semibold mb-4">{t('footer.customerService')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
-                  Contact Us
+                <Link href={`/${locale}/contact`} className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
+                  {t('footer.contactUs')}
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
-                  FAQ
+                <Link href={`/${locale}/faq`} className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
+                  {t('common.faq')}
                 </Link>
               </li>
               <li>
-                <Link href="/shipping" className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
-                  Shipping Info
+                <Link href={`/${locale}/faq`} className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
+                  {t('footer.shippingInfo')}
                 </Link>
               </li>
               <li>
-                <Link href="/returns" className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
-                  Returns & Exchanges
+                <Link href={`/${locale}/faq`} className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
+                  {t('footer.returnsExchanges')}
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
-                  Privacy Policy
+                <Link href={`/${locale}/faq`} className="text-gray-400 hover:text-rose-gold transition-colors text-sm">
+                  {t('footer.privacyPolicy')}
                 </Link>
               </li>
             </ul>
@@ -113,7 +115,7 @@ export function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-heading font-semibold mb-4">Contact Us</h3>
+            <h3 className="text-lg font-heading font-semibold mb-4">{t('footer.contactUs')}</h3>
             <ul className="space-y-3">
               <li className="flex items-center space-x-3">
                 <Mail className="w-4 h-4 text-rose-gold" />
@@ -142,7 +144,7 @@ export function Footer() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
             <p className="text-gray-400 text-sm">
-              © {currentYear} EternGift. All rights reserved.
+              © {currentYear} EternGift. {t('footer.allRightsReserved')}
             </p>
             <div className="flex items-center space-x-4">
               <span className="text-gray-400 text-sm flex items-center">

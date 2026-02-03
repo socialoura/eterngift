@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Heart, Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useTranslation } from '@/components/providers/I18nProvider'
 
 const testimonials = [
   {
@@ -54,6 +55,7 @@ const testimonials = [
 
 export function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const { t } = useTranslation()
 
   const next = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length)
@@ -113,11 +115,11 @@ export function Testimonials() {
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-4">
-            Love <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B71C1C] to-pink-500">Stories</span>
+            {t('testimonials.title')}
           </h2>
           
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Real stories from couples who made their moments unforgettable with EternGift
+            {t('testimonials.subtitle')}
           </p>
         </motion.div>
 
