@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/Footer'
 import { locales, type Locale, localeCurrencies } from '@/lib/i18n/config'
 import { getDictionary } from '@/lib/i18n/dictionaries'
 import { I18nProvider } from '@/components/providers/I18nProvider'
+import { MotionProvider } from '@/components/providers/MotionProvider'
 
 export async function generateStaticParams() {
   return locales.map((lang) => ({ lang }))
@@ -24,11 +25,13 @@ export default async function LangLayout({
 
   return (
     <I18nProvider locale={locale} dictionary={dictionary} defaultCurrency={defaultCurrency}>
-      <Header />
-      <main className="flex-1 pt-[104px]">{children}</main>
-      <Footer />
-      <Analytics />
-      <SpeedInsights />
+      <MotionProvider>
+        <Header />
+        <main className="flex-1 pt-[104px]">{children}</main>
+        <Footer />
+        <Analytics />
+        <SpeedInsights />
+      </MotionProvider>
     </I18nProvider>
   )
 }
