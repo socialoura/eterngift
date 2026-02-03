@@ -31,11 +31,13 @@
     "foreverInLove": "Per sempre innamorati"
   },
   "hero": {
-    "title": "Esprimi il tuo",
+    "title": "Esprimi Il Tuo",
     "titleHighlight": "Amore Eterno",
-    "subtitle": "Scopri la nostra collezione artigianale di rose eterne e gioielli personalizzati. Il regalo perfetto per la tua persona speciale.",
-    "shopNow": "Acquista ora",
-    "learnMore": "Scopri di più"
+    "subtitle": "Scopri la nostra collezione artigianale di rose eterne e gioielli personalizzati. Il regalo perfetto per la tua anima gemella.",
+    "shopNow": "Acquista Ora",
+    "learnMore": "Scopri di Più",
+    "bestSeller": "Bestseller 2026",
+    "fromPrice": "Da 89,99€"
   },
   "featured": {
     "title": "I nostri",
@@ -112,11 +114,15 @@
     "allRightsReserved": "Tutti i diritti riservati."
   },
   "newsletter": {
-    "title": "Resta aggiornato",
-    "subtitle": "Iscriviti per offerte esclusive, novità e idee regalo romantiche.",
-    "placeholder": "La tua email",
-    "subscribe": "Iscriviti",
-    "privacy": "Rispettiamo la tua privacy. Cancellati quando vuoi."
+    "title": "Ottieni il 10% di sconto",
+    "subtitle": "Unisciti alla nostra comunità di romantici! Ricevi offerte esclusive, idee regalo e accesso anticipato.",
+    "placeholder": "Il tuo indirizzo email",
+    "subscribe": "Ottieni il mio sconto",
+    "privacy": "Niente spam. Cancellati quando vuoi.",
+    "exclusiveOffer": "Offerta esclusiva",
+    "earlyAccess": "Accesso anticipato",
+    "exclusiveDeals": "Offerte esclusive",
+    "giftIdeas": "Idee regalo"
   },
   "testimonials": {
     "title": "Storie d'amore",
@@ -125,7 +131,21 @@
   "whyUs": {
     "title": "Perché scegliere",
     "titleHighlight": "EternGift",
-    "subtitle": "Ti aiutiamo a esprimere il tuo amore con i regali più belli e duraturi."
+    "subtitle": "Ti aiutiamo a esprimere il tuo amore con i regali più belli e duraturi.",
+    "eternalQuality": "Qualità eterna",
+    "eternalQualityDesc": "Le nostre rose sono conservate con tecnologia all'avanguardia per mantenere la loro bellezza naturale per anni.",
+    "personalizedTouch": "Tocco personalizzato",
+    "personalizedTouchDesc": "Ogni collana può essere incisa con il tuo messaggio speciale.",
+    "luxuryPackaging": "Confezione di lusso",
+    "luxuryPackagingDesc": "Ogni regalo arriva in confezione premium con nastri di raso.",
+    "freeShipping": "Spedizione mondiale gratuita",
+    "freeShippingDesc": "Consegniamo amore in tutto il mondo con spedizione express gratuita.",
+    "guarantee": "Garanzia 30 giorni",
+    "guaranteeDesc": "Non soddisfatto? Offriamo resi senza problemi entro 30 giorni.",
+    "support": "Supporto 24/7",
+    "supportDesc": "Il nostro team dedicato è sempre qui per aiutarti.",
+    "ctaTitle": "Pronto a rendere felice qualcuno?",
+    "ctaSubtitle": "Unisciti a oltre 50.000 clienti felici che hanno scelto EternGift per esprimere il loro amore."
   },
   "cart": {
     "yourCart": "Il tuo carrello",

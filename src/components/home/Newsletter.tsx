@@ -88,7 +88,7 @@ export function Newsletter() {
                   className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 mb-6"
                 >
                   <Sparkles className="w-4 h-4 text-[#D4AF88]" />
-                  <span className="text-white/90 text-sm font-medium">Exclusive Offer</span>
+                  <span className="text-white/90 text-sm font-medium">{t('newsletter.exclusiveOffer')}</span>
                 </motion.div>
 
                 <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-4">
@@ -100,9 +100,13 @@ export function Newsletter() {
                 </p>
 
                 <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                  {['💝 Early Access', '🎁 Exclusive Deals', '💌 Gift Ideas'].map((item, i) => (
+                  {[
+                    { icon: '💝', key: 'newsletter.earlyAccess' },
+                    { icon: '🎁', key: 'newsletter.exclusiveDeals' },
+                    { icon: '💌', key: 'newsletter.giftIdeas' }
+                  ].map((item, i) => (
                     <span key={i} className="text-white/70 text-sm bg-white/10 px-3 py-1 rounded-full">
-                      {item}
+                      {item.icon} {t(item.key)}
                     </span>
                   ))}
                 </div>

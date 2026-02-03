@@ -327,7 +327,7 @@ export function HeroSection() {
                       <span className="text-2xl">⭐</span>
                       <div>
                         <p className="text-sm font-bold text-gray-900">4.9/5</p>
-                        <p className="text-xs text-gray-500">2,847 reviews</p>
+                        <p className="text-xs text-gray-500">2,847 {t('featured.reviews')}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -347,8 +347,8 @@ export function HeroSection() {
                     <div className="flex items-center gap-2">
                       <Heart className="w-5 h-5 text-white fill-white" />
                       <div>
-                        <p className="text-sm font-bold text-white">Most Popular</p>
-                        <p className="text-xs text-white/80">Best Seller 2026</p>
+                        <p className="text-sm font-bold text-white">{t('product.mostPopular')}</p>
+                        <p className="text-xs text-white/80">{t('hero.bestSeller')}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -365,7 +365,7 @@ export function HeroSection() {
                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                     className="bg-[#D4AF88] rounded-full px-6 py-2 shadow-xl"
                   >
-                    <p className="text-sm font-bold text-white">From $89.99</p>
+                    <p className="text-sm font-bold text-white">{t('hero.fromPrice')}</p>
                   </motion.div>
                 </motion.div>
               </div>

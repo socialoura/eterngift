@@ -4,43 +4,13 @@ import { motion } from 'framer-motion'
 import { Heart, Shield, Truck, Gift, Sparkles, Clock } from 'lucide-react'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 
-const features = [
-  {
-    icon: Heart,
-    title: 'Eternal Quality',
-    description: 'Our roses are preserved using cutting-edge technology to maintain their natural beauty for years, not days.',
-    gradient: 'from-pink-500 to-rose-500',
-  },
-  {
-    icon: Sparkles,
-    title: 'Personalized Touch',
-    description: 'Every necklace can be engraved with your special message, making each gift truly one-of-a-kind.',
-    gradient: 'from-[#D4AF88] to-amber-500',
-  },
-  {
-    icon: Gift,
-    title: 'Luxury Packaging',
-    description: 'Each gift arrives in premium packaging with satin ribbons, ready to create an unforgettable unboxing experience.',
-    gradient: 'from-purple-500 to-pink-500',
-  },
-  {
-    icon: Truck,
-    title: 'Free Worldwide Shipping',
-    description: 'We deliver love globally with free express shipping. Track your gift every step of the way.',
-    gradient: 'from-blue-500 to-cyan-500',
-  },
-  {
-    icon: Shield,
-    title: '30-Day Guarantee',
-    description: 'Not satisfied? We offer hassle-free returns within 30 days. Your happiness is our priority.',
-    gradient: 'from-green-500 to-emerald-500',
-  },
-  {
-    icon: Clock,
-    title: '24/7 Support',
-    description: 'Our dedicated team is always here to help you choose the perfect gift or answer any questions.',
-    gradient: 'from-[#B71C1C] to-rose-600',
-  },
+const featureKeys = [
+  { icon: Heart, titleKey: 'whyUs.eternalQuality', descKey: 'whyUs.eternalQualityDesc', gradient: 'from-pink-500 to-rose-500' },
+  { icon: Sparkles, titleKey: 'whyUs.personalizedTouch', descKey: 'whyUs.personalizedTouchDesc', gradient: 'from-[#D4AF88] to-amber-500' },
+  { icon: Gift, titleKey: 'whyUs.luxuryPackaging', descKey: 'whyUs.luxuryPackagingDesc', gradient: 'from-purple-500 to-pink-500' },
+  { icon: Truck, titleKey: 'whyUs.freeShipping', descKey: 'whyUs.freeShippingDesc', gradient: 'from-blue-500 to-cyan-500' },
+  { icon: Shield, titleKey: 'whyUs.guarantee', descKey: 'whyUs.guaranteeDesc', gradient: 'from-green-500 to-emerald-500' },
+  { icon: Clock, titleKey: 'whyUs.support', descKey: 'whyUs.supportDesc', gradient: 'from-[#B71C1C] to-rose-600' },
 ]
 
 export function WhyEternGift() {
@@ -83,9 +53,9 @@ export function WhyEternGift() {
 
         {/* Features grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {features.map((feature, index) => (
+          {featureKeys.map((feature, index) => (
             <motion.div
-              key={feature.title}
+              key={feature.titleKey}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -107,11 +77,11 @@ export function WhyEternGift() {
                 </motion.div>
 
                 <h3 className="text-xl font-heading font-bold text-gray-900 mb-3 group-hover:text-[#B71C1C] transition-colors">
-                  {feature.title}
+                  {t(feature.titleKey)}
                 </h3>
 
                 <p className="text-gray-600 leading-relaxed">
-                  {feature.description}
+                  {t(feature.descKey)}
                 </p>
 
                 {/* Decorative corner */}
@@ -145,11 +115,11 @@ export function WhyEternGift() {
               </motion.div>
 
               <h3 className="text-2xl md:text-3xl font-heading font-bold text-white mb-4">
-                Ready to Make Someone's Day Special?
+                {t('whyUs.ctaTitle')}
               </h3>
               
               <p className="text-white/80 max-w-xl mx-auto mb-8">
-                Join over 50,000 happy customers who have chosen EternGift to express their love.
+                {t('whyUs.ctaSubtitle')}
               </p>
 
               <motion.a

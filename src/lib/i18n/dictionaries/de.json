@@ -31,11 +31,13 @@
     "foreverInLove": "Für immer verliebt"
   },
   "hero": {
-    "title": "Drücken Sie Ihre",
+    "title": "Drücke Deine",
     "titleHighlight": "Ewige Liebe",
-    "subtitle": "Entdecken Sie unsere handgefertigte Kollektion ewiger Rosen und personalisiertem Schmuck. Das perfekte Geschenk für Ihren besonderen Menschen.",
-    "shopNow": "Jetzt einkaufen",
-    "learnMore": "Mehr erfahren"
+    "subtitle": "Entdecke unsere handgefertigte Kollektion von ewigen Rosen und personalisiertem Schmuck. Das perfekte Geschenk für deine Seelenverwandte.",
+    "shopNow": "Jetzt Kaufen",
+    "learnMore": "Mehr Erfahren",
+    "bestSeller": "Bestseller 2026",
+    "fromPrice": "Ab 89,99€"
   },
   "featured": {
     "title": "Unsere",
@@ -112,11 +114,15 @@
     "allRightsReserved": "Alle Rechte vorbehalten."
   },
   "newsletter": {
-    "title": "Bleiben Sie informiert",
-    "subtitle": "Abonnieren Sie für exklusive Angebote, Neuheiten und romantische Geschenkideen.",
-    "placeholder": "Ihre E-Mail",
-    "subscribe": "Abonnieren",
-    "privacy": "Wir respektieren Ihre Privatsphäre. Jederzeit abmeldbar."
+    "title": "10% Rabatt sichern",
+    "subtitle": "Werde Teil unserer Romantiker-Community! Erhalte exklusive Angebote, Geschenkideen und frühen Zugang.",
+    "placeholder": "Deine E-Mail-Adresse",
+    "subscribe": "Meinen Rabatt sichern",
+    "privacy": "Kein Spam. Jederzeit abmelden.",
+    "exclusiveOffer": "Exklusives Angebot",
+    "earlyAccess": "Früher Zugang",
+    "exclusiveDeals": "Exklusive Angebote",
+    "giftIdeas": "Geschenkideen"
   },
   "testimonials": {
     "title": "Liebesgeschichten",
@@ -125,7 +131,21 @@
   "whyUs": {
     "title": "Warum",
     "titleHighlight": "EternGift",
-    "subtitle": "Wir helfen Ihnen, Ihre Liebe mit den schönsten, beständigsten Geschenken auszudrücken."
+    "subtitle": "Wir helfen Ihnen, Ihre Liebe mit den schönsten, beständigsten Geschenken auszudrücken.",
+    "eternalQuality": "Ewige Qualität",
+    "eternalQualityDesc": "Unsere Rosen werden mit modernster Technologie konserviert, um ihre natürliche Schönheit jahrelang zu erhalten.",
+    "personalizedTouch": "Persönliche Note",
+    "personalizedTouchDesc": "Jede Halskette kann mit Ihrer besonderen Nachricht graviert werden.",
+    "luxuryPackaging": "Luxus-Verpackung",
+    "luxuryPackagingDesc": "Jedes Geschenk kommt in Premium-Verpackung mit Satinbändern.",
+    "freeShipping": "Kostenloser weltweiter Versand",
+    "freeShippingDesc": "Wir liefern Liebe weltweit mit kostenlosem Expressversand.",
+    "guarantee": "30-Tage-Garantie",
+    "guaranteeDesc": "Nicht zufrieden? Wir bieten problemlose Rücksendungen innerhalb von 30 Tagen.",
+    "support": "24/7 Support",
+    "supportDesc": "Unser engagiertes Team ist immer für Sie da.",
+    "ctaTitle": "Bereit, jemandem eine Freude zu machen?",
+    "ctaSubtitle": "Schließen Sie sich über 50.000 zufriedenen Kunden an, die EternGift gewählt haben."
   },
   "cart": {
     "yourCart": "Ihr Warenkorb",

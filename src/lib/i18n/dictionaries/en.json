@@ -33,9 +33,11 @@
   "hero": {
     "title": "Express Your",
     "titleHighlight": "Eternal Love",
-    "subtitle": "Discover our handcrafted collection of eternal roses and personalized jewelry. The perfect gift for your special someone.",
+    "subtitle": "Discover our handcrafted collection of eternal roses and personalized jewelry. The perfect gift for your soulmate.",
     "shopNow": "Shop Now",
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "bestSeller": "Best Seller 2026",
+    "fromPrice": "From $89.99"
   },
   "featured": {
     "title": "Our",
@@ -112,11 +114,15 @@
     "allRightsReserved": "All rights reserved."
   },
   "newsletter": {
-    "title": "Stay in the Loop",
-    "subtitle": "Subscribe for exclusive offers, new arrivals, and romantic gift ideas.",
-    "placeholder": "Enter your email",
-    "subscribe": "Subscribe",
-    "privacy": "We respect your privacy. Unsubscribe at any time."
+    "title": "Get 10% Off Your First Order",
+    "subtitle": "Join our community of romantics! Get exclusive offers, gift ideas, and early access to new collections.",
+    "placeholder": "Enter your email address",
+    "subscribe": "Get My 10% Discount",
+    "privacy": "No spam, ever. Unsubscribe anytime.",
+    "exclusiveOffer": "Exclusive Offer",
+    "earlyAccess": "Early Access",
+    "exclusiveDeals": "Exclusive Deals",
+    "giftIdeas": "Gift Ideas"
   },
   "testimonials": {
     "title": "Love Stories",
@@ -125,7 +131,21 @@
   "whyUs": {
     "title": "Why Choose",
     "titleHighlight": "EternGift",
-    "subtitle": "We're dedicated to helping you express your love with the most beautiful, lasting gifts."
+    "subtitle": "We're dedicated to helping you express your love with the most beautiful, lasting gifts.",
+    "eternalQuality": "Eternal Quality",
+    "eternalQualityDesc": "Our roses are preserved using cutting-edge technology to maintain their natural beauty for years.",
+    "personalizedTouch": "Personalized Touch",
+    "personalizedTouchDesc": "Every necklace can be engraved with your special message, making each gift truly one-of-a-kind.",
+    "luxuryPackaging": "Luxury Packaging",
+    "luxuryPackagingDesc": "Each gift arrives in premium packaging with satin ribbons.",
+    "freeShipping": "Free Worldwide Shipping",
+    "freeShippingDesc": "We deliver love globally with free express shipping.",
+    "guarantee": "30-Day Guarantee",
+    "guaranteeDesc": "Not satisfied? We offer hassle-free returns within 30 days.",
+    "support": "24/7 Support",
+    "supportDesc": "Our dedicated team is always here to help you.",
+    "ctaTitle": "Ready to Make Someone's Day Special?",
+    "ctaSubtitle": "Join over 50,000 happy customers who have chosen EternGift to express their love."
   },
   "cart": {
     "yourCart": "Your Cart",

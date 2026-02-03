@@ -35,7 +35,9 @@
     "titleHighlight": "Amour Éternel",
     "subtitle": "Découvrez notre collection artisanale de roses éternelles et bijoux personnalisés. Le cadeau parfait pour votre âme sœur.",
     "shopNow": "Acheter maintenant",
-    "learnMore": "En savoir plus"
+    "learnMore": "En savoir plus",
+    "bestSeller": "Best-seller 2026",
+    "fromPrice": "À partir de 89,99€"
   },
   "featured": {
     "title": "Nos",
@@ -112,11 +114,15 @@
     "allRightsReserved": "Tous droits réservés."
   },
   "newsletter": {
-    "title": "Restez informé",
-    "subtitle": "Inscrivez-vous pour des offres exclusives, nouveautés et idées cadeaux romantiques.",
-    "placeholder": "Votre email",
-    "subscribe": "S'inscrire",
-    "privacy": "Nous respectons votre vie privée. Désinscription à tout moment."
+    "title": "Obtenez 10% de réduction",
+    "subtitle": "Rejoignez notre communauté de romantiques ! Recevez des offres exclusives, des idées cadeaux et un accès anticipé aux nouvelles collections.",
+    "placeholder": "Votre adresse email",
+    "subscribe": "Obtenir ma réduction",
+    "privacy": "Pas de spam. Désinscription à tout moment.",
+    "exclusiveOffer": "Offre exclusive",
+    "earlyAccess": "Accès anticipé",
+    "exclusiveDeals": "Offres exclusives",
+    "giftIdeas": "Idées cadeaux"
   },
   "testimonials": {
     "title": "Histoires d'amour",
@@ -125,7 +131,21 @@
   "whyUs": {
     "title": "Pourquoi choisir",
     "titleHighlight": "EternGift",
-    "subtitle": "Nous vous aidons à exprimer votre amour avec les plus beaux cadeaux durables."
+    "subtitle": "Nous vous aidons à exprimer votre amour avec les plus beaux cadeaux durables.",
+    "eternalQuality": "Qualité éternelle",
+    "eternalQualityDesc": "Nos roses sont préservées avec une technologie de pointe pour maintenir leur beauté naturelle pendant des années.",
+    "personalizedTouch": "Touche personnalisée",
+    "personalizedTouchDesc": "Chaque collier peut être gravé avec votre message spécial, rendant chaque cadeau unique.",
+    "luxuryPackaging": "Emballage luxueux",
+    "luxuryPackagingDesc": "Chaque cadeau arrive dans un emballage premium avec rubans satinés.",
+    "freeShipping": "Livraison mondiale gratuite",
+    "freeShippingDesc": "Nous livrons l'amour dans le monde entier avec la livraison express gratuite.",
+    "guarantee": "Garantie 30 jours",
+    "guaranteeDesc": "Pas satisfait ? Nous offrons des retours sans tracas sous 30 jours.",
+    "support": "Support 24/7",
+    "supportDesc": "Notre équipe dévouée est toujours là pour vous aider.",
+    "ctaTitle": "Prêt à rendre quelqu'un heureux ?",
+    "ctaSubtitle": "Rejoignez plus de 50 000 clients satisfaits qui ont choisi EternGift pour exprimer leur amour."
   },
   "cart": {
     "yourCart": "Votre panier",

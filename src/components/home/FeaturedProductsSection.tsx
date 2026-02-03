@@ -98,7 +98,9 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
               ) : (
                 <Sparkles className="w-4 h-4 text-white" />
               )}
-              <span className="text-white text-sm font-semibold">{product.badge}</span>
+              <span className="text-white text-sm font-semibold">
+                {product.badge === 'Most Popular' ? t('product.mostPopular') : t('product.premium')}
+              </span>
             </div>
           </motion.div>
         )}
@@ -113,7 +115,7 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
         </motion.button>
 
         {/* Image container */}
-        <Link href={`/products/${product.slug}`}>
+        <Link href={`/${locale}/products/${product.slug}`}>
           <div className="relative aspect-[4/3] bg-gradient-to-br from-[#FAFAFA] via-[#FFF8F8] to-[#FFF0F0] overflow-hidden">
             {/* Animated background circles */}
             <motion.div 
@@ -186,7 +188,7 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
           {/* Subtle top border accent */}
           <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-[#D4AF88]/30 to-transparent" />
 
-          <Link href={`/products/${product.slug}`}>
+          <Link href={`/${locale}/products/${product.slug}`}>
             <h3 className="text-xl font-heading font-bold text-gray-900 hover:text-[#B71C1C] transition-colors line-clamp-2">
               {product.name}
             </h3>
