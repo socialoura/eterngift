@@ -5,49 +5,20 @@ import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Clock, Send, Heart, MessageCircle, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
+import { useTranslation } from '@/components/providers/I18nProvider'
 
-const contactInfo = [
-  {
-    icon: Mail,
-    title: 'Email Us',
-    value: 'support@eterngift.com',
-    description: 'We reply within 24 hours',
-    href: 'mailto:support@eterngift.com',
-  },
-  {
-    icon: Phone,
-    title: 'Call Us',
-    value: '+1 (555) 123-4567',
-    description: 'Mon-Fri, 9am-6pm EST',
-    href: 'tel:+15551234567',
-  },
-  {
-    icon: MapPin,
-    title: 'Visit Us',
-    value: '123 Love Street',
-    description: 'New York, NY 10001',
-    href: '#',
-  },
-  {
-    icon: Clock,
-    title: 'Business Hours',
-    value: 'Mon - Fri: 9am - 6pm',
-    description: 'Weekend: 10am - 4pm',
-    href: '#',
-  },
-]
-
-const subjects = [
-  'General Inquiry',
-  'Order Status',
-  'Product Question',
-  'Return/Exchange',
-  'Shipping Issue',
-  'Partnership',
-  'Other',
+const subjectKeys = [
+  'generalInquiry',
+  'orderStatus',
+  'productQuestion',
+  'returnExchange',
+  'shippingIssue',
+  'partnership',
+  'other',
 ]
 
 export default function ContactPage() {
+  const { t } = useTranslation()
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -55,6 +26,37 @@ export default function ContactPage() {
     message: '',
   })
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+
+  const contactInfo = [
+    {
+      icon: Mail,
+      titleKey: 'contactPage.emailUs',
+      value: 'support@eterngift.com',
+      descKey: 'contactPage.emailDesc',
+      href: 'mailto:support@eterngift.com',
+    },
+    {
+      icon: Phone,
+      titleKey: 'contactPage.callUs',
+      value: '+1 (555) 123-4567',
+      descKey: 'contactPage.callDesc',
+      href: 'tel:+15551234567',
+    },
+    {
+      icon: MapPin,
+      titleKey: 'contactPage.visitUs',
+      value: '123 Love Street',
+      descKey: '',
+      href: '#',
+    },
+    {
+      icon: Clock,
+      titleKey: 'contactPage.businessHours',
+      value: 'Mon - Fri: 9am - 6pm',
+      descKey: '',
+      href: '#',
+    },
+  ]
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -91,14 +93,14 @@ export default function ContactPage() {
             </motion.div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-gray-900 mb-6">
-              Get In{' '}
+              {t('contactPage.title')}{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B71C1C] to-[#D4AF88]">
-                Touch
+                {t('contactPage.titleHighlight')}
               </span>
             </h1>
 
             <p className="text-lg text-gray-600">
-              Have a question or need assistance? We&apos;re here to help make your gifting experience perfect.
+              {t('contactPage.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -110,7 +112,7 @@ export default function ContactPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {contactInfo.map((info, index) => (
               <motion.a
-                key={info.title}
+                key={info.titleKey}
                 href={info.href}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -122,9 +124,9 @@ export default function ContactPage() {
                 <div className="w-14 h-14 bg-gradient-to-br from-[#FFE5E5] to-pink-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <info.icon className="w-7 h-7 text-[#B71C1C]" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-1">{info.title}</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-1">{t(info.titleKey)}</h3>
                 <p className="text-[#B71C1C] font-medium mb-1">{info.value}</p>
-                <p className="text-sm text-gray-500">{info.description}</p>
+                {info.descKey && <p className="text-sm text-gray-500">{t(info.descKey)}</p>}
               </motion.a>
             ))}
           </div>
@@ -143,10 +145,10 @@ export default function ContactPage() {
               className="bg-white rounded-3xl shadow-xl p-8 lg:p-10"
             >
               <h2 className="text-2xl lg:text-3xl font-heading font-bold text-gray-900 mb-2">
-                Send Us a Message
+                {t('contactPage.sendMessage')}
               </h2>
               <p className="text-gray-600 mb-8">
-                Fill out the form below and we&apos;ll get back to you as soon as possible.
+                {t('contactPage.formSubtitle')}
               </p>
 
               {status === 'success' ? (
@@ -163,17 +165,17 @@ export default function ContactPage() {
                     <CheckCircle className="w-10 h-10 text-green-600" />
                   </motion.div>
                   <h3 className="text-2xl font-heading font-bold text-gray-900 mb-2">
-                    Message Sent! 💕
+                    {t('contactPage.messageSent')} 💕
                   </h3>
                   <p className="text-gray-600 mb-6">
-                    Thank you for reaching out. We&apos;ll respond within 24 hours.
+                    {t('contactPage.thankYou')}
                   </p>
                   <Button
                     onClick={() => setStatus('idle')}
                     variant="outline"
                     className="border-[#B71C1C] text-[#B71C1C] hover:bg-[#B71C1C] hover:text-white"
                   >
-                    Send Another Message
+                    {t('contactPage.sendAnother')}
                   </Button>
                 </motion.div>
               ) : (
@@ -181,7 +183,7 @@ export default function ContactPage() {
                   <div className="grid sm:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Your Name *
+                        {t('contactPage.yourName')} *
                       </label>
                       <Input
                         type="text"
@@ -194,7 +196,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Email Address *
+                        {t('contactPage.emailAddress')} *
                       </label>
                       <Input
                         type="email"
@@ -209,7 +211,7 @@ export default function ContactPage() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Subject *
+                      {t('contactPage.subject')} *
                     </label>
                     <select
                       value={formData.subject}
@@ -217,10 +219,10 @@ export default function ContactPage() {
                       required
                       className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#B71C1C] focus:ring-2 focus:ring-[#B71C1C]/20 outline-none transition-all bg-white"
                     >
-                      <option value="">Select a subject</option>
-                      {subjects.map((subject) => (
-                        <option key={subject} value={subject}>
-                          {subject}
+                      <option value="">{t('contactPage.selectSubject')}</option>
+                      {subjectKeys.map((key) => (
+                        <option key={key} value={key}>
+                          {t(`contactPage.${key}`)}
                         </option>
                       ))}
                     </select>
@@ -228,11 +230,11 @@ export default function ContactPage() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Message *
+                      {t('contactPage.message')} *
                     </label>
                     <textarea
                       rows={5}
-                      placeholder="Tell us how we can help you..."
+                      placeholder={t('contactPage.messagePlaceholder')}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       required
@@ -247,7 +249,7 @@ export default function ContactPage() {
                       className="w-full bg-gradient-to-r from-[#B71C1C] to-[#D4AF88] hover:from-[#8B1538] hover:to-[#B71C1C] text-white py-4 text-lg font-semibold"
                     >
                       <Send className="w-5 h-5 mr-2" />
-                      Send Message
+                      {t('contactPage.send')}
                     </Button>
                   </motion.div>
                 </form>

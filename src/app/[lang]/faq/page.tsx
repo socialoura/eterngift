@@ -4,108 +4,109 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, Heart, Package, Truck, RefreshCw, CreditCard, Gift, MessageCircle, Shield } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useTranslation } from '@/components/providers/I18nProvider'
 
 const faqCategories = [
   {
     id: 'products',
-    name: 'Products',
+    nameKey: 'faqPage.catProducts',
     icon: Gift,
     questions: [
       {
-        q: 'What are eternal roses?',
-        a: 'Eternal roses are real roses that have been specially preserved to maintain their natural beauty for years. Through a unique preservation process, these roses retain their soft texture, vibrant colors, and natural appearance without requiring water or sunlight.',
+        qKey: 'faqPage.qa.products.q1',
+        aKey: 'faqPage.qa.products.a1',
       },
       {
-        q: 'How long do eternal roses last?',
-        a: 'Our eternal roses are designed to last 2-3 years or even longer with proper care. Keep them away from direct sunlight, humidity, and extreme temperatures for the best longevity.',
+        qKey: 'faqPage.qa.products.q2',
+        aKey: 'faqPage.qa.products.a2',
       },
       {
-        q: 'Are the roses real?',
-        a: 'Yes! Our eternal roses start as 100% real roses. They are carefully selected at their peak bloom and undergo a special preservation process that replaces their natural sap with a plant-based solution, maintaining their beauty indefinitely.',
+        qKey: 'faqPage.qa.products.q3',
+        aKey: 'faqPage.qa.products.a3',
       },
       {
-        q: 'Can I customize the engraved necklace?',
-        a: 'Currently, our necklaces come in three beautiful colors: Gray, Gold, and Rose Gold. The heart design symbolizes eternal love. We\'re working on adding custom engraving options soon!',
+        qKey: 'faqPage.qa.products.q4',
+        aKey: 'faqPage.qa.products.a4',
       },
     ],
   },
   {
     id: 'shipping',
-    name: 'Shipping',
+    nameKey: 'faqPage.catShipping',
     icon: Truck,
     questions: [
       {
-        q: 'Do you offer free shipping?',
-        a: 'Yes! We offer free standard shipping on all orders over $50. For orders under $50, a flat rate of $4.99 applies.',
+        qKey: 'faqPage.qa.shipping.q1',
+        aKey: 'faqPage.qa.shipping.a1',
       },
       {
-        q: 'How long does shipping take?',
-        a: 'Standard shipping typically takes 5-10 business days. Express shipping (2-4 business days) is available for an additional fee. During peak seasons like Valentine\'s Day, please order early!',
+        qKey: 'faqPage.qa.shipping.q2',
+        aKey: 'faqPage.qa.shipping.a2',
       },
       {
-        q: 'Do you ship internationally?',
-        a: 'Yes, we ship worldwide! International shipping times vary by destination, typically 7-21 business days. Import duties and taxes may apply depending on your country.',
+        qKey: 'faqPage.qa.shipping.q3',
+        aKey: 'faqPage.qa.shipping.a3',
       },
       {
-        q: 'Can I track my order?',
-        a: 'Absolutely! Once your order ships, you\'ll receive an email with tracking information. You can also track your order through your account dashboard.',
+        qKey: 'faqPage.qa.shipping.q4',
+        aKey: 'faqPage.qa.shipping.a4',
       },
     ],
   },
   {
     id: 'returns',
-    name: 'Returns & Refunds',
+    nameKey: 'faqPage.catReturns',
     icon: RefreshCw,
     questions: [
       {
-        q: 'What is your return policy?',
-        a: 'We offer a 30-day satisfaction guarantee. If you\'re not completely happy with your purchase, contact us within 30 days for a full refund or exchange.',
+        qKey: 'faqPage.qa.returns.q1',
+        aKey: 'faqPage.qa.returns.a1',
       },
       {
-        q: 'How do I initiate a return?',
-        a: 'Simply email our support team at support@eterngift.com with your order number and reason for return. We\'ll provide you with a prepaid return label and process your refund within 5-7 business days of receiving the item.',
+        qKey: 'faqPage.qa.returns.q2',
+        aKey: 'faqPage.qa.returns.a2',
       },
       {
-        q: 'Are there any items that cannot be returned?',
-        a: 'For hygiene reasons, we cannot accept returns on items that show signs of use or damage caused by the customer. All items must be in their original packaging.',
+        qKey: 'faqPage.qa.returns.q3',
+        aKey: 'faqPage.qa.returns.a3',
       },
     ],
   },
   {
     id: 'payment',
-    name: 'Payment',
+    nameKey: 'faqPage.catPayment',
     icon: CreditCard,
     questions: [
       {
-        q: 'What payment methods do you accept?',
-        a: 'We accept all major credit cards (Visa, Mastercard, American Express), PayPal, Apple Pay, and Google Pay. All transactions are secured with 256-bit SSL encryption.',
+        qKey: 'faqPage.qa.payment.q1',
+        aKey: 'faqPage.qa.payment.a1',
       },
       {
-        q: 'Is my payment information secure?',
-        a: 'Absolutely! We use industry-standard SSL encryption and never store your full credit card details. Your payment is processed securely through Stripe, a PCI-compliant payment processor.',
+        qKey: 'faqPage.qa.payment.q2',
+        aKey: 'faqPage.qa.payment.a2',
       },
       {
-        q: 'Do you offer payment plans?',
-        a: 'Yes! We partner with Klarna and Afterpay to offer Buy Now, Pay Later options. Split your purchase into 4 interest-free payments.',
+        qKey: 'faqPage.qa.payment.q3',
+        aKey: 'faqPage.qa.payment.a3',
       },
     ],
   },
   {
     id: 'care',
-    name: 'Product Care',
+    nameKey: 'faqPage.catCare',
     icon: Heart,
     questions: [
       {
-        q: 'How do I care for my eternal roses?',
-        a: 'Keep your eternal roses in a cool, dry place away from direct sunlight and humidity. Avoid touching the petals frequently as oils from your skin can affect the preservation. Gently dust with a soft brush if needed.',
+        qKey: 'faqPage.qa.care.q1',
+        aKey: 'faqPage.qa.care.a1',
       },
       {
-        q: 'Can I put eternal roses in water?',
-        a: 'No! Eternal roses should never be placed in water as they are already preserved. Water will damage the preservation and ruin the roses.',
+        qKey: 'faqPage.qa.care.q2',
+        aKey: 'faqPage.qa.care.a2',
       },
       {
-        q: 'How do I clean the necklace?',
-        a: 'Clean your necklace with a soft, dry cloth. Avoid contact with water, perfumes, and chemicals. Store in the provided jewelry box when not wearing.',
+        qKey: 'faqPage.qa.care.q3',
+        aKey: 'faqPage.qa.care.a3',
       },
     ],
   },
@@ -166,6 +167,7 @@ function FAQItem({ question, answer, isOpen, onClick }: {
 }
 
 export default function FAQPage() {
+  const { t } = useTranslation()
   const [activeCategory, setActiveCategory] = useState('products')
   const [openQuestion, setOpenQuestion] = useState<string | null>(null)
 
@@ -196,15 +198,14 @@ export default function FAQPage() {
             </motion.div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-gray-900 mb-6">
-              Frequently Asked{' '}
+              {t('faqPage.title')}{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B71C1C] to-[#D4AF88]">
-                Questions
+                {t('faqPage.titleHighlight')}
               </span>
             </h1>
 
             <p className="text-lg text-gray-600 mb-8">
-              Find answers to common questions about our products, shipping, returns, and more.
-              Can&apos;t find what you&apos;re looking for? Contact our support team!
+              {t('faqPage.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -218,7 +219,7 @@ export default function FAQPage() {
             <div className="lg:col-span-1">
               <div className="sticky top-32">
                 <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
-                  Categories
+                  {t('faqPage.categories')}
                 </h3>
                 <nav className="space-y-2">
                   {faqCategories.map((category) => (
@@ -236,7 +237,7 @@ export default function FAQPage() {
                       )}
                     >
                       <category.icon className="w-5 h-5" />
-                      <span className="font-medium">{category.name}</span>
+                      <span className="font-medium">{t(category.nameKey)}</span>
                     </button>
                   ))}
                 </nav>
@@ -262,10 +263,10 @@ export default function FAQPage() {
                         </div>
                         <div>
                           <h2 className="text-2xl font-heading font-bold text-gray-900">
-                            {currentCategory.name}
+                            {t(currentCategory.nameKey)}
                           </h2>
                           <p className="text-sm text-gray-500">
-                            {currentCategory.questions.length} questions
+                            {currentCategory.questions.length} {t('faqPage.questions')}
                           </p>
                         </div>
                       </>
@@ -276,8 +277,8 @@ export default function FAQPage() {
                     {currentCategory?.questions.map((item, index) => (
                       <FAQItem
                         key={index}
-                        question={item.q}
-                        answer={item.a}
+                        question={t(item.qKey)}
+                        answer={t(item.aKey)}
                         isOpen={openQuestion === `${activeCategory}-${index}`}
                         onClick={() => 
                           setOpenQuestion(

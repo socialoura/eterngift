@@ -161,15 +161,103 @@
     "rightHeart": "Corazón derecho"
   },
   "faqPage": {
-    "title": "Preguntas frecuentes",
-    "subtitle": "Encuentra respuestas a las preguntas comunes sobre nuestros productos y servicios."
+    "title": "Preguntas",
+    "titleHighlight": "Frecuentes",
+    "subtitle": "Encuentra respuestas a las preguntas comunes sobre nuestros productos, envío y más.",
+    "categories": "Categorías",
+    "catProducts": "Productos",
+    "catShipping": "Envío",
+    "catReturns": "Devoluciones",
+    "catPayment": "Pago",
+    "catCare": "Cuidado",
+    "questions": "preguntas",
+    "qa": {
+      "products": {
+        "q1": "¿Qué son las rosas eternas?",
+        "a1": "Las rosas eternas son rosas reales que han sido preservadas especialmente para mantener su belleza natural durante años. Gracias a un proceso único, conservan su textura, colores y apariencia sin necesidad de agua ni luz solar.",
+        "q2": "¿Cuánto duran las rosas eternas?",
+        "a2": "Nuestras rosas eternas están diseñadas para durar 2-3 años o incluso más con el cuidado adecuado. Manténlas alejadas del sol directo, la humedad y temperaturas extremas.",
+        "q3": "¿Las rosas son reales?",
+        "a3": "¡Sí! Nuestras rosas eternas son 100% reales. Se seleccionan en su mejor momento y pasan por un proceso de preservación que reemplaza su savia por una solución vegetal para mantener su belleza.",
+        "q4": "¿Puedo personalizar el collar grabado?",
+        "a4": "Actualmente, nuestros collares vienen en tres colores: gris, oro y oro rosa. El diseño de corazón simboliza el amor eterno. ¡Estamos trabajando en añadir más opciones de personalización pronto!"
+      },
+      "shipping": {
+        "q1": "¿Ofrecen envío gratis?",
+        "a1": "¡Sí! Ofrecemos envío estándar gratuito en pedidos superiores a $50. Para pedidos inferiores a $50, se aplica una tarifa plana de $4.99.",
+        "q2": "¿Cuánto tarda el envío?",
+        "a2": "El envío estándar suele tardar 5-10 días hábiles. El envío express (2-4 días hábiles) está disponible por un costo adicional. En temporadas altas como San Valentín, ¡haz tu pedido con antelación!",
+        "q3": "¿Envían internacionalmente?",
+        "a3": "Sí, enviamos a todo el mundo. Los tiempos de envío internacional varían según el destino (normalmente 7-21 días hábiles). Pueden aplicarse aranceles e impuestos de importación según tu país.",
+        "q4": "¿Puedo rastrear mi pedido?",
+        "a4": "¡Por supuesto! Cuando tu pedido sea enviado, recibirás un correo con la información de seguimiento."
+      },
+      "returns": {
+        "q1": "¿Cuál es su política de devoluciones?",
+        "a1": "Ofrecemos una garantía de satisfacción de 30 días. Si no estás completamente satisfecho, contáctanos dentro de los 30 días para un reembolso o cambio.",
+        "q2": "¿Cómo inicio una devolución?",
+        "a2": "Envía un email a nuestro equipo de soporte en support@eterngift.com con tu número de pedido y el motivo. Te enviaremos una etiqueta de devolución y procesaremos el reembolso 5-7 días hábiles después de recibir el producto.",
+        "q3": "¿Hay artículos que no se pueden devolver?",
+        "a3": "Por razones de higiene, no aceptamos devoluciones de artículos usados o dañados por el cliente. Los artículos deben estar en su embalaje original."
+      },
+      "payment": {
+        "q1": "¿Qué métodos de pago aceptan?",
+        "a1": "Aceptamos las principales tarjetas (Visa, Mastercard, American Express), PayPal, Apple Pay y Google Pay. Todas las transacciones están protegidas con cifrado SSL de 256 bits.",
+        "q2": "¿Mi información de pago está segura?",
+        "a2": "¡Sí! Usamos cifrado SSL y nunca almacenamos los datos completos de tu tarjeta. Tu pago se procesa de forma segura a través de Stripe (cumple con PCI).",
+        "q3": "¿Ofrecen pagos a plazos?",
+        "a3": "Sí. Trabajamos con Klarna y Afterpay para ofrecer opciones de “Compra ahora, paga después”."
+      },
+      "care": {
+        "q1": "¿Cómo cuido mis rosas eternas?",
+        "a1": "Guarda tus rosas eternas en un lugar fresco y seco, lejos del sol directo y la humedad. Evita tocar los pétalos con frecuencia. Quita el polvo suavemente si es necesario.",
+        "q2": "¿Puedo poner las rosas eternas en agua?",
+        "a2": "No. Las rosas eternas no deben colocarse en agua porque ya están preservadas. El agua dañará la preservación.",
+        "q3": "¿Cómo limpio el collar?",
+        "a3": "Limpia el collar con un paño suave y seco. Evita el contacto con agua, perfumes y químicos. Guárdalo en su caja cuando no lo uses."
+      }
+    }
   },
   "contactPage": {
-    "title": "Contáctanos",
-    "subtitle": "Nos encantaría saber de ti. Envíanos un mensaje y te responderemos lo antes posible.",
-    "name": "Nombre",
+    "title": "Ponte en",
+    "titleHighlight": "Contacto",
+    "subtitle": "¿Tienes una pregunta? Estamos aquí para ayudarte.",
+    "emailUs": "Email",
+    "emailDesc": "Respondemos en 24h",
+    "callUs": "Teléfono",
+    "callDesc": "Lun-Vie, 9h-18h",
+    "visitUs": "Dirección",
+    "businessHours": "Horarios",
+    "sendMessage": "Envíanos un mensaje",
+    "formSubtitle": "Completa el formulario y te responderemos pronto.",
+    "yourName": "Tu nombre",
+    "emailAddress": "Email",
     "subject": "Asunto",
+    "selectSubject": "Selecciona un asunto",
+    "generalInquiry": "Consulta general",
+    "orderStatus": "Estado del pedido",
+    "productQuestion": "Pregunta de producto",
+    "returnExchange": "Devolución/Cambio",
+    "shippingIssue": "Problema de envío",
+    "partnership": "Colaboración",
+    "other": "Otro",
     "message": "Mensaje",
-    "send": "Enviar mensaje"
+    "messagePlaceholder": "¿Cómo podemos ayudarte?",
+    "send": "Enviar mensaje",
+    "messageSent": "¡Mensaje enviado!",
+    "thankYou": "Gracias por contactarnos. Responderemos en 24h.",
+    "sendAnother": "Enviar otro mensaje"
+  },
+  "productsPage": {
+    "title": "Nuestros Regalos Eternos",
+    "subtitle": "Hechos con amor, diseñados para durar. Elige el regalo perfecto.",
+    "viewDetails": "Ver detalles",
+    "whyChoose": "¿Por qué elegir",
+    "eternalQuality": "Calidad Eterna",
+    "eternalQualityDesc": "Preservado a la perfección",
+    "personalizedLove": "Amor Personalizado",
+    "personalizedLoveDesc": "Mensajes grabados únicos",
+    "premiumPackaging": "Embalaje Premium",
+    "premiumPackagingDesc": "Presentación de lujo"
   }
 }

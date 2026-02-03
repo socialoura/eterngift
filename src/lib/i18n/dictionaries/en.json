@@ -161,15 +161,103 @@
     "rightHeart": "Right Heart"
   },
   "faqPage": {
-    "title": "Frequently Asked Questions",
-    "subtitle": "Find answers to common questions about our products and services."
+    "title": "Frequently Asked",
+    "titleHighlight": "Questions",
+    "subtitle": "Find answers to common questions about our products, shipping, returns, and more.",
+    "categories": "Categories",
+    "catProducts": "Products",
+    "catShipping": "Shipping",
+    "catReturns": "Returns & Refunds",
+    "catPayment": "Payment",
+    "catCare": "Product Care",
+    "questions": "questions",
+    "qa": {
+      "products": {
+        "q1": "What are eternal roses?",
+        "a1": "Eternal roses are real roses that have been specially preserved to maintain their natural beauty for years. Through a unique preservation process, these roses retain their soft texture, vibrant colors, and natural appearance without requiring water or sunlight.",
+        "q2": "How long do eternal roses last?",
+        "a2": "Our eternal roses are designed to last 2-3 years or even longer with proper care. Keep them away from direct sunlight, humidity, and extreme temperatures for the best longevity.",
+        "q3": "Are the roses real?",
+        "a3": "Yes! Our eternal roses start as 100% real roses. They are carefully selected at their peak bloom and undergo a special preservation process that replaces their natural sap with a plant-based solution, maintaining their beauty indefinitely.",
+        "q4": "Can I customize the engraved necklace?",
+        "a4": "Currently, our necklaces come in three beautiful colors: Gray, Gold, and Rose Gold. The heart design symbolizes eternal love. We're working on adding custom engraving options soon!"
+      },
+      "shipping": {
+        "q1": "Do you offer free shipping?",
+        "a1": "Yes! We offer free standard shipping on all orders over $50. For orders under $50, a flat rate of $4.99 applies.",
+        "q2": "How long does shipping take?",
+        "a2": "Standard shipping typically takes 5-10 business days. Express shipping (2-4 business days) is available for an additional fee. During peak seasons like Valentine's Day, please order early!",
+        "q3": "Do you ship internationally?",
+        "a3": "Yes, we ship worldwide! International shipping times vary by destination, typically 7-21 business days. Import duties and taxes may apply depending on your country.",
+        "q4": "Can I track my order?",
+        "a4": "Absolutely! Once your order ships, you'll receive an email with tracking information. You can also track your order through your account dashboard."
+      },
+      "returns": {
+        "q1": "What is your return policy?",
+        "a1": "We offer a 30-day satisfaction guarantee. If you're not completely happy with your purchase, contact us within 30 days for a full refund or exchange.",
+        "q2": "How do I initiate a return?",
+        "a2": "Simply email our support team at support@eterngift.com with your order number and reason for return. We'll provide you with a prepaid return label and process your refund within 5-7 business days of receiving the item.",
+        "q3": "Are there any items that cannot be returned?",
+        "a3": "For hygiene reasons, we cannot accept returns on items that show signs of use or damage caused by the customer. All items must be in their original packaging."
+      },
+      "payment": {
+        "q1": "What payment methods do you accept?",
+        "a1": "We accept all major credit cards (Visa, Mastercard, American Express), PayPal, Apple Pay, and Google Pay. All transactions are secured with 256-bit SSL encryption.",
+        "q2": "Is my payment information secure?",
+        "a2": "Absolutely! We use industry-standard SSL encryption and never store your full credit card details. Your payment is processed securely through Stripe, a PCI-compliant payment processor.",
+        "q3": "Do you offer payment plans?",
+        "a3": "Yes! We partner with Klarna and Afterpay to offer Buy Now, Pay Later options. Split your purchase into 4 interest-free payments."
+      },
+      "care": {
+        "q1": "How do I care for my eternal roses?",
+        "a1": "Keep your eternal roses in a cool, dry place away from direct sunlight and humidity. Avoid touching the petals frequently as oils from your skin can affect the preservation. Gently dust with a soft brush if needed.",
+        "q2": "Can I put eternal roses in water?",
+        "a2": "No! Eternal roses should never be placed in water as they are already preserved. Water will damage the preservation and ruin the roses.",
+        "q3": "How do I clean the necklace?",
+        "a3": "Clean your necklace with a soft, dry cloth. Avoid contact with water, perfumes, and chemicals. Store in the provided jewelry box when not wearing."
+      }
+    }
   },
   "contactPage": {
-    "title": "Contact Us",
-    "subtitle": "We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
-    "name": "Name",
+    "title": "Get In",
+    "titleHighlight": "Touch",
+    "subtitle": "Have a question or need assistance? We're here to help make your gifting experience perfect.",
+    "emailUs": "Email Us",
+    "emailDesc": "We reply within 24 hours",
+    "callUs": "Call Us",
+    "callDesc": "Mon-Fri, 9am-6pm EST",
+    "visitUs": "Visit Us",
+    "businessHours": "Business Hours",
+    "sendMessage": "Send Us a Message",
+    "formSubtitle": "Fill out the form below and we'll get back to you as soon as possible.",
+    "yourName": "Your Name",
+    "emailAddress": "Email Address",
     "subject": "Subject",
+    "selectSubject": "Select a subject",
+    "generalInquiry": "General Inquiry",
+    "orderStatus": "Order Status",
+    "productQuestion": "Product Question",
+    "returnExchange": "Return/Exchange",
+    "shippingIssue": "Shipping Issue",
+    "partnership": "Partnership",
+    "other": "Other",
     "message": "Message",
-    "send": "Send Message"
+    "messagePlaceholder": "Tell us how we can help you...",
+    "send": "Send Message",
+    "messageSent": "Message Sent!",
+    "thankYou": "Thank you for reaching out. We'll respond within 24 hours.",
+    "sendAnother": "Send Another Message"
+  },
+  "productsPage": {
+    "title": "Our Eternal Gifts",
+    "subtitle": "Handcrafted with love, designed to last forever. Choose the perfect gift for your special someone.",
+    "viewDetails": "View Details",
+    "whyChoose": "Why Choose",
+    "eternalQuality": "Eternal Quality",
+    "eternalQualityDesc": "Preserved to perfection, lasting forever",
+    "personalizedLove": "Personalized Love",
+    "personalizedLoveDesc": "Engraved messages make each gift unique",
+    "premiumPackaging": "Premium Packaging",
+    "premiumPackagingDesc": "Luxury presentation for special moments"
   }
 }

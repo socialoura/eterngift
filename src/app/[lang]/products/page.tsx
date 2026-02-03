@@ -8,11 +8,12 @@ import { Heart } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { eternalRoseBear, eternalRoseBox, ProductVariant } from '@/lib/products-data'
 import { useCurrencyStore } from '@/store/currency'
+import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 import { cn } from '@/lib/utils'
 
 const allProducts: ProductVariant[] = [eternalRoseBear, eternalRoseBox]
 
-function ProductCard({ product }: { product: ProductVariant }) {
+function ProductCard({ product, t, locale }: { product: ProductVariant; t: (key: string) => string; locale: string }) {
   const [selectedColor, setSelectedColor] = useState(product.options[0]?.values[0]?.name || '')
   const [isHovered, setIsHovered] = useState(false)
   
@@ -34,11 +35,11 @@ function ProductCard({ product }: { product: ProductVariant }) {
     >
       {product.badge && (
         <div className="absolute top-4 left-4 z-10 bg-[#B71C1C] text-white text-xs font-semibold px-3 py-1.5 rounded-full">
-          {product.badge === 'Most Popular' ? '⭐ Most Popular' : '✨ Premium'}
+          {product.badge === 'Most Popular' ? `⭐ ${t('product.mostPopular')}` : `✨ ${t('product.premium')}`}
         </div>
       )}
 
-      <Link href={`/products/${product.slug}`}>
+      <Link href={`/${locale}/products/${product.slug}`}>
         <div className="relative aspect-square bg-gradient-to-br from-white to-[#F5F1ED] p-6">
           <Image
             src={currentImages.hero}
@@ -52,7 +53,7 @@ function ProductCard({ product }: { product: ProductVariant }) {
       </Link>
 
       <div className="p-6 space-y-4">
-        <Link href={`/products/${product.slug}`}>
+        <Link href={`/${locale}/products/${product.slug}`}>
           <h3 className="text-lg font-heading font-semibold text-gray-900 hover:text-[#B71C1C] transition-colors line-clamp-2">
             {product.name}
           </h3>
@@ -94,9 +95,9 @@ function ProductCard({ product }: { product: ProductVariant }) {
           </div>
         )}
 
-        <Link href={`/products/${product.slug}`} className="block">
+        <Link href={`/${locale}/products/${product.slug}`} className="block">
           <Button className="w-full bg-[#B71C1C] hover:bg-[#8B1538]">
-            View Details
+            {t('productsPage.viewDetails')}
           </Button>
         </Link>
       </div>
@@ -105,6 +106,9 @@ function ProductCard({ product }: { product: ProductVariant }) {
 }
 
 export default function ProductsPage() {
+  const { t } = useTranslation()
+  const locale = useLocale()
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-[#FFE5E5]/30">
       {/* Header */}
@@ -116,10 +120,10 @@ export default function ProductsPage() {
             className="text-center"
           >
             <h1 className="text-3xl md:text-4xl font-heading font-bold text-white mb-3">
-              Our Eternal Gifts
+              {t('productsPage.title')}
             </h1>
             <p className="text-[#FFE5E5]/90 max-w-xl mx-auto">
-              Handcrafted with love, designed to last forever. Choose the perfect gift for your special someone.
+              {t('productsPage.subtitle')}
             </p>
           </motion.div>
         </div>
@@ -128,7 +132,7 @@ export default function ProductsPage() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {allProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard key={product.id} product={product} t={t} locale={locale} />
           ))}
         </div>
 
@@ -140,15 +144,15 @@ export default function ProductsPage() {
           className="mt-16 text-center"
         >
           <h2 className="text-2xl font-heading font-bold text-gray-900 mb-8">
-            Why Choose <span className="text-[#D4AF88]">EternGift</span>?
+            {t('productsPage.whyChoose')} <span className="text-[#D4AF88]">EternGift</span>?
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="p-6">
               <div className="w-14 h-14 bg-[#FFE5E5] rounded-full flex items-center justify-center mx-auto mb-4">
                 <Heart className="w-7 h-7 text-[#B71C1C]" />
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Eternal Quality</h3>
-              <p className="text-gray-600 text-sm">Preserved to perfection, lasting forever</p>
+              <h3 className="font-semibold text-gray-900 mb-2">{t('productsPage.eternalQuality')}</h3>
+              <p className="text-gray-600 text-sm">{t('productsPage.eternalQualityDesc')}</p>
             </div>
             <div className="p-6">
               <div className="w-14 h-14 bg-[#FFE5E5] rounded-full flex items-center justify-center mx-auto mb-4">
@@ -156,8 +160,8 @@ export default function ProductsPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Personalized Love</h3>
-              <p className="text-gray-600 text-sm">Engraved messages make each gift unique</p>
+              <h3 className="font-semibold text-gray-900 mb-2">{t('productsPage.personalizedLove')}</h3>
+              <p className="text-gray-600 text-sm">{t('productsPage.personalizedLoveDesc')}</p>
             </div>
             <div className="p-6">
               <div className="w-14 h-14 bg-[#FFE5E5] rounded-full flex items-center justify-center mx-auto mb-4">
@@ -165,8 +169,8 @@ export default function ProductsPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
                 </svg>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Premium Packaging</h3>
-              <p className="text-gray-600 text-sm">Luxury presentation for special moments</p>
+              <h3 className="font-semibold text-gray-900 mb-2">{t('productsPage.premiumPackaging')}</h3>
+              <p className="text-gray-600 text-sm">{t('productsPage.premiumPackagingDesc')}</p>
             </div>
           </div>
         </motion.div>

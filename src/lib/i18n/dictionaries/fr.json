@@ -161,15 +161,103 @@
     "rightHeart": "Cœur droit"
   },
   "faqPage": {
-    "title": "Questions fréquentes",
-    "subtitle": "Trouvez les réponses aux questions courantes sur nos produits et services."
+    "title": "Questions",
+    "titleHighlight": "Fréquentes",
+    "subtitle": "Trouvez les réponses aux questions courantes sur nos produits, la livraison, les retours et plus.",
+    "categories": "Catégories",
+    "catProducts": "Produits",
+    "catShipping": "Livraison",
+    "catReturns": "Retours & Remboursements",
+    "catPayment": "Paiement",
+    "catCare": "Entretien",
+    "questions": "questions",
+    "qa": {
+      "products": {
+        "q1": "Que sont les roses éternelles ?",
+        "a1": "Les roses éternelles sont de vraies roses spécialement préservées pour conserver leur beauté naturelle pendant des années. Grâce à un processus unique, elles gardent leur texture douce, leurs couleurs et leur apparence sans eau ni lumière.",
+        "q2": "Combien de temps durent les roses éternelles ?",
+        "a2": "Nos roses éternelles sont conçues pour durer 2 à 3 ans, voire plus avec un bon entretien. Évitez le soleil direct, l'humidité et les températures extrêmes.",
+        "q3": "Les roses sont-elles réelles ?",
+        "a3": "Oui ! Nos roses éternelles sont 100% réelles. Elles sont sélectionnées à maturité puis préservées grâce à un procédé qui remplace leur sève par une solution végétale, afin de conserver leur beauté.",
+        "q4": "Puis-je personnaliser le collier gravé ?",
+        "a4": "Actuellement, nos colliers existent en trois couleurs : gris, or et or rose. Le cœur symbolise l'amour éternel. Nous travaillons à ajouter davantage d'options de personnalisation."
+      },
+      "shipping": {
+        "q1": "Proposez-vous la livraison gratuite ?",
+        "a1": "Oui ! La livraison standard est gratuite dès 50€ d'achat. En dessous, un forfait de 4,99€ s'applique.",
+        "q2": "Quels sont les délais de livraison ?",
+        "a2": "La livraison standard prend généralement 5 à 10 jours ouvrés. Une livraison express (2 à 4 jours ouvrés) est disponible avec frais supplémentaires. En période de pointe (Saint-Valentin), commandez tôt.",
+        "q3": "Livrez-vous à l'international ?",
+        "a3": "Oui, nous livrons dans le monde entier ! Les délais varient selon la destination (souvent 7 à 21 jours ouvrés). Des taxes/droits d'importation peuvent s'appliquer selon votre pays.",
+        "q4": "Puis-je suivre ma commande ?",
+        "a4": "Bien sûr ! Une fois votre commande expédiée, vous recevrez un email avec les informations de suivi."
+      },
+      "returns": {
+        "q1": "Quelle est votre politique de retour ?",
+        "a1": "Nous offrons une garantie satisfaction de 30 jours. Si vous n'êtes pas entièrement satisfait, contactez-nous sous 30 jours pour un remboursement ou un échange.",
+        "q2": "Comment initier un retour ?",
+        "a2": "Écrivez à support@eterngift.com avec votre numéro de commande et la raison du retour. Nous vous fournirons une étiquette de retour et traiterons le remboursement sous 5 à 7 jours ouvrés après réception.",
+        "q3": "Y a-t-il des articles non retournables ?",
+        "a3": "Pour des raisons d'hygiène, nous n'acceptons pas les retours d'articles utilisés ou endommagés par le client. Les produits doivent être dans leur emballage d'origine."
+      },
+      "payment": {
+        "q1": "Quels moyens de paiement acceptez-vous ?",
+        "a1": "Nous acceptons les principales cartes (Visa, Mastercard, American Express), PayPal, Apple Pay et Google Pay. Toutes les transactions sont sécurisées via un chiffrement SSL 256 bits.",
+        "q2": "Mes informations de paiement sont-elles sécurisées ?",
+        "a2": "Oui. Nous utilisons un chiffrement SSL et ne stockons jamais les détails complets de votre carte. Le paiement est traité de manière sécurisée par Stripe (PCI-compliant).",
+        "q3": "Proposez-vous des paiements en plusieurs fois ?",
+        "a3": "Oui ! Nous proposons des options “Acheter maintenant, payer plus tard” avec Klarna et Afterpay."
+      },
+      "care": {
+        "q1": "Comment entretenir mes roses éternelles ?",
+        "a1": "Conservez vos roses dans un endroit frais et sec, à l'abri du soleil et de l'humidité. Évitez de toucher souvent les pétales. Dépoussiérez délicatement si besoin.",
+        "q2": "Puis-je mettre les roses éternelles dans l'eau ?",
+        "a2": "Non. Les roses éternelles ne doivent jamais être mises dans l'eau : cela endommagerait la préservation.",
+        "q3": "Comment nettoyer le collier ?",
+        "a3": "Nettoyez le collier avec un chiffon doux et sec. Évitez l'eau, les parfums et les produits chimiques. Rangez-le dans son écrin lorsque vous ne le portez pas."
+      }
+    }
   },
   "contactPage": {
-    "title": "Contactez-nous",
-    "subtitle": "Nous serions ravis de vous entendre. Envoyez-nous un message et nous vous répondrons dès que possible.",
-    "name": "Nom",
+    "title": "Entrer en",
+    "titleHighlight": "Contact",
+    "subtitle": "Une question ou besoin d'aide ? Nous sommes là pour rendre votre expérience cadeau parfaite.",
+    "emailUs": "Email",
+    "emailDesc": "Réponse sous 24h",
+    "callUs": "Téléphone",
+    "callDesc": "Lun-Ven, 9h-18h",
+    "visitUs": "Adresse",
+    "businessHours": "Horaires",
+    "sendMessage": "Envoyez-nous un message",
+    "formSubtitle": "Remplissez le formulaire ci-dessous et nous vous répondrons dès que possible.",
+    "yourName": "Votre nom",
+    "emailAddress": "Adresse email",
     "subject": "Sujet",
+    "selectSubject": "Sélectionnez un sujet",
+    "generalInquiry": "Demande générale",
+    "orderStatus": "Statut de commande",
+    "productQuestion": "Question produit",
+    "returnExchange": "Retour/Échange",
+    "shippingIssue": "Problème de livraison",
+    "partnership": "Partenariat",
+    "other": "Autre",
     "message": "Message",
-    "send": "Envoyer"
+    "messagePlaceholder": "Dites-nous comment nous pouvons vous aider...",
+    "send": "Envoyer le message",
+    "messageSent": "Message envoyé !",
+    "thankYou": "Merci de nous avoir contactés. Nous répondrons sous 24h.",
+    "sendAnother": "Envoyer un autre message"
+  },
+  "productsPage": {
+    "title": "Nos Cadeaux Éternels",
+    "subtitle": "Faits avec amour, conçus pour durer éternellement. Choisissez le cadeau parfait pour votre être cher.",
+    "viewDetails": "Voir les détails",
+    "whyChoose": "Pourquoi choisir",
+    "eternalQuality": "Qualité Éternelle",
+    "eternalQualityDesc": "Préservé à la perfection, dure éternellement",
+    "personalizedLove": "Amour Personnalisé",
+    "personalizedLoveDesc": "Des messages gravés rendent chaque cadeau unique",
+    "premiumPackaging": "Emballage Premium",
+    "premiumPackagingDesc": "Présentation luxueuse pour des moments spéciaux"
   }
 }

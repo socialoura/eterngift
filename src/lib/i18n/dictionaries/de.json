@@ -161,15 +161,103 @@
     "rightHeart": "Rechtes Herz"
   },
   "faqPage": {
-    "title": "Häufig gestellte Fragen",
-    "subtitle": "Finden Sie Antworten auf häufige Fragen zu unseren Produkten und Services."
+    "title": "Häufig gestellte",
+    "titleHighlight": "Fragen",
+    "subtitle": "Antworten auf häufige Fragen zu Produkten, Versand und mehr.",
+    "categories": "Kategorien",
+    "catProducts": "Produkte",
+    "catShipping": "Versand",
+    "catReturns": "Rückgaben",
+    "catPayment": "Zahlung",
+    "catCare": "Pflege",
+    "questions": "Fragen",
+    "qa": {
+      "products": {
+        "q1": "Was sind ewige Rosen?",
+        "a1": "Ewige Rosen sind echte Rosen, die speziell konserviert wurden, um ihre natürliche Schönheit über Jahre zu bewahren. Durch einen einzigartigen Prozess behalten sie ihre weiche Textur, kräftige Farben und ihr natürliches Aussehen – ohne Wasser oder Sonnenlicht.",
+        "q2": "Wie lange halten ewige Rosen?",
+        "a2": "Unsere ewigen Rosen halten in der Regel 2–3 Jahre oder länger bei richtiger Pflege. Bitte vor direkter Sonne, hoher Luftfeuchtigkeit und extremen Temperaturen schützen.",
+        "q3": "Sind die Rosen echt?",
+        "a3": "Ja! Unsere ewigen Rosen sind 100% echte Rosen. Sie werden zur perfekten Blüte ausgewählt und anschließend durch ein Konservierungsverfahren behandelt, das den natürlichen Saft durch eine pflanzenbasierte Lösung ersetzt.",
+        "q4": "Kann ich die Gravur-Halskette personalisieren?",
+        "a4": "Aktuell gibt es unsere Halsketten in drei Farben: Grau, Gold und Roségold. Das Herzsymbol steht für ewige Liebe. Wir arbeiten daran, weitere Personalisierungsoptionen hinzuzufügen."
+      },
+      "shipping": {
+        "q1": "Bieten Sie kostenlosen Versand an?",
+        "a1": "Ja! Kostenloser Standardversand für Bestellungen über 50$. Unter 50$ fällt eine Pauschale von 4,99$ an.",
+        "q2": "Wie lange dauert der Versand?",
+        "a2": "Standardversand dauert meist 5–10 Werktage. Expressversand (2–4 Werktage) ist gegen Aufpreis verfügbar. In Spitzenzeiten wie zum Valentinstag bitte frühzeitig bestellen.",
+        "q3": "Liefern Sie international?",
+        "a3": "Ja, wir liefern weltweit! Internationale Lieferzeiten variieren je nach Ziel (typisch 7–21 Werktage). Einfuhrabgaben und Steuern können je nach Land anfallen.",
+        "q4": "Kann ich meine Bestellung verfolgen?",
+        "a4": "Natürlich! Nach dem Versand erhalten Sie eine E-Mail mit Tracking-Informationen."
+      },
+      "returns": {
+        "q1": "Wie lautet Ihre Rückgaberegelung?",
+        "a1": "Wir bieten eine 30-Tage-Zufriedenheitsgarantie. Wenn Sie nicht zufrieden sind, kontaktieren Sie uns innerhalb von 30 Tagen für Rückerstattung oder Umtausch.",
+        "q2": "Wie starte ich eine Rückgabe?",
+        "a2": "Senden Sie eine E-Mail an support@eterngift.com mit Bestellnummer und Grund. Wir stellen ein Rücksendeetikett bereit und bearbeiten die Rückerstattung innerhalb von 5–7 Werktagen nach Eingang.",
+        "q3": "Gibt es Artikel, die nicht zurückgegeben werden können?",
+        "a3": "Aus Hygienegründen können wir keine Rückgaben von Artikeln akzeptieren, die Gebrauchsspuren aufweisen oder durch den Kunden beschädigt wurden. Alle Artikel müssen in Originalverpackung sein."
+      },
+      "payment": {
+        "q1": "Welche Zahlungsmethoden akzeptieren Sie?",
+        "a1": "Wir akzeptieren alle gängigen Kreditkarten (Visa, Mastercard, American Express), PayPal, Apple Pay und Google Pay. Alle Transaktionen sind mit 256‑Bit SSL verschlüsselt.",
+        "q2": "Sind meine Zahlungsdaten sicher?",
+        "a2": "Ja. Wir verwenden SSL-Verschlüsselung und speichern niemals Ihre vollständigen Kartendaten. Die Zahlung wird sicher über Stripe (PCI-konform) verarbeitet.",
+        "q3": "Bieten Sie Ratenzahlung an?",
+        "a3": "Ja! Wir arbeiten mit Klarna und Afterpay für “Buy Now, Pay Later”-Optionen."
+      },
+      "care": {
+        "q1": "Wie pflege ich meine ewigen Rosen?",
+        "a1": "Bewahren Sie Ihre ewigen Rosen an einem kühlen, trockenen Ort auf – fern von direkter Sonne und Feuchtigkeit. Vermeiden Sie häufiges Berühren der Blütenblätter. Stauben Sie bei Bedarf vorsichtig ab.",
+        "q2": "Kann ich ewige Rosen ins Wasser stellen?",
+        "a2": "Nein. Ewige Rosen dürfen niemals ins Wasser, da dies die Konservierung beschädigt.",
+        "q3": "Wie reinige ich die Halskette?",
+        "a3": "Reinigen Sie die Halskette mit einem weichen, trockenen Tuch. Vermeiden Sie Wasser, Parfüms und Chemikalien. Bewahren Sie sie in der Schmuckbox auf, wenn Sie sie nicht tragen."
+      }
+    }
   },
   "contactPage": {
-    "title": "Kontaktieren Sie uns",
-    "subtitle": "Wir freuen uns von Ihnen zu hören. Senden Sie uns eine Nachricht und wir antworten so schnell wie möglich.",
-    "name": "Name",
+    "title": "Kontakt",
+    "titleHighlight": "aufnehmen",
+    "subtitle": "Fragen? Wir helfen Ihnen gerne.",
+    "emailUs": "E-Mail",
+    "emailDesc": "Antwort in 24h",
+    "callUs": "Telefon",
+    "callDesc": "Mo-Fr, 9-18 Uhr",
+    "visitUs": "Adresse",
+    "businessHours": "Öffnungszeiten",
+    "sendMessage": "Nachricht senden",
+    "formSubtitle": "Füllen Sie das Formular aus.",
+    "yourName": "Ihr Name",
+    "emailAddress": "E-Mail",
     "subject": "Betreff",
+    "selectSubject": "Betreff wählen",
+    "generalInquiry": "Allgemeine Anfrage",
+    "orderStatus": "Bestellstatus",
+    "productQuestion": "Produktfrage",
+    "returnExchange": "Rückgabe/Umtausch",
+    "shippingIssue": "Versandproblem",
+    "partnership": "Partnerschaft",
+    "other": "Sonstiges",
     "message": "Nachricht",
-    "send": "Nachricht senden"
+    "messagePlaceholder": "Wie können wir helfen?",
+    "send": "Senden",
+    "messageSent": "Gesendet!",
+    "thankYou": "Danke! Wir antworten in 24h.",
+    "sendAnother": "Weitere Nachricht"
+  },
+  "productsPage": {
+    "title": "Unsere ewigen Geschenke",
+    "subtitle": "Mit Liebe gefertigt, für immer. Wählen Sie das perfekte Geschenk.",
+    "viewDetails": "Details",
+    "whyChoose": "Warum",
+    "eternalQuality": "Ewige Qualität",
+    "eternalQualityDesc": "Perfekt konserviert",
+    "personalizedLove": "Personalisierte Liebe",
+    "personalizedLoveDesc": "Gravierte Botschaften",
+    "premiumPackaging": "Premium-Verpackung",
+    "premiumPackagingDesc": "Luxuriöse Präsentation"
   }
 }

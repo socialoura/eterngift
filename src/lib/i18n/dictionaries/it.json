@@ -161,15 +161,103 @@
     "rightHeart": "Cuore destro"
   },
   "faqPage": {
-    "title": "Domande frequenti",
-    "subtitle": "Trova risposte alle domande comuni sui nostri prodotti e servizi."
+    "title": "Domande",
+    "titleHighlight": "Frequenti",
+    "subtitle": "Risposte alle domande comuni su prodotti e spedizione.",
+    "categories": "Categorie",
+    "catProducts": "Prodotti",
+    "catShipping": "Spedizione",
+    "catReturns": "Resi",
+    "catPayment": "Pagamento",
+    "catCare": "Cura",
+    "questions": "domande",
+    "qa": {
+      "products": {
+        "q1": "Cosa sono le rose eterne?",
+        "a1": "Le rose eterne sono rose vere che vengono preservate per mantenere la loro bellezza naturale per anni. Grazie a un processo unico, conservano consistenza, colori e aspetto senza bisogno di acqua o luce solare.",
+        "q2": "Quanto durano le rose eterne?",
+        "a2": "Le nostre rose eterne sono progettate per durare 2-3 anni o anche di più con la giusta cura. Tienile lontane dal sole diretto, dall'umidità e da temperature estreme.",
+        "q3": "Le rose sono vere?",
+        "a3": "Sì! Le nostre rose eterne sono 100% vere. Vengono selezionate al massimo della fioritura e poi preservate sostituendo la linfa naturale con una soluzione a base vegetale.",
+        "q4": "Posso personalizzare la collana incisa?",
+        "a4": "Attualmente le collane sono disponibili in tre colori: grigio, oro e oro rosa. Il cuore simboleggia l'amore eterno. Stiamo lavorando per aggiungere altre opzioni di personalizzazione."
+      },
+      "shipping": {
+        "q1": "Offrite la spedizione gratuita?",
+        "a1": "Sì! Offriamo la spedizione standard gratuita per ordini superiori a $50. Per ordini inferiori, si applica una tariffa fissa di $4.99.",
+        "q2": "Quanto tempo impiega la spedizione?",
+        "a2": "La spedizione standard richiede in genere 5-10 giorni lavorativi. La spedizione express (2-4 giorni lavorativi) è disponibile con un costo aggiuntivo. In periodi di punta come San Valentino, ordina in anticipo.",
+        "q3": "Spedite a livello internazionale?",
+        "a3": "Sì, spediamo in tutto il mondo! I tempi variano in base alla destinazione (di solito 7-21 giorni lavorativi). Potrebbero applicarsi dazi e tasse di importazione.",
+        "q4": "Posso tracciare il mio ordine?",
+        "a4": "Certo! Quando l'ordine viene spedito, riceverai un'email con le informazioni di tracciamento."
+      },
+      "returns": {
+        "q1": "Qual è la vostra politica di reso?",
+        "a1": "Offriamo una garanzia soddisfatti o rimborsati di 30 giorni. Se non sei completamente soddisfatto, contattaci entro 30 giorni per un rimborso o una sostituzione.",
+        "q2": "Come posso avviare un reso?",
+        "a2": "Invia una email a support@eterngift.com con il numero d'ordine e il motivo del reso. Ti forniremo un'etichetta di reso e elaboreremo il rimborso entro 5-7 giorni lavorativi dalla ricezione del prodotto.",
+        "q3": "Ci sono articoli che non possono essere restituiti?",
+        "a3": "Per motivi igienici, non accettiamo resi di articoli usati o danneggiati dal cliente. Tutti gli articoli devono essere nella confezione originale."
+      },
+      "payment": {
+        "q1": "Quali metodi di pagamento accettate?",
+        "a1": "Accettiamo le principali carte (Visa, Mastercard, American Express), PayPal, Apple Pay e Google Pay. Tutte le transazioni sono protette da crittografia SSL a 256 bit.",
+        "q2": "Le mie informazioni di pagamento sono sicure?",
+        "a2": "Sì! Utilizziamo la crittografia SSL e non memorizziamo mai i dati completi della tua carta. Il pagamento viene elaborato in modo sicuro tramite Stripe (conforme PCI).",
+        "q3": "Offrite pagamenti a rate?",
+        "a3": "Sì! Collaboriamo con Klarna e Afterpay per opzioni “Compra ora, paga dopo”."
+      },
+      "care": {
+        "q1": "Come mi prendo cura delle rose eterne?",
+        "a1": "Tieni le rose eterne in un luogo fresco e asciutto, lontano dal sole diretto e dall'umidità. Evita di toccare spesso i petali. Spolvera delicatamente se necessario.",
+        "q2": "Posso mettere le rose eterne in acqua?",
+        "a2": "No. Le rose eterne non devono mai essere messe in acqua perché sono già preservate: l'acqua rovinerebbe la conservazione.",
+        "q3": "Come pulisco la collana?",
+        "a3": "Pulisci la collana con un panno morbido e asciutto. Evita acqua, profumi e prodotti chimici. Conservala nella scatola quando non la indossi."
+      }
+    }
   },
   "contactPage": {
-    "title": "Contattaci",
-    "subtitle": "Ci piacerebbe sentirti. Inviaci un messaggio e ti risponderemo il prima possibile.",
-    "name": "Nome",
+    "title": "Mettiti in",
+    "titleHighlight": "Contatto",
+    "subtitle": "Domande? Siamo qui per aiutarti.",
+    "emailUs": "Email",
+    "emailDesc": "Risposta in 24h",
+    "callUs": "Telefono",
+    "callDesc": "Lun-Ven, 9-18",
+    "visitUs": "Indirizzo",
+    "businessHours": "Orari",
+    "sendMessage": "Inviaci un messaggio",
+    "formSubtitle": "Compila il modulo.",
+    "yourName": "Il tuo nome",
+    "emailAddress": "Email",
     "subject": "Oggetto",
+    "selectSubject": "Seleziona",
+    "generalInquiry": "Richiesta",
+    "orderStatus": "Stato ordine",
+    "productQuestion": "Domanda",
+    "returnExchange": "Reso",
+    "shippingIssue": "Spedizione",
+    "partnership": "Partnership",
+    "other": "Altro",
     "message": "Messaggio",
-    "send": "Invia messaggio"
+    "messagePlaceholder": "Come possiamo aiutarti?",
+    "send": "Invia",
+    "messageSent": "Inviato!",
+    "thankYou": "Grazie! Risponderemo in 24h.",
+    "sendAnother": "Invia altro"
+  },
+  "productsPage": {
+    "title": "I Nostri Regali Eterni",
+    "subtitle": "Fatti con amore, per sempre.",
+    "viewDetails": "Dettagli",
+    "whyChoose": "Perché",
+    "eternalQuality": "Qualità Eterna",
+    "eternalQualityDesc": "Conservato alla perfezione",
+    "personalizedLove": "Amore Personalizzato",
+    "personalizedLoveDesc": "Messaggi incisi unici",
+    "premiumPackaging": "Confezione Premium",
+    "premiumPackagingDesc": "Presentazione di lusso"
   }
 }
