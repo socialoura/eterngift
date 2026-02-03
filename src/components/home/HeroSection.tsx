@@ -7,6 +7,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { Heart, Sparkles, Gift } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
+import { useIsMobile, useReducedMotion } from '@/hooks/useIsMobile'
 
 function FloatingHeart({ delay, duration, left, size, opacity }: { 
   delay: number; duration: number; left: string; size: number; opacity: number 
@@ -66,8 +67,17 @@ export function HeroSection() {
   
   const { t } = useTranslation()
   const locale = useLocale()
+  const isMobile = useIsMobile()
+  const prefersReducedMotion = useReducedMotion()
+  
+  // Reduce animations on mobile for better performance
+  const shouldReduceAnimations = isMobile || prefersReducedMotion
 
-  const floatingHearts = [
+  // Fewer hearts on mobile
+  const floatingHearts = shouldReduceAnimations ? [
+    { delay: 0, duration: 10, left: '10%', size: 16, opacity: 0.3 },
+    { delay: 2, duration: 12, left: '90%', size: 14, opacity: 0.3 },
+  ] : [
     { delay: 0, duration: 8, left: '5%', size: 20, opacity: 0.4 },
     { delay: 1.5, duration: 10, left: '15%', size: 16, opacity: 0.3 },
     { delay: 3, duration: 9, left: '25%', size: 24, opacity: 0.5 },
@@ -78,7 +88,11 @@ export function HeroSection() {
     { delay: 2.5, duration: 12, left: '55%', size: 16, opacity: 0.4 },
   ]
 
-  const sparkles = [
+  // Fewer sparkles on mobile
+  const sparkles = shouldReduceAnimations ? [
+    { delay: 0, x: '20%', y: '20%' },
+    { delay: 1, x: '80%', y: '60%' },
+  ] : [
     { delay: 0, x: '20%', y: '20%' },
     { delay: 0.5, x: '80%', y: '15%' },
     { delay: 1, x: '70%', y: '60%' },
@@ -130,7 +144,7 @@ export function HeroSection() {
 
       {/* Main content */}
       <motion.div style={{ opacity }} className="relative z-10">
-        <div className="container mx-auto px-4 pt-20 pb-32 lg:pt-32 lg:pb-40">
+        <div className="container mx-auto px-4 pt-16 pb-20 md:pt-20 md:pb-32 lg:pt-32 lg:pb-40">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             
             {/* Text content */}
@@ -150,7 +164,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white leading-[1.1]"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold text-white leading-[1.1]"
               >
                 {t('hero.title')}
                 <motion.span 
@@ -169,7 +183,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="mt-8 text-lg md:text-xl text-white/80 max-w-xl mx-auto lg:mx-0 leading-relaxed"
+                className="mt-6 md:mt-8 text-base md:text-lg lg:text-xl text-white/80 max-w-xl mx-auto lg:mx-0 leading-relaxed"
               >
                 {t('hero.subtitle')}
               </motion.p>
@@ -178,7 +192,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                className="mt-8 md:mt-10 flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start"
               >
                 <Link href={`/${locale}/collections`}>
                   <motion.div
@@ -187,7 +201,7 @@ export function HeroSection() {
                   >
                     <Button
                       size="lg"
-                      className="w-full sm:w-auto bg-white text-[#8B1538] hover:bg-[#D4AF88] hover:text-white px-8 py-6 text-lg font-semibold shadow-2xl"
+                      className="w-full sm:w-auto bg-white text-[#8B1538] hover:bg-[#D4AF88] hover:text-white px-6 py-4 md:px-8 md:py-6 text-base md:text-lg font-semibold shadow-2xl"
                     >
                       <Gift className="w-5 h-5 mr-2" />
                       {t('hero.shopNow')}
@@ -202,7 +216,7 @@ export function HeroSection() {
                     <Button
                       size="lg"
                       variant="outline"
-                      className="w-full sm:w-auto border-2 border-white/50 text-white hover:bg-white/10 px-8 py-6 text-lg"
+                      className="w-full sm:w-auto border-2 border-white/50 text-white hover:bg-white/10 px-6 py-4 md:px-8 md:py-6 text-base md:text-lg"
                     >
                       {t('hero.learnMore')}
                     </Button>
@@ -215,7 +229,7 @@ export function HeroSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
-                className="mt-12 flex flex-wrap gap-6 justify-center lg:justify-start"
+                className="mt-8 md:mt-12 flex flex-wrap gap-4 md:gap-6 justify-center lg:justify-start"
               >
                 {[
                   { icon: '🚚', textKey: 'common.freeShipping' },
@@ -237,7 +251,7 @@ export function HeroSection() {
               transition={{ duration: 1, delay: 0.3 }}
               className="relative order-1 lg:order-2"
             >
-              <div className="relative mx-auto w-full max-w-lg aspect-square">
+              <div className="relative mx-auto w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-square">
                 {/* Glowing rings */}
                 <motion.div
                   className="absolute inset-0 rounded-full"

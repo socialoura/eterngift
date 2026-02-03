@@ -11,6 +11,7 @@ import { QuickBuyModal } from '@/components/checkout/QuickBuyModal'
 import { useCurrencyStore } from '@/store/currency'
 import { useCartStore } from '@/store/cart'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
+import { useIsMobile } from '@/hooks/useIsMobile'
 import { cn } from '@/lib/utils'
 
 function ProductCard({ product, index }: { product: ProductVariant; index: number }) {
@@ -63,17 +64,17 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
       onMouseLeave={() => setIsHovered(false)}
       className="group relative"
     >
-      {/* Card glow effect on hover */}
+      {/* Card glow effect on hover - hidden on mobile */}
       <motion.div
-        className="absolute -inset-2 bg-gradient-to-r from-[#B71C1C] via-[#D4AF88] to-[#B71C1C] rounded-[2rem] opacity-0 blur-2xl transition-all duration-700"
-        animate={{ opacity: isHovered ? 0.4 : 0 }}
+        className="absolute -inset-2 bg-gradient-to-r from-[#B71C1C] via-[#D4AF88] to-[#B71C1C] rounded-[2rem] opacity-0 blur-2xl transition-all duration-700 hidden md:block"
+        animate={{ opacity: isHovered ? 0.3 : 0 }}
       />
 
       <div className={cn(
-        'relative bg-white rounded-[2rem] overflow-hidden',
+        'relative bg-white rounded-xl md:rounded-[2rem] overflow-hidden',
         'shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] hover:shadow-[0_25px_60px_-15px_rgba(183,28,28,0.25)]',
         'border border-gray-100/80 hover:border-[#D4AF88]/30',
-        'transition-all duration-500 transform hover:-translate-y-3'
+        'transition-all duration-500 transform md:hover:-translate-y-2'
       )}>
         {/* Decorative corner accent */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#FFE5E5] to-transparent rounded-bl-[100px] opacity-60" />
@@ -117,17 +118,9 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
         {/* Image container */}
         <Link href={`/${locale}/products/${product.slug}`}>
           <div className="relative aspect-[4/3] bg-gradient-to-br from-[#FAFAFA] via-[#FFF8F8] to-[#FFF0F0] overflow-hidden">
-            {/* Animated background circles */}
-            <motion.div 
-              className="absolute top-1/4 right-1/4 w-40 h-40 bg-pink-100 rounded-full blur-3xl"
-              animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-              transition={{ duration: 4, repeat: Infinity }}
-            />
-            <motion.div 
-              className="absolute bottom-1/4 left-1/4 w-32 h-32 bg-[#D4AF88]/20 rounded-full blur-2xl"
-              animate={{ scale: [1.2, 1, 1.2], opacity: [0.3, 0.5, 0.3] }}
-              transition={{ duration: 4, delay: 1, repeat: Infinity }}
-            />
+            {/* Background circles - static on mobile for performance */}
+            <div className="absolute top-1/4 right-1/4 w-32 md:w-40 h-32 md:h-40 bg-pink-100 rounded-full blur-3xl opacity-40" />
+            <div className="absolute bottom-1/4 left-1/4 w-24 md:w-32 h-24 md:h-32 bg-[#D4AF88]/20 rounded-full blur-2xl opacity-40" />
 
             {/* Product image with enhanced animation */}
             <motion.div
@@ -148,28 +141,26 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
               />
             </motion.div>
 
-            {/* Floating sparkles on hover */}
+            {/* Floating sparkles on hover - hidden on mobile for performance */}
             <motion.div
-              className="absolute inset-0 pointer-events-none z-20"
+              className="absolute inset-0 pointer-events-none z-20 hidden md:block"
               animate={{ opacity: isHovered ? 1 : 0 }}
             >
-              {[...Array(8)].map((_, i) => (
+              {[...Array(4)].map((_, i) => (
                 <motion.div
                   key={i}
                   className="absolute"
                   style={{
-                    left: `${10 + i * 12}%`,
-                    top: `${20 + (i % 4) * 18}%`,
+                    left: `${15 + i * 20}%`,
+                    top: `${25 + (i % 2) * 30}%`,
                   }}
                   animate={{
-                    y: [0, -25, 0],
+                    y: [0, -20, 0],
                     opacity: [0.4, 1, 0.4],
-                    scale: [0.6, 1.3, 0.6],
-                    rotate: [0, 180, 360],
                   }}
                   transition={{
-                    duration: 2.5,
-                    delay: i * 0.2,
+                    duration: 3,
+                    delay: i * 0.3,
                     repeat: Infinity,
                   }}
                 >
@@ -329,7 +320,7 @@ export function FeaturedProductsSection() {
   const locale = useLocale()
   
   return (
-    <section className="py-24 bg-gradient-to-b from-white via-[#FFF8F8] to-white relative overflow-hidden">
+    <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-white via-[#FFF8F8] to-white relative overflow-hidden">
       {/* Subtle background decorations */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-64 h-64 bg-pink-100 rounded-full blur-3xl opacity-40" />
@@ -337,17 +328,17 @@ export function FeaturedProductsSection() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-pink-50 to-[#FFE5E5]/30 rounded-full blur-3xl opacity-50" />
       </div>
 
-      {/* Floating hearts decoration */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[...Array(6)].map((_, i) => (
+      {/* Floating hearts decoration - hidden on mobile */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block">
+        {[...Array(4)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute"
-            style={{ left: `${10 + i * 15}%`, top: `${20 + (i % 3) * 25}%` }}
-            animate={{ y: [0, -20, 0], opacity: [0.15, 0.3, 0.15] }}
-            transition={{ duration: 5, delay: i * 0.8, repeat: Infinity }}
+            style={{ left: `${15 + i * 20}%`, top: `${25 + (i % 2) * 30}%` }}
+            animate={{ y: [0, -15, 0], opacity: [0.15, 0.25, 0.15] }}
+            transition={{ duration: 6, delay: i * 1, repeat: Infinity }}
           >
-            <Heart className="w-6 h-6 text-pink-200 fill-pink-200" />
+            <Heart className="w-5 h-5 text-pink-200 fill-pink-200" />
           </motion.div>
         ))}
       </div>
@@ -358,7 +349,7 @@ export function FeaturedProductsSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           {/* Animated icon */}
           <motion.div
@@ -373,17 +364,17 @@ export function FeaturedProductsSection() {
             </div>
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-gray-900 mb-3 md:mb-4">
             {t('featured.title')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B71C1C] to-[#D4AF88]">{t('featured.titleHighlight')}</span> {t('featured.titleEnd')}
           </h2>
           
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
             {t('featured.subtitle')}
           </p>
         </motion.div>
 
         {/* Products grid */}
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 max-w-6xl mx-auto">
           <ProductCard product={eternalRoseBear} index={0} />
           <ProductCard product={eternalRoseBox} index={1} />
         </div>
@@ -393,7 +384,7 @@ export function FeaturedProductsSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="text-center mt-10 md:mt-16"
         >
           <Link href={`/${locale}/collections`}>
             <motion.div

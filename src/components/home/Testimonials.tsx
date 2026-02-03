@@ -66,35 +66,37 @@ export function Testimonials() {
   }
 
   return (
-    <section className="py-24 bg-gradient-to-b from-[#FFF8F8] to-white relative overflow-hidden">
+    <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-[#FFF8F8] to-white relative overflow-hidden">
       {/* Decorative background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-pink-100 rounded-full blur-3xl opacity-40" />
         <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-[#D4AF88]/20 rounded-full blur-3xl opacity-50" />
         
-        {/* Floating hearts */}
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute"
-            style={{
-              left: `${10 + i * 15}%`,
-              top: `${20 + (i % 3) * 25}%`,
-            }}
-            animate={{
-              y: [0, -15, 0],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: 4,
-              delay: i * 0.5,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          >
-            <Heart className="w-6 h-6 text-pink-200 fill-pink-200" />
-          </motion.div>
-        ))}
+        {/* Floating hearts - hidden on mobile for performance */}
+        <div className="hidden md:block">
+          {[...Array(4)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute"
+              style={{
+                left: `${15 + i * 20}%`,
+                top: `${25 + (i % 2) * 30}%`,
+              }}
+              animate={{
+                y: [0, -10, 0],
+                opacity: [0.2, 0.35, 0.2],
+              }}
+              transition={{
+                duration: 5,
+                delay: i * 0.6,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            >
+              <Heart className="w-5 h-5 text-pink-200 fill-pink-200" />
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">

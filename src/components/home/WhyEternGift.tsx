@@ -18,7 +18,7 @@ export function WhyEternGift() {
   const locale = useLocale()
   
   return (
-    <section className="py-24 bg-gradient-to-b from-white via-[#FFFAFA] to-white relative overflow-hidden">
+    <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-white via-[#FFFAFA] to-white relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-40 -left-20 w-72 h-72 bg-pink-100 rounded-full blur-3xl opacity-40" />
@@ -31,7 +31,7 @@ export function WhyEternGift() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-10 md:mb-16 lg:mb-20"
         >
           <motion.span
             initial={{ opacity: 0, scale: 0.8 }}
@@ -42,17 +42,17 @@ export function WhyEternGift() {
             {t('whyUs.title')} {t('whyUs.titleHighlight')}
           </motion.span>
 
-          <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-gray-900 mb-4 md:mb-6">
             {t('whyUs.title')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B71C1C] via-pink-500 to-[#D4AF88]">{t('whyUs.titleHighlight')}</span>
           </h2>
           
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
             {t('whyUs.subtitle')}
           </p>
         </motion.div>
 
         {/* Features grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto">
           {featureKeys.map((feature, index) => (
             <motion.div
               key={feature.titleKey}
@@ -63,7 +63,7 @@ export function WhyEternGift() {
               whileHover={{ y: -8, scale: 1.02 }}
               className="group"
             >
-              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 h-full border border-gray-100 relative overflow-hidden">
+              <div className="bg-white rounded-xl md:rounded-2xl p-5 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 h-full border border-gray-100 relative overflow-hidden">
                 {/* Gradient overlay on hover */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
                 

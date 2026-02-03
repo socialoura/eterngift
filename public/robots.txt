@@ -1,0 +1,11 @@
+# robots.txt for EternGift
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://eterngift.com/sitemap.xml
+
+# Disallow admin areas
+Disallow: /dashboard/
+Disallow: /api/
+Disallow: /_next/

@@ -23,7 +23,7 @@ export function Newsletter() {
   }
 
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section className="py-12 md:py-16 lg:py-24 relative overflow-hidden">
       {/* Animated gradient background */}
       <motion.div 
         className="absolute inset-0"
@@ -37,29 +37,28 @@ export function Newsletter() {
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
 
-      {/* Floating hearts */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[...Array(12)].map((_, i) => (
+      {/* Floating hearts - hidden on mobile for performance */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block">
+        {[...Array(6)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute"
             style={{
-              left: `${5 + i * 8}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${10 + i * 15}%`,
+              top: `${20 + (i % 3) * 25}%`,
             }}
             animate={{
-              y: [0, -30, 0],
-              opacity: [0.1, 0.3, 0.1],
-              rotate: [0, 10, -10, 0],
+              y: [0, -20, 0],
+              opacity: [0.1, 0.25, 0.1],
             }}
             transition={{
-              duration: 4 + Math.random() * 2,
-              delay: i * 0.3,
+              duration: 5,
+              delay: i * 0.5,
               repeat: Infinity,
               ease: 'easeInOut',
             }}
           >
-            <Heart className="w-6 h-6 text-white/20 fill-white/20" />
+            <Heart className="w-5 h-5 text-white/20 fill-white/20" />
           </motion.div>
         ))}
       </div>
