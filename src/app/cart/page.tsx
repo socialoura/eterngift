@@ -60,14 +60,14 @@ export default function CartPage() {
             <div className="lg:col-span-2 space-y-4">
               {items.map((item, index) => (
                 <motion.div
-                  key={item.product.id}
+                  key={item.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                   className="bg-white rounded-xl p-4 shadow-card flex gap-4"
                 >
                   {/* Product Image */}
-                  <Link href={`/products/${item.product.id}`}>
+                  <Link href={`/products/${item.product.id === 1 ? 'eternal-rose-bear' : 'eternal-rose-box'}`}>
                     <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-lg overflow-hidden bg-cream shrink-0">
                       <Image
                         src={item.product.imageUrl || '/images/placeholder.jpg'}
@@ -81,13 +81,13 @@ export default function CartPage() {
                   {/* Product Info */}
                   <div className="flex-1 min-w-0">
                     <div className="flex justify-between gap-2">
-                      <Link href={`/products/${item.product.id}`}>
+                      <Link href={`/products/${item.product.id === 1 ? 'eternal-rose-bear' : 'eternal-rose-box'}`}>
                         <h3 className="font-heading font-semibold text-gray-800 hover:text-primary transition-colors line-clamp-1">
                           {item.product.name}
                         </h3>
                       </Link>
                       <button
-                        onClick={() => removeItem(item.product.id)}
+                        onClick={() => removeItem(item.id)}
                         className="text-gray-400 hover:text-red-500 transition-colors shrink-0"
                       >
                         <Trash2 className="w-5 h-5" />
@@ -98,12 +98,27 @@ export default function CartPage() {
                       {item.product.category}
                     </p>
 
+                    {(item.engravingLeftHeart || item.engravingRightHeart) && (
+                      <div className="mt-2 text-xs text-gray-600 bg-light-pink/40 rounded-lg px-3 py-2">
+                        {item.engravingLeftHeart && (
+                          <p>
+                            <span className="font-medium">Gravure coeur gauche:</span> {item.engravingLeftHeart}
+                          </p>
+                        )}
+                        {item.engravingRightHeart && (
+                          <p>
+                            <span className="font-medium">Gravure coeur droit:</span> {item.engravingRightHeart}
+                          </p>
+                        )}
+                      </div>
+                    )}
+
                     <div className="flex items-center justify-between mt-4">
                       {/* Quantity */}
                       <div className="flex items-center border border-gray-200 rounded-lg">
                         <button
                           onClick={() =>
-                            updateQuantity(item.product.id, item.quantity - 1)
+                            updateQuantity(item.id, item.quantity - 1)
                           }
                           className="p-2 hover:bg-gray-50 transition-colors"
                         >
@@ -114,7 +129,7 @@ export default function CartPage() {
                         </span>
                         <button
                           onClick={() =>
-                            updateQuantity(item.product.id, item.quantity + 1)
+                            updateQuantity(item.id, item.quantity + 1)
                           }
                           className="p-2 hover:bg-gray-50 transition-colors"
                         >

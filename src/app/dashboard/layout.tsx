@@ -25,6 +25,7 @@ export default function DashboardLayout({
 }) {
   const pathname = usePathname()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [logoSrc, setLogoSrc] = useState('/logo.png')
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -47,11 +48,13 @@ export default function DashboardLayout({
         <div className="h-16 flex items-center justify-between px-4 border-b border-gray-100">
           <Link href="/dashboard" className="flex items-center space-x-2">
             <Image
-              src="/logo.svg"
+              key={logoSrc}
+              src={logoSrc}
               alt="EternGift"
               width={32}
               height={32}
               className="w-8 h-8"
+              onError={() => setLogoSrc('/logo.svg')}
             />
             <span className="text-lg font-heading font-bold text-primary">
               EternGift

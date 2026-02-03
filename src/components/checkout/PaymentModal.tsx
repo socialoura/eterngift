@@ -56,6 +56,8 @@ export function PaymentModal({
             productName: item.product.name,
             priceUsd: item.product.priceUsd,
             quantity: item.quantity,
+            engravingLeftHeart: item.engravingLeftHeart || null,
+            engravingRightHeart: item.engravingRightHeart || null,
           })),
           shippingInfo,
           totalUsd,
@@ -92,6 +94,8 @@ export function PaymentModal({
             productName: item.product.name,
             priceUsd: item.product.priceUsd,
             quantity: item.quantity,
+            engravingLeftHeart: item.engravingLeftHeart || null,
+            engravingRightHeart: item.engravingRightHeart || null,
           })),
           shippingInfo,
           totalUsd,
@@ -178,8 +182,10 @@ export function PaymentModal({
               )}
             >
               <div className="flex items-center justify-center gap-2">
-                <CreditCard className="w-5 h-5" />
-                Credit Card
+                <span>Credit Card</span>
+                <span className="hidden sm:block relative h-5 w-24">
+                  <Image src="/cb.png" alt="Cards" fill className="object-contain" />
+                </span>
               </div>
             </button>
             <button
@@ -193,11 +199,11 @@ export function PaymentModal({
             >
               <div className="flex items-center justify-center gap-2">
                 <Image
-                  src="/logos/payment-methods/paypal.svg"
+                  src="/paypal.svg"
                   alt="PayPal"
-                  width={20}
-                  height={20}
-                  className="w-5 h-5"
+                  width={22}
+                  height={22}
+                  className="h-5 w-auto"
                 />
                 PayPal
               </div>
@@ -232,28 +238,10 @@ export function PaymentModal({
             {paymentMethod === 'card' ? (
               <div className="space-y-4">
                 {/* Card Logos */}
-                <div className="flex items-center gap-2 mb-4">
-                  <Image
-                    src="/logos/payment-methods/visa.svg"
-                    alt="Visa"
-                    width={40}
-                    height={25}
-                    className="h-6 w-auto"
-                  />
-                  <Image
-                    src="/logos/payment-methods/mastercard.svg"
-                    alt="Mastercard"
-                    width={40}
-                    height={25}
-                    className="h-6 w-auto"
-                  />
-                  <Image
-                    src="/logos/payment-methods/amex.svg"
-                    alt="Amex"
-                    width={40}
-                    height={25}
-                    className="h-6 w-auto"
-                  />
+                <div className="flex items-center mb-4">
+                  <div className="relative h-7 w-44">
+                    <Image src="/cb.png" alt="Cards" fill className="object-contain" />
+                  </div>
                 </div>
 
                 <Input
@@ -312,7 +300,7 @@ export function PaymentModal({
                   isLoading={isProcessing}
                 >
                   <Image
-                    src="/logos/payment-methods/paypal.svg"
+                    src="/paypal.svg"
                     alt="PayPal"
                     width={20}
                     height={20}

@@ -8,14 +8,27 @@ interface CartState {
   items: CartItem[]
   currency: string
   exchangeRate: number
-  addItem: (product: Product, quantity?: number) => void
-  removeItem: (productId: number) => void
-  updateQuantity: (productId: number, quantity: number) => void
+  addItem: (
+    product: Product,
+    quantity?: number,
+    customizations?: { engravingLeftHeart?: string; engravingRightHeart?: string }
+  ) => void
+  removeItem: (cartItemId: string) => void
+  updateQuantity: (cartItemId: string, quantity: number) => void
   clearCart: () => void
   setCurrency: (currency: string, rate: number) => void
   getTotalItems: () => number
   getSubtotalUsd: () => number
   getSubtotalLocal: () => number
+}
+
+function createCartItemId(
+  product: Product,
+  customizations?: { engravingLeftHeart?: string; engravingRightHeart?: string }
+) {
+  const left = (customizations?.engravingLeftHeart || '').trim()
+  const right = (customizations?.engravingRightHeart || '').trim()
+  return `${product.id}::${product.name}::${left}::${right}`
 }
 
 export const useCartStore = create<CartState>()(
@@ -25,16 +38,19 @@ export const useCartStore = create<CartState>()(
       currency: 'USD',
       exchangeRate: 1,
 
-      addItem: (product: Product, quantity: number = 1) => {
+      addItem: (
+        product: Product,
+        quantity: number = 1,
+        customizations?: { engravingLeftHeart?: string; engravingRightHeart?: string }
+      ) => {
         set((state) => {
-          const existingItem = state.items.find(
-            (item) => item.product.id === product.id
-          )
+          const id = createCartItemId(product, customizations)
+          const existingItem = state.items.find((item) => item.id === id)
 
           if (existingItem) {
             return {
               items: state.items.map((item) =>
-                item.product.id === product.id
+                item.id === id
                   ? { ...item, quantity: item.quantity + quantity }
                   : item
               ),
@@ -42,26 +58,35 @@ export const useCartStore = create<CartState>()(
           }
 
           return {
-            items: [...state.items, { product, quantity }],
+            items: [
+              ...state.items,
+              {
+                id,
+                product,
+                quantity,
+                engravingLeftHeart: customizations?.engravingLeftHeart?.trim() || undefined,
+                engravingRightHeart: customizations?.engravingRightHeart?.trim() || undefined,
+              },
+            ],
           }
         })
       },
 
-      removeItem: (productId: number) => {
+      removeItem: (cartItemId: string) => {
         set((state) => ({
-          items: state.items.filter((item) => item.product.id !== productId),
+          items: state.items.filter((item) => item.id !== cartItemId),
         }))
       },
 
-      updateQuantity: (productId: number, quantity: number) => {
+      updateQuantity: (cartItemId: string, quantity: number) => {
         if (quantity <= 0) {
-          get().removeItem(productId)
+          get().removeItem(cartItemId)
           return
         }
 
         set((state) => ({
           items: state.items.map((item) =>
-            item.product.id === productId ? { ...item, quantity } : item
+            item.id === cartItemId ? { ...item, quantity } : item
           ),
         }))
       },
@@ -92,6 +117,26 @@ export const useCartStore = create<CartState>()(
     }),
     {
       name: 'eterngift-cart',
+      version: 1,
+      migrate: (persistedState: any) => {
+        if (!persistedState) return persistedState
+        const items = Array.isArray(persistedState.items) ? persistedState.items : []
+
+        return {
+          ...persistedState,
+          items: items.map((item: any) => {
+            if (item?.id) return item
+            if (!item?.product) return item
+
+            const id = createCartItemId(item.product, {
+              engravingLeftHeart: item.engravingLeftHeart,
+              engravingRightHeart: item.engravingRightHeart,
+            })
+
+            return { ...item, id }
+          }),
+        }
+      },
     }
   )
 )

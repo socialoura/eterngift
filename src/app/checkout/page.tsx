@@ -202,7 +202,7 @@ export default function CheckoutPage() {
               {/* Items */}
               <div className="space-y-4 mb-6">
                 {items.map((item) => (
-                  <div key={item.product.id} className="flex gap-3">
+                  <div key={item.id} className="flex gap-3">
                     <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-cream shrink-0">
                       <Image
                         src={item.product.imageUrl || '/images/placeholder.jpg'}
@@ -219,6 +219,16 @@ export default function CheckoutPage() {
                         {item.product.name}
                       </h4>
                       <p className="text-xs text-gray-500">{item.product.category}</p>
+                      {(item.engravingLeftHeart || item.engravingRightHeart) && (
+                        <div className="mt-1 text-[11px] text-gray-600">
+                          {item.engravingLeftHeart && (
+                            <p className="line-clamp-1">Gravure gauche: {item.engravingLeftHeart}</p>
+                          )}
+                          {item.engravingRightHeart && (
+                            <p className="line-clamp-1">Gravure droit: {item.engravingRightHeart}</p>
+                          )}
+                        </div>
+                      )}
                     </div>
                     <p className="font-medium text-gray-800 text-sm">
                       {formatPrice(item.product.priceUsd * item.quantity)}

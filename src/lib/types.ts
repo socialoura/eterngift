@@ -16,8 +16,11 @@ export interface Product {
 }
 
 export interface CartItem {
+  id: string
   product: Product
   quantity: number
+  engravingLeftHeart?: string
+  engravingRightHeart?: string
 }
 
 export interface Order {
@@ -53,6 +56,8 @@ export interface OrderItem {
   priceUsd: number
   quantity: number
   totalUsd: number
+  engravingLeftHeart?: string | null
+  engravingRightHeart?: string | null
 }
 
 export interface ShippingInfo {

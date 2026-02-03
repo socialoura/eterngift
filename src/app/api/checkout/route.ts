@@ -65,7 +65,12 @@ export async function POST(request: NextRequest) {
                   {
                     name: 'Items',
                     value: items
-                      .map((item: { productName: string; quantity: number }) => `${item.productName} x${item.quantity}`)
+                      .map((item: { productName: string; quantity: number; engravingLeftHeart?: string | null; engravingRightHeart?: string | null }) => {
+                        const left = (item.engravingLeftHeart || '').trim()
+                        const right = (item.engravingRightHeart || '').trim()
+                        const engr = left || right ? ` (G:${left || '-'} | D:${right || '-'})` : ''
+                        return `${item.productName} x${item.quantity}${engr}`
+                      })
                       .join(', '),
                   },
                   {

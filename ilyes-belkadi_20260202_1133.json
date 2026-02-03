@@ -1,0 +1,410 @@
+{
+  "picture": {
+    "hidden": false,
+    "url": "https://rxresu.me/uploads/019c091a-1c41-7212-8b0e-68645814c80b/pictures/1769682317661.webp",
+    "size": 80,
+    "rotation": 0,
+    "aspectRatio": 1,
+    "borderRadius": 0,
+    "borderColor": "rgba(0, 0, 0, 0.5)",
+    "borderWidth": 0,
+    "shadowColor": "rgba(0, 0, 0, 0.5)",
+    "shadowWidth": 0
+  },
+  "basics": {
+    "name": "Ilyès BELKADI",
+    "headline": "Business Analyst IT",
+    "email": "ilyes.belkadi@edu.esiee.fr",
+    "phone": "+33637175004",
+    "location": "Paris",
+    "website": {
+      "url": "",
+      "label": ""
+    },
+    "customFields": [
+      {
+        "id": "019c0936-5b6c-77f8-ae0d-eabe02bb2601",
+        "icon": "calendar",
+        "text": "24 ans",
+        "link": ""
+      },
+      {
+        "id": "019c0937-00ef-710f-a534-4056823fa619",
+        "icon": "microsoft-word-logo",
+        "text": "V240677870",
+        "link": ""
+      }
+    ]
+  },
+  "summary": {
+    "title": "Présentation",
+    "columns": 1,
+    "hidden": false,
+    "content": "<p><strong>Ingénieur en informatique diplômé de l’ESIEE Paris en août 2024, avec 3 ans d’expérience pratique chez BNP Paribas dans le cadre d’un apprentissage, ainsi qu’un semestre d’échange universitaire en Malaisie.</strong></p><p><strong>Je suis actuellement à la recherche d’une opportunité en Suisse afin de mettre à profit mes compétences techniques et mon ouverture internationale dans un environnement dynamique à l’échelle mondiale.</strong></p>"
+  },
+  "sections": {
+    "profiles": {
+      "title": "",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    },
+    "experience": {
+      "title": "EXPÉRIENCES PROFESSIONNELLES",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "019c0923-ba9b-7097-b48b-0c27f7a438fa",
+          "hidden": false,
+          "company": "Entreprenariat",
+          "position": "Freelance",
+          "location": "",
+          "period": "2024-2026",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": "<ul><li><p><strong>Conception et développement autonome d'un site web professionnel mettant en avant mes compétences et réalisations en tant que développeur web.</strong></p></li><li><p><strong>Design moderne et responsive, optimisation SEO, intégration de fonctionnalités dynamiques et gestion du contenu.</strong></p></li></ul><p></p>"
+        },
+        {
+          "id": "019c0922-ea01-73ab-819c-7eb4ca2aeeea",
+          "hidden": false,
+          "company": "BNP Paribas",
+          "position": "Business Analyst IT",
+          "location": "Paris",
+          "period": "2023-2024",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": "<ul><li><p><strong>Conception et développement d’une application web fullstack de A à Z </strong>utilisant Java Spring Boot et Angular. Gestion complète du cycle de développement, incluant l’architecture technique, la création d’API REST, l’interface frontend et l’intégration base de données.</p></li><li><p><strong>Pilotage autonome du projet </strong>avec prise de décisions techniques majeures, organisation des phases de développement et respect des délais. Communication régulière avec les parties prenantes et adaptation de la solution en fonction des retours utilisateurs.</p></li></ul><p></p>"
+        },
+        {
+          "id": "019c0921-0852-72ab-a702-ca09f10afea0",
+          "hidden": false,
+          "company": "BNP Paribas",
+          "position": "Business Analyst IT | Automatisation",
+          "location": "Paris",
+          "period": "2022-2023",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": "<ul><li><p><strong>Développement et maintenance</strong> de scripts d’automatisation Ansible pour gérer les configurations serveur et les déploiements, contribuant à la stratégie d’infrastructure as code de l’équipe.</p></li><li><p>Participation active à la construction d’une infrastructure entièrement automatisée, améliorant la fiabilité des systèmes.</p></li></ul><p></p>"
+        },
+        {
+          "id": "019c0920-44c9-779c-80cc-9b28621b8233",
+          "hidden": false,
+          "company": "BNP Paribas",
+          "position": "Gestion de Projet | Développeur FullStack Web",
+          "location": "Paris",
+          "period": "2021-2022",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": "<ul><li><p><strong>Développement et déploiement </strong>d’une application web Python pour la gestion de l’obsolescence des serveurs, intégrant à la fois la logique backend et une interface utilisateur intuitive pour faciliter le suivi de l’infrastructure.</p></li></ul><p></p>"
+        }
+      ]
+    },
+    "education": {
+      "title": "FORMATION",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "019c0925-33af-74d8-a3d2-23783fa13f1f",
+          "hidden": false,
+          "school": "ESIEE Paris",
+          "degree": "Diplôme d’ingénieur en Informatique et Applications 3D",
+          "area": "",
+          "grade": "",
+          "location": "Paris",
+          "period": "2019-2024",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": ""
+        },
+        {
+          "id": "019c0925-cce4-7098-bef8-7d3f5e1a2d68",
+          "hidden": false,
+          "school": "Heriot Watt University",
+          "degree": "MSc - Business Strategy, Leadership & Change",
+          "area": "",
+          "grade": "",
+          "location": "Malaisie",
+          "period": "2023-2024",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": ""
+        }
+      ]
+    },
+    "projects": {
+      "title": "",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    },
+    "skills": {
+      "title": "Compétences",
+      "columns": 5,
+      "hidden": false,
+      "items": [
+        {
+          "id": "019c092f-7870-738c-a2dc-68da31993962",
+          "hidden": false,
+          "icon": "",
+          "name": "Bureautique & Outils : Microsoft Office, Linux",
+          "proficiency": "",
+          "level": 0,
+          "keywords": []
+        },
+        {
+          "id": "019c0930-77eb-7158-8d33-ebdd19725dd0",
+          "hidden": false,
+          "icon": "",
+          "name": "Langages informatiques : Python, Java, PHP, JavaScript, C#, Spring Boot",
+          "proficiency": "",
+          "level": 0,
+          "keywords": []
+        },
+        {
+          "id": "019c0930-b2a5-74f9-bc64-ab5cbd315832",
+          "hidden": false,
+          "icon": "",
+          "name": "Bases de données : MySQL, Oracle, MongoDB",
+          "proficiency": "",
+          "level": 0,
+          "keywords": []
+        },
+        {
+          "id": "019c0930-e342-713a-88c8-030239e6ccdc",
+          "hidden": false,
+          "icon": "",
+          "name": "Développement web : Front-end (HTML/CSS), Back-end",
+          "proficiency": "",
+          "level": 0,
+          "keywords": []
+        },
+        {
+          "id": "019c0931-0213-74f9-8aa8-5fb265e246f9",
+          "hidden": false,
+          "icon": "",
+          "name": "Power BI, Jira, ServiceNow",
+          "proficiency": "",
+          "level": 0,
+          "keywords": []
+        }
+      ]
+    },
+    "languages": {
+      "title": "Langues",
+      "columns": 3,
+      "hidden": false,
+      "items": [
+        {
+          "id": "019c0926-6f97-7613-b2c5-503ef040fc7a",
+          "hidden": false,
+          "language": "English",
+          "fluency": "C1",
+          "level": 0
+        },
+        {
+          "id": "019c0927-f9fb-72af-8322-8e807c553028",
+          "hidden": false,
+          "language": "Spanish",
+          "fluency": "B1",
+          "level": 0
+        },
+        {
+          "id": "019c0928-2941-7196-97c9-5291c8905eba",
+          "hidden": false,
+          "language": "French",
+          "fluency": "C2",
+          "level": 0
+        }
+      ]
+    },
+    "interests": {
+      "title": "Centres d’intérêt",
+      "columns": 4,
+      "hidden": false,
+      "items": [
+        {
+          "id": "019c0928-5149-774b-b580-64d3729b20a5",
+          "hidden": false,
+          "icon": "",
+          "name": "Basketball",
+          "keywords": [
+            "Participation in world university championships in Berlin Milan, Barcelona and Belgrade."
+          ]
+        },
+        {
+          "id": "019c0931-6b7b-738a-8813-73b8162a1d4e",
+          "hidden": false,
+          "icon": "",
+          "name": "Voyage",
+          "keywords": [
+            "Singapore",
+            "Japan",
+            "Malaysia",
+            "Cambodia",
+            "Taiwan",
+            "Thailand",
+            "Indonesia",
+            "Vietnam",
+            "Laos",
+            "South Korea"
+          ]
+        },
+        {
+          "id": "019c092a-a215-72ab-b5b1-3c1b6af7fe20",
+          "hidden": false,
+          "icon": "",
+          "name": "Aéronautique",
+          "keywords": []
+        },
+        {
+          "id": "019c092a-7ff0-7729-92d4-8a0019280f12",
+          "hidden": false,
+          "icon": "",
+          "name": "Finance",
+          "keywords": []
+        }
+      ]
+    },
+    "awards": {
+      "title": "",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    },
+    "certifications": {
+      "title": "",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    },
+    "publications": {
+      "title": "",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    },
+    "volunteer": {
+      "title": "VOLONTARIAT",
+      "columns": 1,
+      "hidden": false,
+      "items": [
+        {
+          "id": "019c092b-cf59-717f-844a-8e33817afc06",
+          "hidden": false,
+          "organization": "Professeur d'anglais",
+          "location": "Laos",
+          "period": "2024",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": "<ul><li><p><strong>Professeur d’anglais pour des enfants dans des communautés rurales.</strong></p></li></ul><p></p>"
+        },
+        {
+          "id": "019c092c-7c57-722c-b762-b0acea53a66a",
+          "hidden": false,
+          "organization": "Professeur d’anglais",
+          "location": "Cambodge",
+          "period": "2025",
+          "website": {
+            "url": "",
+            "label": ""
+          },
+          "description": "<ul><li><p><strong>Professeur d’anglais dans une école privée au Cambodge</strong></p></li></ul><p></p>"
+        }
+      ]
+    },
+    "references": {
+      "title": "",
+      "columns": 1,
+      "hidden": false,
+      "items": []
+    }
+  },
+  "customSections": [],
+  "metadata": {
+    "template": "pikachu",
+    "layout": {
+      "sidebarWidth": 50,
+      "pages": [
+        {
+          "fullWidth": true,
+          "main": [
+            "summary",
+            "profiles",
+            "experience",
+            "education",
+            "projects",
+            "volunteer",
+            "references",
+            "certifications",
+            "skills",
+            "awards",
+            "languages",
+            "interests",
+            "publications"
+          ],
+          "sidebar": []
+        }
+      ]
+    },
+    "css": {
+      "enabled": true,
+      "value": "/* Remplacer le titre de l'expérience par le logo BNP (sauf la première) */\r\n.section-item-experience:nth-child(n+2) .experience-item-title {\r\n  background-image: url('https://i.ibb.co/Tx7K9tJr/bnp-paribas-logo.png');\r\n  background-size: contain;\r\n  background-repeat: no-repeat;\r\n  background-position: left center;\r\n  padding-left: 40px;\r\n  color: transparent;\r\n  min-height: 28px;\r\n}\r\n"
+    },
+    "page": {
+      "gapX": 4,
+      "gapY": 3,
+      "marginX": 14,
+      "marginY": 12,
+      "format": "free-form",
+      "locale": "en-US",
+      "hideIcons": false
+    },
+    "design": {
+      "level": {
+        "icon": "star",
+        "type": "circle"
+      },
+      "colors": {
+        "primary": "rgba(21, 93, 252, 1)",
+        "text": "rgba(0, 0, 0, 1)",
+        "background": "rgba(255, 255, 255, 1)"
+      }
+    },
+    "typography": {
+      "body": {
+        "fontFamily": "IBM Plex Serif",
+        "fontWeights": [
+          "400",
+          "500"
+        ],
+        "fontSize": 10,
+        "lineHeight": 1.5
+      },
+      "heading": {
+        "fontFamily": "IBM Plex Serif",
+        "fontWeights": [
+          "600"
+        ],
+        "fontSize": 14,
+        "lineHeight": 1.5
+      }
+    },
+    "notes": ""
+  }
+}

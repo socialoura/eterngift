@@ -1,11 +1,13 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Heart, Mail, Phone, MapPin, Facebook, Instagram, Twitter } from 'lucide-react'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
+  const [logoSrc, setLogoSrc] = useState('/logo.png')
 
   return (
     <footer className="bg-gray-900 text-white">
@@ -16,11 +18,13 @@ export function Footer() {
           <div className="space-y-4">
             <Link href="/" className="flex items-center space-x-2">
               <Image
-                src="/logo.png"
+                key={logoSrc}
+                src={logoSrc}
                 alt="EternGift"
                 width={40}
                 height={40}
                 className="w-10 h-10"
+                onError={() => setLogoSrc('/logo.svg')}
               />
               <span className="text-xl font-heading font-bold text-rose-gold">
                 EternGift

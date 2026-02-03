@@ -24,10 +24,9 @@ export const metadata: Metadata = {
     description: 'Discover our collection of eternal roses, stunning jewelry, and romantic gift sets.',
   },
   icons: {
-    icon: '/favicon/favicon.ico',
-    apple: '/favicon/apple-touch-icon.png',
+    icon: '/logo.svg',
+    apple: '/logo.svg',
   },
-  manifest: '/favicon/site.webmanifest',
 }
 
 export default function RootLayout({
