@@ -1,0 +1,155 @@
+{
+  "common": {
+    "home": "Home",
+    "collections": "Collections",
+    "roseBear": "Rose Bear",
+    "roseBox": "Rose Box",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "cart": "Cart",
+    "wishlist": "Wishlist",
+    "buyNow": "Buy Now",
+    "addToCart": "Add to Cart",
+    "added": "Added!",
+    "viewDetails": "View Details",
+    "viewAllCollection": "View All Collection",
+    "freeShipping": "Free Shipping",
+    "secure": "Secure",
+    "securePayment": "Secure Payment",
+    "giftWrapping": "Gift Wrapping",
+    "premiumPackaging": "Premium packaging",
+    "madeWithLove": "Made with Love",
+    "handcraftedQuality": "Handcrafted quality",
+    "continueToPayment": "Continue to Payment",
+    "continueShopping": "Continue Shopping",
+    "orderConfirmed": "Order Confirmed!",
+    "thankYou": "Thank you for your purchase. Your order number is:",
+    "confirmationEmail": "You will receive a confirmation email shortly."
+  },
+  "header": {
+    "promo": "Valentine's Special: Free Shipping on Orders $50+",
+    "foreverInLove": "Forever in Love"
+  },
+  "hero": {
+    "title": "Express Your",
+    "titleHighlight": "Eternal Love",
+    "subtitle": "Discover our handcrafted collection of eternal roses and personalized jewelry. The perfect gift for your special someone.",
+    "shopNow": "Shop Now",
+    "learnMore": "Learn More"
+  },
+  "featured": {
+    "title": "Our",
+    "titleHighlight": "Eternal",
+    "titleEnd": "Gifts",
+    "subtitle": "Handcrafted with love, designed to last forever. Each piece tells a unique story of eternal romance.",
+    "reviews": "reviews"
+  },
+  "collections": {
+    "badge": "Valentine's Collection",
+    "title": "Our",
+    "titleHighlight": "Eternal",
+    "titleEnd": "Gifts",
+    "subtitle": "Discover our handcrafted collection of eternal roses and personalized jewelry. Each piece is designed to express your love and create lasting memories."
+  },
+  "product": {
+    "mostPopular": "Most Popular",
+    "premium": "Premium",
+    "off": "OFF",
+    "color": "Color",
+    "necklace": "Necklace",
+    "engraving": "Engraving",
+    "optional": "Optional",
+    "maxCharacters": "Max 20 characters",
+    "leftHeartEngraving": "Left Heart Engraving",
+    "rightHeartEngraving": "Right Heart Engraving",
+    "leftHeartPlaceholder": "e.g. I love you",
+    "rightHeartPlaceholder": "e.g. Forever",
+    "engravingTip": "Tip: if you order multiple gifts, different engravings will be treated as separate items in the cart.",
+    "whatsIncluded": "What's Included",
+    "description": "Description",
+    "customerReviews": "Customer Reviews",
+    "basedOn": "Based on",
+    "verifiedReviews": "verified reviews",
+    "youMayAlsoLove": "You May Also Love"
+  },
+  "checkout": {
+    "quickCheckout": "Quick Checkout",
+    "payment": "Payment",
+    "shipping": "Shipping",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone",
+    "phoneOptional": "Phone (optional)",
+    "address": "Address",
+    "city": "City",
+    "postalCode": "Postal Code",
+    "country": "Country",
+    "creditCard": "Credit Card",
+    "paypal": "PayPal",
+    "nameOnCard": "Name on Card",
+    "cardNumber": "Card Number",
+    "expiryDate": "Expiry Date",
+    "cvc": "CVC",
+    "payNow": "Pay Now",
+    "payWithPaypal": "Pay with PayPal",
+    "paypalRedirect": "You will be redirected to PayPal to complete your purchase securely.",
+    "securePayment": "Your payment information is encrypted and secure"
+  },
+  "footer": {
+    "description": "Perfect for Valentine's Day, anniversaries, and special moments.",
+    "quickLinks": "Quick Links",
+    "shopAll": "Shop All",
+    "eternalRoses": "Eternal Roses",
+    "jewelry": "Jewelry",
+    "giftSets": "Gift Sets",
+    "aboutUs": "About Us",
+    "customerService": "Customer Service",
+    "contactUs": "Contact Us",
+    "shippingInfo": "Shipping Info",
+    "returnsExchanges": "Returns & Exchanges",
+    "privacyPolicy": "Privacy Policy",
+    "allRightsReserved": "All rights reserved."
+  },
+  "newsletter": {
+    "title": "Stay in the Loop",
+    "subtitle": "Subscribe for exclusive offers, new arrivals, and romantic gift ideas.",
+    "placeholder": "Enter your email",
+    "subscribe": "Subscribe",
+    "privacy": "We respect your privacy. Unsubscribe at any time."
+  },
+  "testimonials": {
+    "title": "Love Stories",
+    "subtitle": "Real stories from our happy customers"
+  },
+  "whyUs": {
+    "title": "Why Choose",
+    "titleHighlight": "EternGift",
+    "subtitle": "We're dedicated to helping you express your love with the most beautiful, lasting gifts."
+  },
+  "cart": {
+    "yourCart": "Your Cart",
+    "empty": "Your cart is empty",
+    "emptyDescription": "Looks like you haven't added any items yet.",
+    "startShopping": "Start Shopping",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "free": "Free",
+    "total": "Total",
+    "proceedToCheckout": "Proceed to Checkout",
+    "leftHeart": "Left Heart",
+    "rightHeart": "Right Heart"
+  },
+  "faqPage": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to common questions about our products and services."
+  },
+  "contactPage": {
+    "title": "Contact Us",
+    "subtitle": "We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+    "name": "Name",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send Message"
+  }
+}

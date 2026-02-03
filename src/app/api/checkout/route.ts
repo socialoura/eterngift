@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { generateOrderNumber } from '@/lib/utils'
+import { sendOrderConfirmationEmail, sendDiscordNotification } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,13 +16,6 @@ export async function POST(request: NextRequest) {
 
     const orderNumber = generateOrderNumber()
 
-    // In production, this would:
-    // 1. Create a Stripe Payment Intent
-    // 2. Save order to database
-    // 3. Send confirmation email
-    // 4. Send Discord notification
-
-    // For now, simulate successful payment
     const order = {
       orderNumber,
       customerEmail: shippingInfo.email,
@@ -36,67 +30,29 @@ export async function POST(request: NextRequest) {
         country: shippingInfo.country,
       },
       paymentMethod,
-      status: 'pending',
+      status: 'confirmed',
       createdAt: new Date().toISOString(),
     }
 
-    // Send Discord notification (if webhook URL is configured)
-    if (process.env.DISCORD_WEBHOOK_URL) {
-      try {
-        await fetch(process.env.DISCORD_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            embeds: [
-              {
-                title: `🎉 New Order: #${orderNumber}`,
-                color: 0xb71c1c,
-                fields: [
-                  {
-                    name: 'Customer',
-                    value: `${order.customerName} (${order.customerEmail})`,
-                    inline: true,
-                  },
-                  {
-                    name: 'Total',
-                    value: `$${totalUsd.toFixed(2)} USD`,
-                    inline: true,
-                  },
-                  {
-                    name: 'Items',
-                    value: items
-                      .map((item: { productName: string; quantity: number; engravingLeftHeart?: string | null; engravingRightHeart?: string | null }) => {
-                        const left = (item.engravingLeftHeart || '').trim()
-                        const right = (item.engravingRightHeart || '').trim()
-                        const engr = left || right ? ` (G:${left || '-'} | D:${right || '-'})` : ''
-                        return `${item.productName} x${item.quantity}${engr}`
-                      })
-                      .join(', '),
-                  },
-                  {
-                    name: 'Address',
-                    value: `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.country}`,
-                  },
-                  {
-                    name: 'Payment',
-                    value: paymentMethod === 'stripe' ? 'Credit Card' : 'PayPal',
-                    inline: true,
-                  },
-                  {
-                    name: 'Status',
-                    value: '⏳ Pending',
-                    inline: true,
-                  },
-                ],
-                timestamp: new Date().toISOString(),
-              },
-            ],
-          }),
-        })
-      } catch (discordError) {
-        console.error('Discord notification failed:', discordError)
-      }
-    }
+    // Send confirmation email to customer
+    await sendOrderConfirmationEmail({
+      orderNumber,
+      items,
+      shippingInfo,
+      totalUsd,
+      currency,
+      paymentMethod: paymentMethod || 'card',
+    })
+
+    // Send Discord notification to you
+    await sendDiscordNotification({
+      orderNumber,
+      items,
+      shippingInfo,
+      totalUsd,
+      currency,
+      paymentMethod: paymentMethod || 'card',
+    })
 
     return NextResponse.json({
       success: true,

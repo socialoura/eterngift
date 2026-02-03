@@ -43,16 +43,16 @@ export interface ProductVariant {
 }
 
 const bearColorImages: Record<string, string> = {
-  Rouge: 'rouge',
-  Rose: 'rose',
-  Bleu: 'bleu',
-  Blanc: 'blanc',
-  Violet: 'violet',
+  Red: 'rouge',
+  Pink: 'rose',
+  Blue: 'bleu',
+  White: 'blanc',
+  Purple: 'violet',
 }
 
 const boxColorImages: Record<string, string> = {
-  Rouge: 'rouge',
-  Rose: 'rose',
+  Red: 'rouge',
+  Pink: 'rose',
 }
 
 export const eternalRoseBear: ProductVariant = {
@@ -82,20 +82,20 @@ export const eternalRoseBear: ProductVariant = {
       name: 'Bear Color',
       type: 'color',
       values: [
-        { name: 'Rouge', color: '#B71C1C', image: '/products/rose-bear/rouge/1.png' },
-        { name: 'Rose', color: '#FF69B4', image: '/products/rose-bear/rose/1.png' },
-        { name: 'Bleu', color: '#4169E1', image: '/products/rose-bear/bleu/1.png' },
-        { name: 'Violet', color: '#9370DB', image: '/products/rose-bear/violet/1.png' },
-        { name: 'Blanc', color: '#FFFFFF', image: '/products/rose-bear/blanc/1.png' },
+        { name: 'Red', color: '#B71C1C', image: '/products/rose-bear/rouge/1.png' },
+        { name: 'Pink', color: '#FF69B4', image: '/products/rose-bear/rose/1.png' },
+        { name: 'Blue', color: '#4169E1', image: '/products/rose-bear/bleu/1.png' },
+        { name: 'Purple', color: '#9370DB', image: '/products/rose-bear/violet/1.png' },
+        { name: 'White', color: '#FFFFFF', image: '/products/rose-bear/blanc/1.png' },
       ],
     },
     {
       name: 'Necklace Color',
       type: 'color',
       values: [
-        { name: 'Gris', color: '#A8A9AD', image: '/products/necklaces/gray.png' },
-        { name: 'Or', color: '#FFD700', image: '/products/necklaces/gold.png' },
-        { name: 'Or Rose', color: '#D4AF88', image: '/products/necklaces/rose-gold.png' },
+        { name: 'Gray', color: '#A8A9AD', image: '/products/necklaces/gray.png' },
+        { name: 'Gold', color: '#FFD700', image: '/products/necklaces/gold.png' },
+        { name: 'Rose Gold', color: '#D4AF88', image: '/products/necklaces/rose-gold.png' },
       ],
     },
   ],
@@ -138,17 +138,17 @@ export const eternalRoseBox: ProductVariant = {
       name: 'Box Color',
       type: 'color',
       values: [
-        { name: 'Rouge', color: '#B71C1C', image: '/products/rose-box/rouge/1.png' },
-        { name: 'Rose', color: '#FF69B4', image: '/products/rose-box/rose/1.png' },
+        { name: 'Red', color: '#B71C1C', image: '/products/rose-box/rouge/1.png' },
+        { name: 'Pink', color: '#FF69B4', image: '/products/rose-box/rose/1.png' },
       ],
     },
     {
       name: 'Necklace Color',
       type: 'color',
       values: [
-        { name: 'Gris', color: '#A8A9AD', image: '/products/necklaces/gray.png' },
-        { name: 'Or', color: '#FFD700', image: '/products/necklaces/gold.png' },
-        { name: 'Or Rose', color: '#D4AF88', image: '/products/necklaces/rose-gold.png' },
+        { name: 'Gray', color: '#A8A9AD', image: '/products/necklaces/gray.png' },
+        { name: 'Gold', color: '#FFD700', image: '/products/necklaces/gold.png' },
+        { name: 'Rose Gold', color: '#D4AF88', image: '/products/necklaces/rose-gold.png' },
       ],
     },
   ],

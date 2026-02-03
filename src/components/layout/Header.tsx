@@ -3,20 +3,41 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ShoppingCart, Heart, Menu, X, ChevronDown } from 'lucide-react'
+import { ShoppingCart, Heart, Menu, X, ChevronDown, Globe } from 'lucide-react'
 import { useCartStore } from '@/store/cart'
 import { useCurrencyStore } from '@/store/currency'
 import { SUPPORTED_CURRENCIES } from '@/lib/currency'
+import { locales, localeNames, localeFlags, localeCurrencies, type Locale } from '@/lib/i18n/config'
 import { cn } from '@/lib/utils'
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isCurrencyOpen, setIsCurrencyOpen] = useState(false)
+  const [isLangOpen, setIsLangOpen] = useState(false)
   const [logoSrc, setLogoSrc] = useState('/logo.png')
   const [isScrolled, setIsScrolled] = useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
   const totalItems = useCartStore((state) => state.getTotalItems())
   const { currency, setCurrency } = useCurrencyStore()
+
+  // Extract current locale from pathname
+  const currentLocale = (locales.find(l => pathname.startsWith(`/${l}/`) || pathname === `/${l}`) || 'en') as Locale
+  const pathnameWithoutLocale = pathname.replace(`/${currentLocale}`, '') || '/'
+
+  // Only use transparent header on homepage
+  const isHomepage = pathnameWithoutLocale === '/'
+  const useTransparentHeader = isHomepage && !isScrolled
+
+  const switchLocale = (newLocale: Locale) => {
+    document.cookie = `preferred-locale=${newLocale};path=/;max-age=31536000`
+    document.cookie = `preferred-currency=${localeCurrencies[newLocale]};path=/;max-age=31536000`
+    setCurrency(localeCurrencies[newLocale] as 'USD' | 'EUR' | 'GBP' | 'CAD' | 'AUD')
+    router.push(`/${newLocale}${pathnameWithoutLocale}`)
+    setIsLangOpen(false)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,24 +48,30 @@ export function Header() {
   }, [])
 
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/products/eternal-rose-bear', label: 'Rose Bear' },
-    { href: '/products/eternal-rose-box', label: 'Rose Box' },
-    { href: '/faq', label: 'FAQ' },
-    { href: '/contact', label: 'Contact' },
+    { href: `/${currentLocale}`, label: 'Home' },
+    { href: `/${currentLocale}/collections`, label: 'Collections' },
+    { href: `/${currentLocale}/products/eternal-rose-bear`, label: 'Rose Bear' },
+    { href: `/${currentLocale}/products/eternal-rose-box`, label: 'Rose Box' },
+    { href: `/${currentLocale}/faq`, label: 'FAQ' },
+    { href: `/${currentLocale}/contact`, label: 'Contact' },
   ]
 
   return (
     <header 
       className={cn(
-        'sticky top-0 z-50 w-full transition-all duration-300',
-        isScrolled 
-          ? 'bg-white/98 backdrop-blur-lg shadow-lg shadow-black/5' 
-          : 'bg-white/95 backdrop-blur-md'
+        'fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500',
+        useTransparentHeader 
+          ? 'bg-transparent' 
+          : 'bg-white/98 backdrop-blur-lg shadow-lg shadow-black/5'
       )}
     >
       {/* Top bar - promo */}
-      <div className="bg-gradient-to-r from-[#8B1538] via-[#B71C1C] to-[#D4AF88] text-white text-center py-2 text-sm">
+      <div className={cn(
+        'text-white text-center py-2 text-sm transition-all duration-300',
+        useTransparentHeader 
+          ? 'bg-black/20 backdrop-blur-sm' 
+          : 'bg-gradient-to-r from-[#8B1538] via-[#B71C1C] to-[#D4AF88]'
+      )}>
         <p className="flex items-center justify-center gap-2">
           <span>💝</span>
           <span className="font-medium">Valentine&apos;s Special: Free Shipping on Orders $50+</span>
@@ -71,10 +98,18 @@ export function Header() {
               />
             </motion.div>
             <div className="flex flex-col">
-              <span className="text-xl lg:text-2xl font-heading font-bold bg-gradient-to-r from-[#8B1538] to-[#B71C1C] bg-clip-text text-transparent">
+              <span className={cn(
+                'text-xl lg:text-2xl font-heading font-bold transition-all',
+                useTransparentHeader 
+                  ? 'text-white' 
+                  : 'bg-gradient-to-r from-[#8B1538] to-[#B71C1C] bg-clip-text text-transparent'
+              )}>
                 EternGift
               </span>
-              <span className="text-[10px] text-gray-400 font-medium tracking-widest uppercase hidden sm:block">
+              <span className={cn(
+                'text-[10px] font-medium tracking-widest uppercase hidden sm:block transition-all',
+                useTransparentHeader ? 'text-white/70' : 'text-gray-400'
+              )}>
                 Forever in Love
               </span>
             </div>
@@ -86,10 +121,18 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="relative px-4 py-2 text-gray-600 hover:text-[#B71C1C] transition-colors font-medium group"
+                className={cn(
+                  'relative px-4 py-2 transition-colors font-medium group',
+                  useTransparentHeader 
+                    ? 'text-white/90 hover:text-white' 
+                    : 'text-gray-600 hover:text-[#B71C1C]'
+                )}
               >
                 <span className="relative z-10">{link.label}</span>
-                <span className="absolute inset-0 bg-[#FFE5E5] rounded-lg scale-0 group-hover:scale-100 transition-transform duration-200 origin-center" />
+                <span className={cn(
+                  'absolute inset-0 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-200 origin-center',
+                  useTransparentHeader ? 'bg-white/20' : 'bg-[#FFE5E5]'
+                )} />
               </Link>
             ))}
           </nav>
@@ -104,7 +147,9 @@ export function Header() {
                   'flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-lg transition-all',
                   isCurrencyOpen 
                     ? 'bg-[#FFE5E5] text-[#B71C1C]' 
-                    : 'text-gray-600 hover:bg-gray-100'
+                    : useTransparentHeader 
+                      ? 'text-white/80 hover:bg-white/20' 
+                      : 'text-gray-600 hover:bg-gray-100'
                 )}
               >
                 <span>{currency}</span>
@@ -149,18 +194,81 @@ export function Header() {
               </AnimatePresence>
             </div>
 
+            {/* Language Selector */}
+            <div className="relative">
+              <button
+                onClick={() => setIsLangOpen(!isLangOpen)}
+                className={cn(
+                  'flex items-center gap-1 px-2 py-2 text-sm font-medium rounded-lg transition-all',
+                  isLangOpen 
+                    ? 'bg-[#FFE5E5] text-[#B71C1C]' 
+                    : useTransparentHeader 
+                      ? 'text-white/80 hover:bg-white/20' 
+                      : 'text-gray-600 hover:bg-gray-100'
+                )}
+              >
+                <Globe className="w-4 h-4" />
+                <span className="hidden sm:inline">{localeFlags[currentLocale]}</span>
+                <ChevronDown className={cn(
+                  'w-3 h-3 transition-transform',
+                  isLangOpen && 'rotate-180'
+                )} />
+              </button>
+              
+              <AnimatePresence>
+                {isLangOpen && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute right-0 mt-2 w-44 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 overflow-hidden"
+                  >
+                    {locales.map((loc) => (
+                      <button
+                        key={loc}
+                        onClick={() => switchLocale(loc)}
+                        className={cn(
+                          'w-full px-4 py-2.5 text-left text-sm transition-colors flex items-center gap-2',
+                          currentLocale === loc 
+                            ? 'bg-gradient-to-r from-[#FFE5E5] to-pink-50 text-[#B71C1C] font-semibold' 
+                            : 'hover:bg-gray-50 text-gray-600'
+                        )}
+                      >
+                        <span className="text-lg">{localeFlags[loc]}</span>
+                        <span>{localeNames[loc]}</span>
+                        {currentLocale === loc && (
+                          <span className="ml-auto text-[#B71C1C]">✓</span>
+                        )}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
             {/* Wishlist */}
             <Link 
-              href="/wishlist" 
-              className="hidden md:flex items-center justify-center w-10 h-10 rounded-full text-gray-500 hover:text-[#B71C1C] hover:bg-[#FFE5E5] transition-all"
+              href={`/${currentLocale}/wishlist`}
+              className={cn(
+                'hidden md:flex items-center justify-center w-10 h-10 rounded-full transition-all',
+                useTransparentHeader 
+                  ? 'text-white/80 hover:text-white hover:bg-white/20' 
+                  : 'text-gray-500 hover:text-[#B71C1C] hover:bg-[#FFE5E5]'
+              )}
             >
               <Heart className="w-5 h-5" />
             </Link>
 
             {/* Cart */}
             <Link 
-              href="/cart" 
-              className="relative flex items-center justify-center w-10 h-10 rounded-full text-gray-500 hover:text-[#B71C1C] hover:bg-[#FFE5E5] transition-all"
+              href={`/${currentLocale}/cart`}
+              className={cn(
+                'relative flex items-center justify-center w-10 h-10 rounded-full transition-all',
+                useTransparentHeader 
+                  ? 'text-white/80 hover:text-white hover:bg-white/20' 
+                  : 'text-gray-500 hover:text-[#B71C1C] hover:bg-[#FFE5E5]'
+              )}
             >
               <ShoppingCart className="w-5 h-5" />
               <AnimatePresence>
@@ -180,7 +288,12 @@ export function Header() {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full text-gray-500 hover:text-[#B71C1C] hover:bg-[#FFE5E5] transition-all"
+              className={cn(
+                'lg:hidden flex items-center justify-center w-10 h-10 rounded-full transition-all',
+                useTransparentHeader 
+                  ? 'text-white/80 hover:text-white hover:bg-white/20' 
+                  : 'text-gray-500 hover:text-[#B71C1C] hover:bg-[#FFE5E5]'
+              )}
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>

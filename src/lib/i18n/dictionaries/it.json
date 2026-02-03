@@ -1,0 +1,155 @@
+{
+  "common": {
+    "home": "Home",
+    "collections": "Collezioni",
+    "roseBear": "Orso Rosa",
+    "roseBox": "Cofanetto Rosa",
+    "faq": "FAQ",
+    "contact": "Contatti",
+    "cart": "Carrello",
+    "wishlist": "Preferiti",
+    "buyNow": "Acquista ora",
+    "addToCart": "Aggiungi al carrello",
+    "added": "Aggiunto!",
+    "viewDetails": "Vedi dettagli",
+    "viewAllCollection": "Vedi tutta la collezione",
+    "freeShipping": "Spedizione gratuita",
+    "secure": "Sicuro",
+    "securePayment": "Pagamento sicuro",
+    "giftWrapping": "Confezione regalo",
+    "premiumPackaging": "Packaging premium",
+    "madeWithLove": "Fatto con amore",
+    "handcraftedQuality": "Qualità artigianale",
+    "continueToPayment": "Continua al pagamento",
+    "continueShopping": "Continua lo shopping",
+    "orderConfirmed": "Ordine confermato!",
+    "thankYou": "Grazie per il tuo acquisto. Il tuo numero d'ordine è:",
+    "confirmationEmail": "Riceverai un'email di conferma a breve."
+  },
+  "header": {
+    "promo": "Speciale San Valentino: Spedizione gratuita per ordini da 50€+",
+    "foreverInLove": "Per sempre innamorati"
+  },
+  "hero": {
+    "title": "Esprimi il tuo",
+    "titleHighlight": "Amore Eterno",
+    "subtitle": "Scopri la nostra collezione artigianale di rose eterne e gioielli personalizzati. Il regalo perfetto per la tua persona speciale.",
+    "shopNow": "Acquista ora",
+    "learnMore": "Scopri di più"
+  },
+  "featured": {
+    "title": "I nostri",
+    "titleHighlight": "Regali",
+    "titleEnd": "Eterni",
+    "subtitle": "Fatti con amore, progettati per durare per sempre. Ogni pezzo racconta una storia unica di romanticismo eterno.",
+    "reviews": "recensioni"
+  },
+  "collections": {
+    "badge": "Collezione San Valentino",
+    "title": "I nostri",
+    "titleHighlight": "Regali",
+    "titleEnd": "Eterni",
+    "subtitle": "Scopri la nostra collezione artigianale di rose eterne e gioielli personalizzati. Ogni pezzo è progettato per esprimere il tuo amore e creare ricordi duraturi."
+  },
+  "product": {
+    "mostPopular": "Più popolare",
+    "premium": "Premium",
+    "off": "DI SCONTO",
+    "color": "Colore",
+    "necklace": "Collana",
+    "engraving": "Incisione",
+    "optional": "Opzionale",
+    "maxCharacters": "Max 20 caratteri",
+    "leftHeartEngraving": "Incisione cuore sinistro",
+    "rightHeartEngraving": "Incisione cuore destro",
+    "leftHeartPlaceholder": "Es: Ti amo",
+    "rightHeartPlaceholder": "Es: Per sempre",
+    "engravingTip": "Consiglio: se ordini più regali, incisioni diverse saranno trattate come articoli separati.",
+    "whatsIncluded": "Cosa include",
+    "description": "Descrizione",
+    "customerReviews": "Recensioni clienti",
+    "basedOn": "Basato su",
+    "verifiedReviews": "recensioni verificate",
+    "youMayAlsoLove": "Potrebbe piacerti anche"
+  },
+  "checkout": {
+    "quickCheckout": "Checkout rapido",
+    "payment": "Pagamento",
+    "shipping": "Spedizione",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "email": "Email",
+    "phone": "Telefono",
+    "phoneOptional": "Telefono (opzionale)",
+    "address": "Indirizzo",
+    "city": "Città",
+    "postalCode": "CAP",
+    "country": "Paese",
+    "creditCard": "Carta di credito",
+    "paypal": "PayPal",
+    "nameOnCard": "Nome sulla carta",
+    "cardNumber": "Numero carta",
+    "expiryDate": "Data di scadenza",
+    "cvc": "CVC",
+    "payNow": "Paga ora",
+    "payWithPaypal": "Paga con PayPal",
+    "paypalRedirect": "Sarai reindirizzato a PayPal per completare l'acquisto in sicurezza.",
+    "securePayment": "Le tue informazioni di pagamento sono criptate e sicure"
+  },
+  "footer": {
+    "description": "Perfetto per San Valentino, anniversari e momenti speciali.",
+    "quickLinks": "Link rapidi",
+    "shopAll": "Vedi tutto",
+    "eternalRoses": "Rose eterne",
+    "jewelry": "Gioielli",
+    "giftSets": "Set regalo",
+    "aboutUs": "Chi siamo",
+    "customerService": "Servizio clienti",
+    "contactUs": "Contattaci",
+    "shippingInfo": "Info spedizione",
+    "returnsExchanges": "Resi e cambi",
+    "privacyPolicy": "Privacy policy",
+    "allRightsReserved": "Tutti i diritti riservati."
+  },
+  "newsletter": {
+    "title": "Resta aggiornato",
+    "subtitle": "Iscriviti per offerte esclusive, novità e idee regalo romantiche.",
+    "placeholder": "La tua email",
+    "subscribe": "Iscriviti",
+    "privacy": "Rispettiamo la tua privacy. Cancellati quando vuoi."
+  },
+  "testimonials": {
+    "title": "Storie d'amore",
+    "subtitle": "Storie vere dai nostri clienti felici"
+  },
+  "whyUs": {
+    "title": "Perché scegliere",
+    "titleHighlight": "EternGift",
+    "subtitle": "Ti aiutiamo a esprimere il tuo amore con i regali più belli e duraturi."
+  },
+  "cart": {
+    "yourCart": "Il tuo carrello",
+    "empty": "Il tuo carrello è vuoto",
+    "emptyDescription": "Sembra che tu non abbia ancora aggiunto articoli.",
+    "startShopping": "Inizia lo shopping",
+    "subtotal": "Subtotale",
+    "shipping": "Spedizione",
+    "free": "Gratuita",
+    "total": "Totale",
+    "proceedToCheckout": "Vai al checkout",
+    "leftHeart": "Cuore sinistro",
+    "rightHeart": "Cuore destro"
+  },
+  "faqPage": {
+    "title": "Domande frequenti",
+    "subtitle": "Trova risposte alle domande comuni sui nostri prodotti e servizi."
+  },
+  "contactPage": {
+    "title": "Contattaci",
+    "subtitle": "Ci piacerebbe sentirti. Inviaci un messaggio e ti risponderemo il prima possibile.",
+    "name": "Nome",
+    "subject": "Oggetto",
+    "message": "Messaggio",
+    "send": "Invia messaggio"
+  }
+}

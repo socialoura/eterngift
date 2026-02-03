@@ -4,27 +4,34 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Heart, Sparkles, ArrowRight, Star } from 'lucide-react'
+import { Heart, Sparkles, ArrowRight, Star, ShoppingCart, Check, Truck, Shield } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { eternalRoseBear, eternalRoseBox, ProductVariant } from '@/lib/products-data'
+import { QuickBuyModal } from '@/components/checkout/QuickBuyModal'
 import { useCurrencyStore } from '@/store/currency'
 import { useCartStore } from '@/store/cart'
 import { cn } from '@/lib/utils'
 
 function ProductCard({ product, index }: { product: ProductVariant; index: number }) {
   const [selectedColor, setSelectedColor] = useState(product.options[0]?.values[0]?.name || '')
+  const [selectedNecklace, setSelectedNecklace] = useState(
+    product.options.find(o => o.name.includes('Necklace'))?.values[0]?.name || ''
+  )
   const [isHovered, setIsHovered] = useState(false)
+  const [isQuickBuyOpen, setIsQuickBuyOpen] = useState(false)
+  const [isAddedToCart, setIsAddedToCart] = useState(false)
   
   const { formatPrice } = useCurrencyStore()
   const addItem = useCartStore((state) => state.addItem)
 
   const colorOption = product.options.find((o) => o.name.includes('Color') && !o.name.includes('Necklace'))
+  const necklaceOption = product.options.find((o) => o.name.includes('Necklace'))
   const currentImages = product.getImagesForColor(selectedColor)
 
-  const handleQuickAdd = () => {
+  const handleAddToCart = () => {
     const productForCart = {
       id: product.id === 'eternal-rose-bear' ? 1 : 2,
-      name: `${product.name} (${selectedColor})`,
+      name: `${product.name} (${selectedColor}, ${selectedNecklace})`,
       description: product.description,
       priceUsd: product.basePrice,
       imageUrl: currentImages.hero,
@@ -39,6 +46,8 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
       updatedAt: new Date(),
     }
     addItem(productForCart)
+    setIsAddedToCart(true)
+    setTimeout(() => setIsAddedToCart(false), 2000)
   }
 
   return (
@@ -203,75 +212,109 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
             </span>
           </div>
 
-          {/* Color options with enhanced styling */}
+          {/* Color options */}
           {colorOption && (
-            <div className="space-y-3 pt-2">
-              <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider flex items-center gap-2">
-                <span className="w-4 h-px bg-gray-300" />
-                Select {colorOption.name}
-                <span className="w-4 h-px bg-gray-300" />
-              </p>
-              <div className="flex gap-2.5">
+            <div className="space-y-2">
+              <p className="text-sm font-medium text-gray-700">Color: <span className="text-[#B71C1C]">{selectedColor}</span></p>
+              <div className="flex flex-wrap gap-2">
                 {colorOption.values.map((value) => (
-                  <motion.button
+                  <button
                     key={value.name}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedColor(value.name)}
                     title={value.name}
                     className={cn(
-                      'relative w-14 h-14 rounded-2xl overflow-hidden border-2 transition-all duration-300 shadow-md',
+                      'relative w-10 h-10 rounded-full overflow-hidden border-2 transition-all',
                       selectedColor === value.name
-                        ? 'border-[#B71C1C] ring-4 ring-[#B71C1C]/20 scale-105 shadow-lg'
-                        : 'border-gray-200 hover:border-[#D4AF88] hover:shadow-lg'
+                        ? 'border-[#B71C1C] ring-2 ring-[#B71C1C]/30 scale-110'
+                        : 'border-gray-200 hover:border-gray-300'
                     )}
                   >
-                    <Image
-                      src={value.image}
-                      alt={value.name}
-                      fill
-                      className="object-cover"
-                      sizes="56px"
-                    />
+                    <Image src={value.image} alt={value.name} fill className="object-cover" sizes="40px" />
                     {selectedColor === value.name && (
-                      <motion.div 
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        className="absolute inset-0 bg-[#B71C1C]/15 flex items-center justify-center backdrop-blur-[1px]"
-                      >
-                        <div className="w-4 h-4 bg-white rounded-full shadow-lg flex items-center justify-center">
-                          <div className="w-2 h-2 bg-[#B71C1C] rounded-full" />
-                        </div>
-                      </motion.div>
+                      <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                        <Check className="w-4 h-4 text-white" />
+                      </div>
                     )}
-                  </motion.button>
+                  </button>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Actions with enhanced buttons */}
-          <div className="flex gap-3 pt-3">
-            <Link href={`/products/${product.slug}`} className="flex-1">
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Button className="w-full bg-gradient-to-r from-[#B71C1C] to-[#8B1538] hover:from-[#8B1538] hover:to-[#6B0F2B] shadow-lg shadow-[#B71C1C]/25 group h-12 text-base font-semibold">
-                  View Details
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </motion.div>
-            </Link>
-            <motion.div whileHover={{ scale: 1.08, rotate: 5 }} whileTap={{ scale: 0.95 }}>
-              <Button 
-                variant="outline" 
-                onClick={handleQuickAdd}
-                className="border-2 border-[#D4AF88] text-[#D4AF88] hover:bg-gradient-to-r hover:from-[#D4AF88] hover:to-[#C49B6D] hover:text-white hover:border-transparent px-4 h-12 shadow-md"
-              >
-                <Heart className="w-5 h-5" />
-              </Button>
-            </motion.div>
+          {/* Necklace options */}
+          {necklaceOption && (
+            <div className="space-y-2">
+              <p className="text-sm font-medium text-gray-700">Necklace: <span className="text-[#B71C1C]">{selectedNecklace}</span></p>
+              <div className="flex flex-wrap gap-2">
+                {necklaceOption.values.map((necklace) => (
+                  <button
+                    key={necklace.name}
+                    onClick={() => setSelectedNecklace(necklace.name)}
+                    className={cn(
+                      'relative w-12 h-12 rounded-lg overflow-hidden border-2 transition-all bg-gray-50',
+                      selectedNecklace === necklace.name
+                        ? 'border-[#B71C1C] ring-2 ring-[#B71C1C]/30'
+                        : 'border-gray-200 hover:border-gray-300'
+                    )}
+                  >
+                    <Image src={necklace.image} alt={necklace.name} fill className="object-cover" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Action buttons */}
+          <div className="flex gap-3 pt-2">
+            <Button
+              onClick={() => setIsQuickBuyOpen(true)}
+              className="flex-1 bg-gradient-to-r from-[#B71C1C] to-[#8B1538] hover:from-[#8B1538] hover:to-[#6B0F2A] shadow-lg shadow-[#B71C1C]/25"
+            >
+              <Sparkles className="w-4 h-4 mr-2" />
+              Buy Now
+            </Button>
+            <Button
+              onClick={handleAddToCart}
+              variant="outline"
+              className={cn(
+                'px-4 border-2 transition-all',
+                isAddedToCart
+                  ? 'bg-green-500 border-green-500 text-white'
+                  : 'border-[#B71C1C] text-[#B71C1C] hover:bg-[#B71C1C] hover:text-white'
+              )}
+            >
+              {isAddedToCart ? <Check className="w-5 h-5" /> : <ShoppingCart className="w-5 h-5" />}
+            </Button>
+          </div>
+
+          {/* Trust badges */}
+          <div className="flex items-center justify-center gap-4 pt-2 text-xs text-gray-500">
+            <div className="flex items-center gap-1">
+              <Truck className="w-3.5 h-3.5" />
+              <span>Free Shipping</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <Shield className="w-3.5 h-3.5" />
+              <span>Secure</span>
+            </div>
           </div>
         </div>
       </div>
+
+      {/* Quick Buy Modal */}
+      <QuickBuyModal
+        isOpen={isQuickBuyOpen}
+        onClose={() => setIsQuickBuyOpen(false)}
+        product={{
+          id: product.id,
+          name: product.name,
+          priceUsd: product.basePrice,
+          imageUrl: currentImages.hero,
+          selectedColor,
+          selectedNecklace,
+        }}
+        onSuccess={() => setIsQuickBuyOpen(false)}
+      />
     </motion.div>
   )
 }
@@ -344,7 +387,7 @@ export function FeaturedProductsSection() {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <Link href="/products">
+          <Link href="/collections">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

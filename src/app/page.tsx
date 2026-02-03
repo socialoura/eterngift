@@ -1,17 +1,10 @@
-import { HeroSection } from '@/components/home/HeroSection'
-import { FeaturedProductsSection } from '@/components/home/FeaturedProductsSection'
-import { WhyEternGift } from '@/components/home/WhyEternGift'
-import { Testimonials } from '@/components/home/Testimonials'
-import { Newsletter } from '@/components/home/Newsletter'
+import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
+import { defaultLocale, isValidLocale } from '@/lib/i18n/config'
 
-export default function HomePage() {
-  return (
-    <main className="overflow-hidden">
-      <HeroSection />
-      <FeaturedProductsSection />
-      <WhyEternGift />
-      <Testimonials />
-      <Newsletter />
-    </main>
-  )
+export default async function RootPage() {
+  const cookieStore = await cookies()
+  const savedLocale = cookieStore.get('preferred-locale')?.value
+  const locale = savedLocale && isValidLocale(savedLocale) ? savedLocale : defaultLocale
+  redirect(`/${locale}`)
 }

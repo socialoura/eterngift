@@ -1,0 +1,155 @@
+{
+  "common": {
+    "home": "Startseite",
+    "collections": "Kollektionen",
+    "roseBear": "Rosenbär",
+    "roseBox": "Rosenbox",
+    "faq": "FAQ",
+    "contact": "Kontakt",
+    "cart": "Warenkorb",
+    "wishlist": "Wunschliste",
+    "buyNow": "Jetzt kaufen",
+    "addToCart": "In den Warenkorb",
+    "added": "Hinzugefügt!",
+    "viewDetails": "Details ansehen",
+    "viewAllCollection": "Alle Kollektionen",
+    "freeShipping": "Kostenloser Versand",
+    "secure": "Sicher",
+    "securePayment": "Sichere Zahlung",
+    "giftWrapping": "Geschenkverpackung",
+    "premiumPackaging": "Premium-Verpackung",
+    "madeWithLove": "Mit Liebe gemacht",
+    "handcraftedQuality": "Handwerksqualität",
+    "continueToPayment": "Weiter zur Zahlung",
+    "continueShopping": "Weiter einkaufen",
+    "orderConfirmed": "Bestellung bestätigt!",
+    "thankYou": "Danke für Ihren Einkauf. Ihre Bestellnummer ist:",
+    "confirmationEmail": "Sie erhalten in Kürze eine Bestätigungs-E-Mail."
+  },
+  "header": {
+    "promo": "Valentinstag-Special: Kostenloser Versand ab 50€",
+    "foreverInLove": "Für immer verliebt"
+  },
+  "hero": {
+    "title": "Drücken Sie Ihre",
+    "titleHighlight": "Ewige Liebe",
+    "subtitle": "Entdecken Sie unsere handgefertigte Kollektion ewiger Rosen und personalisiertem Schmuck. Das perfekte Geschenk für Ihren besonderen Menschen.",
+    "shopNow": "Jetzt einkaufen",
+    "learnMore": "Mehr erfahren"
+  },
+  "featured": {
+    "title": "Unsere",
+    "titleHighlight": "Ewigen",
+    "titleEnd": "Geschenke",
+    "subtitle": "Mit Liebe gemacht, für die Ewigkeit gestaltet. Jedes Stück erzählt eine einzigartige Geschichte ewiger Romantik.",
+    "reviews": "Bewertungen"
+  },
+  "collections": {
+    "badge": "Valentinstag-Kollektion",
+    "title": "Unsere",
+    "titleHighlight": "Ewigen",
+    "titleEnd": "Geschenke",
+    "subtitle": "Entdecken Sie unsere handgefertigte Kollektion ewiger Rosen und personalisiertem Schmuck. Jedes Stück drückt Ihre Liebe aus und schafft bleibende Erinnerungen."
+  },
+  "product": {
+    "mostPopular": "Beliebteste",
+    "premium": "Premium",
+    "off": "RABATT",
+    "color": "Farbe",
+    "necklace": "Halskette",
+    "engraving": "Gravur",
+    "optional": "Optional",
+    "maxCharacters": "Max 20 Zeichen",
+    "leftHeartEngraving": "Gravur linkes Herz",
+    "rightHeartEngraving": "Gravur rechtes Herz",
+    "leftHeartPlaceholder": "z.B. Ich liebe dich",
+    "rightHeartPlaceholder": "z.B. Für immer",
+    "engravingTip": "Tipp: Bei verschiedenen Gravuren werden mehrere Geschenke als separate Artikel behandelt.",
+    "whatsIncluded": "Inhalt",
+    "description": "Beschreibung",
+    "customerReviews": "Kundenbewertungen",
+    "basedOn": "Basierend auf",
+    "verifiedReviews": "verifizierten Bewertungen",
+    "youMayAlsoLove": "Das könnte Ihnen auch gefallen"
+  },
+  "checkout": {
+    "quickCheckout": "Schneller Checkout",
+    "payment": "Zahlung",
+    "shipping": "Versand",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "phoneOptional": "Telefon (optional)",
+    "address": "Adresse",
+    "city": "Stadt",
+    "postalCode": "Postleitzahl",
+    "country": "Land",
+    "creditCard": "Kreditkarte",
+    "paypal": "PayPal",
+    "nameOnCard": "Name auf der Karte",
+    "cardNumber": "Kartennummer",
+    "expiryDate": "Ablaufdatum",
+    "cvc": "CVC",
+    "payNow": "Jetzt bezahlen",
+    "payWithPaypal": "Mit PayPal bezahlen",
+    "paypalRedirect": "Sie werden zu PayPal weitergeleitet, um Ihren Einkauf sicher abzuschließen.",
+    "securePayment": "Ihre Zahlungsinformationen sind verschlüsselt und sicher"
+  },
+  "footer": {
+    "description": "Perfekt für Valentinstag, Jahrestage und besondere Momente.",
+    "quickLinks": "Schnelllinks",
+    "shopAll": "Alles ansehen",
+    "eternalRoses": "Ewige Rosen",
+    "jewelry": "Schmuck",
+    "giftSets": "Geschenksets",
+    "aboutUs": "Über uns",
+    "customerService": "Kundenservice",
+    "contactUs": "Kontakt",
+    "shippingInfo": "Versandinfo",
+    "returnsExchanges": "Rückgabe & Umtausch",
+    "privacyPolicy": "Datenschutz",
+    "allRightsReserved": "Alle Rechte vorbehalten."
+  },
+  "newsletter": {
+    "title": "Bleiben Sie informiert",
+    "subtitle": "Abonnieren Sie für exklusive Angebote, Neuheiten und romantische Geschenkideen.",
+    "placeholder": "Ihre E-Mail",
+    "subscribe": "Abonnieren",
+    "privacy": "Wir respektieren Ihre Privatsphäre. Jederzeit abmeldbar."
+  },
+  "testimonials": {
+    "title": "Liebesgeschichten",
+    "subtitle": "Echte Geschichten von unseren glücklichen Kunden"
+  },
+  "whyUs": {
+    "title": "Warum",
+    "titleHighlight": "EternGift",
+    "subtitle": "Wir helfen Ihnen, Ihre Liebe mit den schönsten, beständigsten Geschenken auszudrücken."
+  },
+  "cart": {
+    "yourCart": "Ihr Warenkorb",
+    "empty": "Ihr Warenkorb ist leer",
+    "emptyDescription": "Sie haben noch keine Artikel hinzugefügt.",
+    "startShopping": "Einkaufen starten",
+    "subtotal": "Zwischensumme",
+    "shipping": "Versand",
+    "free": "Kostenlos",
+    "total": "Gesamt",
+    "proceedToCheckout": "Zur Kasse",
+    "leftHeart": "Linkes Herz",
+    "rightHeart": "Rechtes Herz"
+  },
+  "faqPage": {
+    "title": "Häufig gestellte Fragen",
+    "subtitle": "Finden Sie Antworten auf häufige Fragen zu unseren Produkten und Services."
+  },
+  "contactPage": {
+    "title": "Kontaktieren Sie uns",
+    "subtitle": "Wir freuen uns von Ihnen zu hören. Senden Sie uns eine Nachricht und wir antworten so schnell wie möglich.",
+    "name": "Name",
+    "subject": "Betreff",
+    "message": "Nachricht",
+    "send": "Nachricht senden"
+  }
+}
