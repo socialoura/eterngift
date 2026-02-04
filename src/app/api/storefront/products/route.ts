@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server'
 import { getProduct, initDatabase } from '@/lib/db'
 
 const FALLBACK_PRODUCTS = [
-  { id: 'eternal-rose-bear', base_price: 89.99, stock: 100 },
-  { id: 'eternal-rose-box', base_price: 129.99, stock: 100 },
+  { id: 'eternal-rose-bear', base_price: 29.99, stock: 100 },
+  { id: 'eternal-rose-box', base_price: 19.99, stock: 100 },
 ] as const
 
 export async function GET() {
