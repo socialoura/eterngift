@@ -69,14 +69,18 @@ export function I18nProvider({
   }
 
   // Set currency based on locale on mount
+  // Always sync currency with the current page locale (defaultCurrency)
+  // This ensures French pages show EUR, English pages show USD, etc.
   useEffect(() => {
     let cancelled = false
 
     const init = async () => {
-      const preferred = normalizeCurrency(getCookie('preferred-currency'))
-      const detected = normalizeCurrency(detectCurrencyFromNavigator())
-      const fallback = normalizeCurrency(defaultCurrency) || 'USD'
-      const desiredCurrency = preferred || detected || fallback
+      // Priority: cookie from middleware > defaultCurrency from locale
+      const cookieCurrency = normalizeCurrency(getCookie('preferred-currency'))
+      const localeCurrency = normalizeCurrency(defaultCurrency) || 'USD'
+      
+      // Use cookie if set by middleware, otherwise use locale-based currency
+      const desiredCurrency = cookieCurrency || localeCurrency
 
       try {
         const res = await fetch('/api/currency/rates', { cache: 'no-store' })

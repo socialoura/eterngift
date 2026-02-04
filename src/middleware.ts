@@ -11,18 +11,16 @@ export function middleware(request: NextRequest) {
   )
 
   if (pathnameHasLocale) {
-    // Extract locale and set currency cookie if not already set
+    // Extract locale and always sync currency with locale
     const locale = pathname.split('/')[1]
     if (isValidLocale(locale)) {
       const response = NextResponse.next()
       
-      // Set preferred currency based on locale if not already set
-      if (!request.cookies.get('preferred-currency')) {
-        response.cookies.set('preferred-currency', localeCurrencies[locale], {
-          path: '/',
-          maxAge: 60 * 60 * 24 * 365, // 1 year
-        })
-      }
+      // Always set preferred currency based on locale to keep in sync
+      response.cookies.set('preferred-currency', localeCurrencies[locale], {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 365, // 1 year
+      })
       
       // Set locale cookie
       response.cookies.set('preferred-locale', locale, {
@@ -67,18 +65,16 @@ export function middleware(request: NextRequest) {
   
   const response = NextResponse.redirect(newUrl)
   
-  // Set cookies for locale and currency
+  // Set cookies for locale and currency (always sync currency with locale)
   response.cookies.set('preferred-locale', locale, {
     path: '/',
     maxAge: 60 * 60 * 24 * 365,
   })
   
-  if (!request.cookies.get('preferred-currency')) {
-    response.cookies.set('preferred-currency', localeCurrencies[locale], {
-      path: '/',
-      maxAge: 60 * 60 * 24 * 365,
-    })
-  }
+  response.cookies.set('preferred-currency', localeCurrencies[locale], {
+    path: '/',
+    maxAge: 60 * 60 * 24 * 365,
+  })
 
   return response
 }
