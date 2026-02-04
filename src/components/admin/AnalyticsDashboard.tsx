@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { BarChart3, TrendingUp, DollarSign, ShoppingBag, Loader2, Plus, Trash2 } from 'lucide-react'
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts'
 
-interface Order { order_id: string; price: number; cost: number; status: string; created_at: string }
+interface Order { order_number: string; total_usd: number; subtotal_usd: number; status: string; created_at: string }
 interface GoogleAdsExpense { month: string; amount: number }
 const COLORS = ['#B71C1C', '#D4AF88', '#8B1538', '#FFB74D']
 
@@ -43,24 +43,22 @@ export function AnalyticsDashboard({ token }: { token: string }) {
     setExpenses(expenses.filter(e => e.month !== month))
   }
 
-  const totalRevenue = orders.reduce((s, o) => s + Number(o.price || 0), 0)
-  const totalCost = orders.reduce((s, o) => s + Number(o.cost || 0), 0)
-  const totalProfit = totalRevenue - totalCost
+  const totalRevenue = orders.reduce((s, o) => s + Number(o.total_usd || 0), 0)
+  const totalProfit = totalRevenue
 
   const last7Days = Array.from({ length: 7 }, (_, i) => {
     const d = new Date(); d.setDate(d.getDate() - (6 - i))
     const dayStr = d.toISOString().split('T')[0]
-    return { day: d.toLocaleDateString('en', { weekday: 'short' }), revenue: orders.filter(o => o.created_at?.startsWith(dayStr)).reduce((s, o) => s + Number(o.price || 0), 0) }
+    return { day: d.toLocaleDateString('en', { weekday: 'short' }), revenue: orders.filter(o => o.created_at?.startsWith(dayStr)).reduce((s, o) => s + Number(o.total_usd || 0), 0) }
   })
 
   const monthlyData = Array.from({ length: 12 }, (_, i) => {
     const d = new Date(); d.setMonth(d.getMonth() - (11 - i))
     const m = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
     const mo = orders.filter(o => o.created_at?.startsWith(m))
-    const rev = mo.reduce((s, o) => s + Number(o.price || 0), 0)
-    const cost = mo.reduce((s, o) => s + Number(o.cost || 0), 0)
+    const rev = mo.reduce((s, o) => s + Number(o.total_usd || 0), 0)
     const ads = Number(expenses.find(e => e.month === m)?.amount || 0)
-    return { month: d.toLocaleDateString('en', { month: 'short' }), revenue: rev, netProfit: rev - cost - ads }
+    return { month: d.toLocaleDateString('en', { month: 'short' }), revenue: rev, netProfit: rev - ads }
   })
 
   const productData = [{ name: 'Rose Box', value: Math.floor(orders.length * 0.6) }, { name: 'Rose Bear', value: Math.floor(orders.length * 0.4) }]
