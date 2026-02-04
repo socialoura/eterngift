@@ -35,11 +35,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Skip API routes, static files, etc.
+  // Skip API routes, static files, dashboard, etc.
   if (
     pathname.startsWith('/api/') ||
     pathname.startsWith('/_next/') ||
     pathname.startsWith('/favicon') ||
+    pathname.startsWith('/dashboard') ||
     pathname.includes('.') // Static files like .png, .svg, etc.
   ) {
     return NextResponse.next()
@@ -81,7 +82,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Match all paths except api, _next/static, _next/image, favicon, and files with extensions
-    '/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)',
+    // Match all paths except api, _next, dashboard, favicon, and files with extensions
+    '/((?!api|_next|dashboard|favicon.ico|sitemap|robots|manifest).*)',
   ],
 }
