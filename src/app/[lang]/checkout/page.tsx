@@ -58,8 +58,8 @@ export default function CheckoutPage() {
   const locale = useLocale()
 
   const subtotalUsd = getSubtotalUsd()
-  const shippingUsd = subtotalUsd > 50 ? 0 : 9.99
-  const taxUsd = subtotalUsd * 0.08
+  const shippingUsd = 0
+  const taxUsd = 0
   const totalUsd = subtotalUsd + shippingUsd + taxUsd
 
   const {

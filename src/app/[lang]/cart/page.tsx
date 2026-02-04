@@ -16,7 +16,7 @@ export default function CartPage() {
   const locale = useLocale()
 
   const subtotalUsd = getSubtotalUsd()
-  const shippingUsd = subtotalUsd > 50 ? 0 : 9.99
+  const shippingUsd = 0
   const totalUsd = subtotalUsd + shippingUsd
 
   if (items.length === 0) {
@@ -186,11 +186,6 @@ export default function CartPage() {
                       )}
                     </span>
                   </div>
-                  {shippingUsd > 0 && (
-                    <p className="text-xs text-gray-500">
-                      Free shipping on orders over {formatPrice(50)}
-                    </p>
-                  )}
                   <div className="border-t border-gray-100 pt-3 mt-3">
                     <div className="flex justify-between text-lg font-bold">
                       <span>{t('cart.total')}</span>

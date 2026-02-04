@@ -10,6 +10,7 @@ import { ShippingInfo } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { useCartStore } from '@/store/cart'
 import { useCurrencyStore } from '@/store/currency'
+import { useTranslation } from '@/components/providers/I18nProvider'
 
 interface PaymentModalProps {
   isOpen: boolean
@@ -41,6 +42,7 @@ export function PaymentModal({
 
   const { items } = useCartStore()
   const { formatPrice } = useCurrencyStore()
+  const { t } = useTranslation()
 
   const handleCardPayment = async () => {
     setIsProcessing(true)
@@ -160,7 +162,7 @@ export function PaymentModal({
           {/* Header */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
             <h2 className="text-xl font-heading font-semibold text-gray-800">
-              Complete Payment
+              {t('checkout.completePayment')}
             </h2>
             <button
               onClick={onClose}
@@ -182,7 +184,7 @@ export function PaymentModal({
               )}
             >
               <div className="flex items-center justify-center gap-2">
-                <span>Credit Card</span>
+                <span>{t('checkout.creditCard')}</span>
                 <span className="hidden sm:block relative h-5 w-24">
                   <Image src="/cb.png" alt="Cards" fill className="object-contain" />
                 </span>
@@ -215,7 +217,7 @@ export function PaymentModal({
             {/* Amount */}
             <div className="bg-light-pink/50 rounded-lg p-4 mb-6">
               <div className="flex justify-between items-center">
-                <span className="text-gray-600">Total Amount</span>
+                <span className="text-gray-600">{t('checkout.totalAmount')}</span>
                 <div className="text-right">
                   <p className="text-2xl font-bold text-primary">
                     {formatPrice(totalUsd)}
@@ -242,14 +244,14 @@ export function PaymentModal({
                 </div>
 
                 <Input
-                  label="Name on Card"
+                  label={t('checkout.nameOnCard')}
                   placeholder="John Doe"
                   value={cardName}
                   onChange={(e) => setCardName(e.target.value)}
                 />
 
                 <Input
-                  label="Card Number"
+                  label={t('checkout.cardNumber')}
                   placeholder="1234 5678 9012 3456"
                   value={cardNumber}
                   onChange={(e) => setCardNumber(formatCardNumber(e.target.value))}
@@ -258,14 +260,14 @@ export function PaymentModal({
 
                 <div className="grid grid-cols-2 gap-4">
                   <Input
-                    label="Expiry Date"
+                    label={t('checkout.expiryDate')}
                     placeholder="MM/YY"
                     value={expiryDate}
                     onChange={(e) => setExpiryDate(formatExpiryDate(e.target.value))}
                     maxLength={5}
                   />
                   <Input
-                    label="CVC"
+                    label={t('checkout.cvc')}
                     placeholder="123"
                     value={cvc}
                     onChange={(e) => setCvc(e.target.value.replace(/\D/g, '').slice(0, 4))}
@@ -281,13 +283,13 @@ export function PaymentModal({
                   disabled={!cardNumber || !expiryDate || !cvc || !cardName}
                 >
                   <Lock className="w-4 h-4 mr-2" />
-                  Pay {formatPrice(totalUsd)}
+                  {t('checkout.payNow')} {formatPrice(totalUsd)}
                 </Button>
               </div>
             ) : (
               <div className="space-y-4">
                 <p className="text-gray-600 text-sm text-center mb-4">
-                  You will be redirected to PayPal to complete your purchase securely.
+                  {t('checkout.paypalRedirect')}
                 </p>
 
                 <Button
@@ -303,7 +305,7 @@ export function PaymentModal({
                     height={20}
                     className="w-5 h-5 mr-2"
                   />
-                  Pay with PayPal
+                  {t('checkout.payWithPaypal')}
                 </Button>
               </div>
             )}
@@ -311,7 +313,7 @@ export function PaymentModal({
             {/* Security Note */}
             <div className="flex items-center justify-center gap-2 mt-6 text-sm text-gray-500">
               <Lock className="w-4 h-4" />
-              <span>Secure payment • 256-bit encryption</span>
+              <span>{t('checkout.securePayment')}</span>
             </div>
           </div>
         </motion.div>

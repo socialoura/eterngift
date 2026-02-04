@@ -96,7 +96,9 @@
     "payNow": "Paga ora",
     "payWithPaypal": "Paga con PayPal",
     "paypalRedirect": "Sarai reindirizzato a PayPal per completare l'acquisto in sicurezza.",
-    "securePayment": "Le tue informazioni di pagamento sono criptate e sicure"
+    "securePayment": "Pagamento sicuro • Crittografia 256-bit",
+    "completePayment": "Completa il pagamento",
+    "totalAmount": "Importo totale"
   },
   "footer": {
     "description": "Perfetto per San Valentino, anniversari e momenti speciali.",

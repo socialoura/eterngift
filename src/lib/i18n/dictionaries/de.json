@@ -96,7 +96,9 @@
     "payNow": "Jetzt bezahlen",
     "payWithPaypal": "Mit PayPal bezahlen",
     "paypalRedirect": "Sie werden zu PayPal weitergeleitet, um Ihren Einkauf sicher abzuschließen.",
-    "securePayment": "Ihre Zahlungsinformationen sind verschlüsselt und sicher"
+    "securePayment": "Sichere Zahlung • 256-Bit-Verschlüsselung",
+    "completePayment": "Zahlung abschließen",
+    "totalAmount": "Gesamtbetrag"
   },
   "footer": {
     "description": "Perfekt für Valentinstag, Jahrestage und besondere Momente.",

@@ -96,7 +96,9 @@
     "payNow": "Payer maintenant",
     "payWithPaypal": "Payer avec PayPal",
     "paypalRedirect": "Vous serez redirigé vers PayPal pour finaliser votre achat en toute sécurité.",
-    "securePayment": "Vos informations de paiement sont cryptées et sécurisées"
+    "securePayment": "Paiement sécurisé • Cryptage 256-bit",
+    "completePayment": "Finaliser le paiement",
+    "totalAmount": "Montant total"
   },
   "footer": {
     "description": "Parfait pour la Saint-Valentin, les anniversaires et les moments spéciaux.",
