@@ -1,30 +1,38 @@
 import { NextResponse } from 'next/server'
-import { getProduct, initDatabase } from '@/lib/db'
+import { sql } from '@vercel/postgres'
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 
 const FALLBACK_PRODUCTS = [
   { id: 'eternal-rose-bear', base_price: 29.99, stock: 100 },
   { id: 'eternal-rose-box', base_price: 19.99, stock: 100 },
 ] as const
 
+// Map numeric IDs to string slugs
+const ID_TO_SLUG: Record<number, string> = {
+  1: 'eternal-rose-bear',
+  2: 'eternal-rose-box',
+}
+
 export async function GET() {
   try {
-    await initDatabase()
+    const result = await sql`SELECT id, price_usd, stock FROM products ORDER BY id`
+    
+    const products = result.rows.map(row => ({
+      id: ID_TO_SLUG[row.id] || `product-${row.id}`,
+      base_price: Number(row.price_usd),
+      stock: Number(row.stock),
+    }))
 
-    const products = await Promise.all(
-      FALLBACK_PRODUCTS.map(async (fallback) => {
-        const row = await getProduct(fallback.id)
-        if (!row) return fallback
-
-        return {
-          id: row.id,
-          base_price: Number(row.base_price),
-          stock: typeof row.stock === 'number' ? row.stock : Number(row.stock ?? fallback.stock),
-        }
-      })
-    )
+    // If no products found, return fallback
+    if (products.length === 0) {
+      return NextResponse.json({ products: [...FALLBACK_PRODUCTS] })
+    }
 
     return NextResponse.json({ products })
-  } catch {
+  } catch (error) {
+    console.error('Error fetching storefront products:', error)
     return NextResponse.json({ products: [...FALLBACK_PRODUCTS] })
   }
 }
