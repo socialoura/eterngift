@@ -179,7 +179,7 @@ export default function CheckoutPage() {
                   {...register('country')}
                   className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:border-rose-gold focus:ring-2 focus:ring-rose-gold/20"
                 >
-                  <option value="">Select a country</option>
+                  <option value="">{t('checkout.selectCountry')}</option>
                   {countries.map((country) => (
                     <option key={country} value={country}>
                       {country}
@@ -207,7 +207,7 @@ export default function CheckoutPage() {
 
               <div className="flex items-center justify-center gap-2 text-sm text-gray-500 pt-2">
                 <Lock className="w-4 h-4" />
-                <span>Your information is secure and encrypted</span>
+                <span>{t('checkout.securePayment')}</span>
               </div>
             </form>
           </motion.div>

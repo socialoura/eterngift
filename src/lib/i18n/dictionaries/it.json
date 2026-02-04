@@ -98,7 +98,11 @@
     "paypalRedirect": "Sarai reindirizzato a PayPal per completare l'acquisto in sicurezza.",
     "securePayment": "Pagamento sicuro • Crittografia 256-bit",
     "completePayment": "Completa il pagamento",
-    "totalAmount": "Importo totale"
+    "totalAmount": "Importo totale",
+    "selectCountry": "Seleziona un paese",
+    "paymentFailed": "Pagamento non riuscito",
+    "paymentFailedRetry": "Pagamento non riuscito. Riprova.",
+    "paypalPaymentFailed": "Pagamento PayPal non riuscito"
   },
   "footer": {
     "description": "Perfetto per San Valentino, anniversari e momenti speciali.",

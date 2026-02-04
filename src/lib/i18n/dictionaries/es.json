@@ -98,7 +98,11 @@
     "paypalRedirect": "Serás redirigido a PayPal para completar tu compra de forma segura.",
     "securePayment": "Pago seguro • Encriptación 256-bit",
     "completePayment": "Completar pago",
-    "totalAmount": "Monto total"
+    "totalAmount": "Monto total",
+    "selectCountry": "Selecciona un país",
+    "paymentFailed": "El pago falló",
+    "paymentFailedRetry": "El pago falló. Por favor, inténtalo de nuevo.",
+    "paypalPaymentFailed": "El pago con PayPal falló"
   },
   "footer": {
     "description": "Perfecto para San Valentín, aniversarios y momentos especiales.",

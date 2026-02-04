@@ -98,7 +98,11 @@
     "paypalRedirect": "Sie werden zu PayPal weitergeleitet, um Ihren Einkauf sicher abzuschließen.",
     "securePayment": "Sichere Zahlung • 256-Bit-Verschlüsselung",
     "completePayment": "Zahlung abschließen",
-    "totalAmount": "Gesamtbetrag"
+    "totalAmount": "Gesamtbetrag",
+    "selectCountry": "Land auswählen",
+    "paymentFailed": "Zahlung fehlgeschlagen",
+    "paymentFailedRetry": "Zahlung fehlgeschlagen. Bitte versuche es erneut.",
+    "paypalPaymentFailed": "PayPal-Zahlung fehlgeschlagen"
   },
   "footer": {
     "description": "Perfekt für Valentinstag, Jahrestage und besondere Momente.",

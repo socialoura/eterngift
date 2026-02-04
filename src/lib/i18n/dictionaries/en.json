@@ -98,7 +98,11 @@
     "paypalRedirect": "You will be redirected to PayPal to complete your purchase securely.",
     "securePayment": "Secure payment • 256-bit encryption",
     "completePayment": "Complete Payment",
-    "totalAmount": "Total Amount"
+    "totalAmount": "Total Amount",
+    "selectCountry": "Select a country",
+    "paymentFailed": "Payment failed",
+    "paymentFailedRetry": "Payment failed. Please try again.",
+    "paypalPaymentFailed": "PayPal payment failed"
   },
   "footer": {
     "description": "Perfect for Valentine's Day, anniversaries, and special moments.",

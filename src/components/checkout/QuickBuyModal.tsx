@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { cn } from '@/lib/utils'
 import { useCurrencyStore } from '@/store/currency'
+import { useTranslation } from '@/components/providers/I18nProvider'
 
 interface QuickBuyModalProps {
   isOpen: boolean
@@ -56,6 +57,7 @@ export function QuickBuyModal({
   const [cardName, setCardName] = useState('')
 
   const { formatPrice } = useCurrencyStore()
+  const { t } = useTranslation()
 
   const shippingInfo = {
     firstName,
@@ -97,12 +99,12 @@ export function QuickBuyModal({
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || 'Payment failed')
+        throw new Error(data.error || t('checkout.paymentFailed'))
       }
 
       onSuccess(data.orderNumber)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Payment failed. Please try again.')
+      setError(err instanceof Error ? err.message : t('checkout.paymentFailedRetry'))
     } finally {
       setIsProcessing(false)
     }
@@ -134,12 +136,12 @@ export function QuickBuyModal({
       const data = await response.json()
 
       if (!response.ok) {
-        throw new Error(data.error || 'PayPal payment failed')
+        throw new Error(data.error || t('checkout.paypalPaymentFailed'))
       }
 
       onSuccess(data.orderNumber)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Payment failed. Please try again.')
+      setError(err instanceof Error ? err.message : t('checkout.paymentFailedRetry'))
     } finally {
       setIsProcessing(false)
     }
@@ -203,7 +205,7 @@ export function QuickBuyModal({
                 </button>
               )}
               <h2 className="text-xl font-heading font-semibold text-gray-800">
-                {step === 'shipping' ? 'Quick Checkout' : 'Payment'}
+                {step === 'shipping' ? t('checkout.quickCheckout') : t('checkout.payment')}
               </h2>
             </div>
             <button
@@ -271,14 +273,14 @@ export function QuickBuyModal({
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <Input
-                    label="First Name"
+                    label={t('checkout.firstName')}
                     placeholder="John"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
                     required
                   />
                   <Input
-                    label="Last Name"
+                    label={t('checkout.lastName')}
                     placeholder="Doe"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
@@ -287,7 +289,7 @@ export function QuickBuyModal({
                 </div>
 
                 <Input
-                  label="Email"
+                  label={t('checkout.email')}
                   type="email"
                   placeholder="john@example.com"
                   value={email}
@@ -296,7 +298,7 @@ export function QuickBuyModal({
                 />
 
                 <Input
-                  label="Phone (optional)"
+                  label={t('checkout.phoneOptional')}
                   type="tel"
                   placeholder="+1 234 567 8900"
                   value={phone}
@@ -304,7 +306,7 @@ export function QuickBuyModal({
                 />
 
                 <Input
-                  label="Address"
+                  label={t('checkout.address')}
                   placeholder="123 Main Street"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
@@ -313,14 +315,14 @@ export function QuickBuyModal({
 
                 <div className="grid grid-cols-2 gap-4">
                   <Input
-                    label="City"
+                    label={t('checkout.city')}
                     placeholder="New York"
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     required
                   />
                   <Input
-                    label="Postal Code"
+                    label={t('checkout.postalCode')}
                     placeholder="10001"
                     value={postalCode}
                     onChange={(e) => setPostalCode(e.target.value)}
@@ -329,7 +331,7 @@ export function QuickBuyModal({
                 </div>
 
                 <Input
-                  label="Country"
+                  label={t('checkout.country')}
                   placeholder="United States"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
@@ -340,11 +342,11 @@ export function QuickBuyModal({
                 <div className="flex items-center justify-center gap-6 pt-4 text-sm text-gray-500">
                   <div className="flex items-center gap-1.5">
                     <Truck className="w-4 h-4" />
-                    <span>Free Shipping</span>
+                    <span>{t('common.freeShipping')}</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Shield className="w-4 h-4" />
-                    <span>Secure</span>
+                    <span>{t('common.secure')}</span>
                   </div>
                 </div>
 
@@ -354,7 +356,7 @@ export function QuickBuyModal({
                   onClick={() => setStep('payment')}
                   disabled={!isShippingValid}
                 >
-                  Continue to Payment
+                  {t('common.continueToPayment')}
                 </Button>
               </div>
             ) : (
@@ -371,7 +373,7 @@ export function QuickBuyModal({
                     )}
                   >
                     <div className="flex items-center gap-2">
-                      <span>Credit Card</span>
+                      <span>{t('checkout.creditCard')}</span>
                       <span className="hidden sm:block relative h-5 w-24">
                         <Image src="/cb.png" alt="Cards" fill className="object-contain" />
                       </span>
@@ -393,7 +395,7 @@ export function QuickBuyModal({
                       height={22}
                       className="h-5 w-auto"
                     />
-                    PayPal
+                    {t('checkout.paypal')}
                   </button>
                 </div>
 
@@ -407,14 +409,14 @@ export function QuickBuyModal({
                     </div>
 
                     <Input
-                      label="Name on Card"
+                      label={t('checkout.nameOnCard')}
                       placeholder="John Doe"
                       value={cardName}
                       onChange={(e) => setCardName(e.target.value)}
                     />
 
                     <Input
-                      label="Card Number"
+                      label={t('checkout.cardNumber')}
                       placeholder="1234 5678 9012 3456"
                       value={cardNumber}
                       onChange={(e) => setCardNumber(formatCardNumber(e.target.value))}
@@ -423,14 +425,14 @@ export function QuickBuyModal({
 
                     <div className="grid grid-cols-2 gap-4">
                       <Input
-                        label="Expiry Date"
+                        label={t('checkout.expiryDate')}
                         placeholder="MM/YY"
                         value={expiryDate}
                         onChange={(e) => setExpiryDate(formatExpiryDate(e.target.value))}
                         maxLength={5}
                       />
                       <Input
-                        label="CVC"
+                        label={t('checkout.cvc')}
                         placeholder="123"
                         value={cvc}
                         onChange={(e) => setCvc(e.target.value.replace(/\D/g, '').slice(0, 4))}
@@ -439,21 +441,21 @@ export function QuickBuyModal({
                     </div>
 
                     <Button
-                      className="w-full bg-gradient-to-r from-[#B71C1C] to-[#8B1538]"
+                      className="w-full"
                       size="lg"
                       onClick={handleCardPayment}
                       isLoading={isProcessing}
                       disabled={!cardNumber || !expiryDate || !cvc || !cardName}
                     >
                       <Lock className="w-4 h-4 mr-2" />
-                      Pay {formatPrice(product.priceUsd)}
+                      {t('checkout.payNow')} {formatPrice(product.priceUsd)}
                     </Button>
                   </div>
                 ) : (
                   <div className="space-y-4">
                     <div className="bg-blue-50 rounded-xl p-4 text-center">
                       <p className="text-gray-600 text-sm">
-                        You will be redirected to PayPal to complete your purchase securely.
+                        {t('checkout.paypalRedirect')}
                       </p>
                     </div>
 
@@ -470,7 +472,7 @@ export function QuickBuyModal({
                         height={20}
                         className="w-5 h-5 mr-2"
                       />
-                      Pay with PayPal
+                      {t('checkout.payWithPaypal')}
                     </Button>
                   </div>
                 )}
@@ -478,7 +480,7 @@ export function QuickBuyModal({
                 {/* Security Note */}
                 <div className="flex items-center justify-center gap-2 pt-2 text-sm text-gray-500">
                   <Lock className="w-4 h-4" />
-                  <span>Secure payment • 256-bit encryption</span>
+                  <span>{t('checkout.securePayment')}</span>
                 </div>
               </div>
             )}
