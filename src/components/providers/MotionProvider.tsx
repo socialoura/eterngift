@@ -11,21 +11,22 @@ export function useIsMobile() {
 
 export function MotionProvider({ children }: { children: ReactNode }) {
   const [isMobile, setIsMobile] = useState(true)
+  const [shouldReduceMotion, setShouldReduceMotion] = useState(true)
 
   useEffect(() => {
     const checkMobile = () => {
       const isMobileDevice = window.innerWidth < 768 || 
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
       setIsMobile(isMobileDevice)
+      
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      setShouldReduceMotion(isMobileDevice || prefersReducedMotion)
     }
     
     checkMobile()
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
-
-  const shouldReduceMotion = isMobile || 
-    (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
 
   return (
     <MobileContext.Provider value={isMobile}>

@@ -24,8 +24,8 @@ const config: Config = {
         'soft-gray': '#F0F0F0',
       },
       fontFamily: {
-        heading: ['Playfair Display', 'serif'],
-        body: ['Inter', 'sans-serif'],
+        heading: ['var(--font-playfair)', 'Playfair Display', 'serif'],
+        body: ['var(--font-inter)', 'Inter', 'sans-serif'],
       },
       backgroundImage: {
         'romantic-gradient': 'linear-gradient(180deg, #FFFFFF 0%, #FFE5E5 100%)',

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -11,11 +12,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
-import { PaymentModal } from '@/components/checkout/PaymentModal'
+
 import { useCartStore } from '@/store/cart'
 import { useCurrencyStore } from '@/store/currency'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 import { ShippingInfo } from '@/lib/types'
+
+const PaymentModal = dynamic(() => import('@/components/checkout/PaymentModal').then(mod => mod.PaymentModal), {
+  ssr: false,
+})
 
 const shippingSchema = z.object({
   firstName: z.string().min(2, 'First name is required'),

@@ -3,17 +3,22 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 import { Heart, Sparkles, ArrowRight, Star, ShoppingCart, Check, Truck, Shield } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { eternalRoseBear, eternalRoseBox, ProductVariant } from '@/lib/products-data'
-import { QuickBuyModal } from '@/components/checkout/QuickBuyModal'
+
 import { useCurrencyStore, useHydrated } from '@/store/currency'
 import { useCartStore } from '@/store/cart'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { cn } from '@/lib/utils'
 import { useStorefrontProducts } from '@/hooks/useStorefrontProducts'
+
+const QuickBuyModal = dynamic(() => import('@/components/checkout/QuickBuyModal').then(mod => mod.QuickBuyModal), {
+  ssr: false,
+})
 
 function ProductCard({
   product,

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
+import { inter, playfair } from '@/lib/fonts'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -76,12 +77,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      </head>
-      <body className="antialiased" suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
+      <body className="antialiased font-body" suppressHydrationWarning>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-17893452047"
           strategy="afterInteractive"
