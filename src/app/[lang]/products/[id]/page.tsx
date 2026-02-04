@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -16,7 +16,7 @@ import { QuickBuyModal } from '@/components/checkout/QuickBuyModal'
 import { useCurrencyStore, useHydrated } from '@/store/currency'
 import { useCartStore } from '@/store/cart'
 import { cn } from '@/lib/utils'
-import { useTranslation } from '@/components/providers/I18nProvider'
+import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 import { useStorefrontProducts } from '@/hooks/useStorefrontProducts'
 
 function FloatingHeart({ delay, left, size }: { delay: number; left: string; size: number }) {
@@ -83,9 +83,11 @@ const getFaqs = (t: (key: string) => string) => [
 
 export default function ProductDetailPage() {
   const params = useParams()
+  const router = useRouter()
   const id = params.id as string
   const product = productsMap[id]
   const { t } = useTranslation()
+  const locale = useLocale()
   const { productsById } = useStorefrontProducts()
 
   const [selectedColor, setSelectedColor] = useState('')
@@ -167,7 +169,7 @@ export default function ProductDetailPage() {
 
   const handleQuickBuySuccess = (orderId: string) => {
     setIsQuickBuyOpen(false)
-    setOrderSuccess(orderId)
+    router.push(`/${locale}/order-confirmation?orderId=${orderId}`)
   }
 
   const [openFaq, setOpenFaq] = useState<number | null>(null)

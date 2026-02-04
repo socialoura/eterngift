@@ -191,6 +191,73 @@ export async function getProductVariants(productId: string) {
 }
 
 // Orders functions
+export interface CreateOrderData {
+  orderNumber: string
+  customerEmail: string
+  customerName: string
+  customerCurrency: string
+  subtotalUsd: number
+  taxUsd: number
+  totalUsd: number
+  shippingAddress: {
+    street: string
+    city: string
+    postalCode: string
+    country: string
+  }
+  paymentMethod: string
+  paymentId?: string
+  items: {
+    productId: string
+    productName: string
+    priceUsd: number
+    quantity: number
+    roseColor?: string
+    necklaceColor?: string
+    engravingLeftHeart?: string
+    engravingRightHeart?: string
+  }[]
+}
+
+export async function createOrder(data: CreateOrderData) {
+  // Insert order
+  await sql`
+    INSERT INTO orders (
+      order_id, email, customer_name, price, cost, status, 
+      stripe_transaction_id, created_at, updated_at
+    )
+    VALUES (
+      ${data.orderNumber}, 
+      ${data.customerEmail}, 
+      ${data.customerName}, 
+      ${data.totalUsd}, 
+      0, 
+      'confirmed',
+      ${data.paymentId || null},
+      NOW(), 
+      NOW()
+    )
+  `
+
+  // Insert order items
+  for (const item of data.items) {
+    const itemId = `${data.orderNumber}-${item.productId}-${Date.now()}`
+    await sql`
+      INSERT INTO order_items (id, order_id, product_id, rose_color, necklace_color, quantity)
+      VALUES (
+        ${itemId},
+        ${data.orderNumber}, 
+        ${item.productId}, 
+        ${item.roseColor || null}, 
+        ${item.necklaceColor || null}, 
+        ${item.quantity}
+      )
+    `
+  }
+
+  return data.orderNumber
+}
+
 export async function getAllOrders(filters?: { status?: string; product?: string; dateRange?: string }) {
   let query = sql`SELECT * FROM orders ORDER BY created_at DESC`
   

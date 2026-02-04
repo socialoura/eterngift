@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Heart, Sparkles, ArrowRight, Star, ShoppingCart, Check, Truck, Shield } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
@@ -37,6 +38,7 @@ function ProductCard({
   const [isQuickBuyOpen, setIsQuickBuyOpen] = useState(false)
   const [isAddedToCart, setIsAddedToCart] = useState(false)
   
+  const router = useRouter()
   const { formatPrice } = useCurrencyStore()
   const addItem = useCartStore((state) => state.addItem)
   const { t } = useTranslation()
@@ -349,8 +351,9 @@ function ProductCard({
           selectedColor,
           selectedNecklace,
         }}
-        onSuccess={() => {
+        onSuccess={(orderId) => {
           setIsQuickBuyOpen(false)
+          router.push(`/${locale}/order-confirmation?orderId=${orderId}`)
         }}
       />
     </motion.div>
