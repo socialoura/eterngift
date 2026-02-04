@@ -130,16 +130,16 @@ export async function initDatabase() {
       ON CONFLICT (id) DO NOTHING
     `
 
-    // Insert default products if not exist (separate inserts for reliability)
+    // Insert or update default products with correct prices
     await sql`
       INSERT INTO products (id, name, description, image_url, base_price, stock)
       VALUES ('eternal-rose-box', 'Eternal Rose Box with Engraved Necklace', 'Eternal luxury in a box. A stunning preserved rose arrangement paired with a personalized engraved necklace.', '/products/rose-box/rouge/1.png', 19.99, 100)
-      ON CONFLICT (id) DO NOTHING
+      ON CONFLICT (id) DO UPDATE SET base_price = 19.99
     `
     await sql`
       INSERT INTO products (id, name, description, image_url, base_price, stock)
       VALUES ('eternal-rose-bear', 'Eternal Rose Bear with Engraved Necklace', 'Your perfect eternal companion. A stunning rose bear paired with an engraved necklace, creating a timeless symbol of love and remembrance.', '/products/rose-bear/rouge/1.png', 29.99, 100)
-      ON CONFLICT (id) DO NOTHING
+      ON CONFLICT (id) DO UPDATE SET base_price = 29.99
     `
 
     console.log('Database initialized successfully')
