@@ -327,15 +327,23 @@ export default function ContactPage() {
               {t('contactExtra.followOurJourneyDesc')}
             </p>
             <div className="flex justify-center gap-4">
-              {['Instagram', 'Facebook', 'Pinterest', 'TikTok'].map((social) => (
-                <motion.button
-                  key={social}
+              {[
+                { label: 'Instagram', href: 'https://instagram.com/eterngift_com' },
+                { label: 'Facebook', href: '#' },
+                { label: 'Pinterest', href: '#' },
+                { label: 'TikTok', href: '#' },
+              ].map((social) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target={social.href.startsWith('http') ? '_blank' : undefined}
+                  rel={social.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white rounded-full font-medium transition-colors"
                 >
-                  {social}
-                </motion.button>
+                  {social.label}
+                </motion.a>
               ))}
             </div>
           </motion.div>

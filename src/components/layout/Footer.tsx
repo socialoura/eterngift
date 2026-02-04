@@ -40,7 +40,12 @@ export function Footer() {
               <a href="#" className="text-gray-400 hover:text-rose-gold transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-rose-gold transition-colors">
+              <a
+                href="https://instagram.com/eterngift_com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-rose-gold transition-colors"
+              >
                 <Instagram className="w-5 h-5" />
               </a>
               <a href="#" className="text-gray-400 hover:text-rose-gold transition-colors">
