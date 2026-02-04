@@ -6,16 +6,16 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Heart, Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useTranslation } from '@/components/providers/I18nProvider'
 
-const testimonials = [
+const testimonialData = [
   {
     id: 1,
     name: 'Sarah & Michael',
     location: 'New York, USA',
     avatar: '👩‍❤️‍👨',
     rating: 5,
-    title: 'The perfect anniversary gift!',
-    content: 'I ordered the Eternal Rose Bear for our 5th anniversary and my wife absolutely loved it! The quality is incredible and it looks even better than the photos. The personalized necklace was the cherry on top.',
-    product: 'Eternal Rose Bear',
+    titleKey: 'testimonials.review1Title',
+    contentKey: 'testimonials.review1Text',
+    productKey: 'testimonials.review1Product',
     date: 'January 2026',
   },
   {
@@ -24,9 +24,9 @@ const testimonials = [
     location: 'London, UK',
     avatar: '👩',
     rating: 5,
-    title: 'Exceeded all expectations',
-    content: 'I was skeptical at first, but this gift blew me away. The packaging was luxurious, the rose box is stunning, and my boyfriend was so touched by the engraved message. Worth every penny!',
-    product: 'Eternal Rose Box',
+    titleKey: 'testimonials.review2Title',
+    contentKey: 'testimonials.review2Text',
+    productKey: 'testimonials.review2Product',
     date: 'February 2026',
   },
   {
@@ -35,9 +35,9 @@ const testimonials = [
     location: 'Toronto, Canada',
     avatar: '💑',
     rating: 5,
-    title: 'Made our Valentine\'s special',
-    content: 'We exchanged these as Valentine\'s gifts and both were amazed. The attention to detail is remarkable. The roses look so real and the necklaces are beautiful quality. Highly recommend!',
-    product: 'Eternal Rose Bear',
+    titleKey: 'testimonials.review3Title',
+    contentKey: 'testimonials.review3Text',
+    productKey: 'testimonials.review3Product',
     date: 'February 2026',
   },
   {
@@ -46,9 +46,9 @@ const testimonials = [
     location: 'Miami, USA',
     avatar: '👧',
     rating: 5,
-    title: 'A gift that lasts forever',
-    content: 'Unlike real flowers that wilt after a week, this eternal rose is still as beautiful as the day I received it. My fiancé knew exactly what I wanted. The gold necklace is gorgeous!',
-    product: 'Eternal Rose Box',
+    titleKey: 'testimonials.review4Title',
+    contentKey: 'testimonials.review4Text',
+    productKey: 'testimonials.review4Product',
     date: 'January 2026',
   },
 ]
@@ -56,6 +56,13 @@ const testimonials = [
 export function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const { t } = useTranslation()
+  
+  const testimonials = testimonialData.map(item => ({
+    ...item,
+    title: t(item.titleKey),
+    content: t(item.contentKey),
+    product: t(item.productKey),
+  }))
 
   const next = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length)
@@ -230,10 +237,10 @@ export function Testimonials() {
           className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 max-w-4xl mx-auto"
         >
           {[
-            { value: '50K+', label: 'Happy Couples' },
-            { value: '4.9', label: 'Average Rating' },
-            { value: '99%', label: 'Satisfaction' },
-            { value: '24/7', label: 'Support' },
+            { value: '50K+', labelKey: 'testimonials.happyCouples' },
+            { value: '4.9', labelKey: 'testimonials.averageRating' },
+            { value: '99%', labelKey: 'testimonials.satisfaction' },
+            { value: '24/7', labelKey: 'testimonials.support' },
           ].map((stat, i) => (
             <motion.div
               key={i}
@@ -246,7 +253,7 @@ export function Testimonials() {
               <p className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#B71C1C] to-[#D4AF88]">
                 {stat.value}
               </p>
-              <p className="text-gray-500 text-sm mt-1">{stat.label}</p>
+              <p className="text-gray-500 text-sm mt-1">{t(stat.labelKey)}</p>
             </motion.div>
           ))}
         </motion.div>

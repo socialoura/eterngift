@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
 import { Heart } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { eternalRoseBear, eternalRoseBox, ProductVariant } from '@/lib/products-data'
-import { useCurrencyStore } from '@/store/currency'
+import { useCurrencyStore, useHydrated } from '@/store/currency'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 import { cn } from '@/lib/utils'
 import { useStorefrontProducts } from '@/hooks/useStorefrontProducts'
@@ -29,6 +29,7 @@ function ProductCard({
   const [isHovered, setIsHovered] = useState(false)
   
   const { formatPrice } = useCurrencyStore()
+  const hydrated = useHydrated()
   const colorOption = product.options.find((o) => o.name.includes('Color') && !o.name.includes('Necklace'))
   const currentImages = product.getImagesForColor(selectedColor)
 
@@ -70,8 +71,8 @@ function ProductCard({
           </h3>
         </Link>
 
-        <p className="text-2xl font-bold text-[#B71C1C]">
-          {formatPrice(effectiveBasePrice)}
+        <p className="text-2xl font-bold text-[#B71C1C]" suppressHydrationWarning>
+          {hydrated ? formatPrice(effectiveBasePrice) : `$${effectiveBasePrice.toFixed(2)}`}
         </p>
 
         {colorOption && (

@@ -60,7 +60,7 @@ export const eternalRoseBear: ProductVariant = {
   name: 'Eternal Rose Bear with Engraved Necklace',
   slug: 'eternal-rose-bear',
   description: 'Your perfect eternal companion. A stunning rose bear paired with an engraved necklace, creating a timeless symbol of love and remembrance.',
-  basePrice: 89.99,
+  basePrice: 29.99,
   currency: 'USD',
   badge: 'Most Popular',
   images: {
@@ -116,7 +116,7 @@ export const eternalRoseBox: ProductVariant = {
   name: 'Eternal Rose Box with Engraved Necklace',
   slug: 'eternal-rose-box',
   description: 'Eternal luxury in a box. A stunning preserved rose arrangement paired with a personalized engraved necklace.',
-  basePrice: 129.99,
+  basePrice: 19.99,
   currency: 'USD',
   badge: 'Premium',
   images: {

@@ -8,7 +8,7 @@ import { Heart, Sparkles, ArrowRight, Star, ShoppingCart, Check, Truck, Shield }
 import { Button } from '@/components/ui/Button'
 import { eternalRoseBear, eternalRoseBox, ProductVariant } from '@/lib/products-data'
 import { QuickBuyModal } from '@/components/checkout/QuickBuyModal'
-import { useCurrencyStore } from '@/store/currency'
+import { useCurrencyStore, useHydrated } from '@/store/currency'
 import { useCartStore } from '@/store/cart'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 import { useIsMobile } from '@/hooks/useIsMobile'
@@ -36,10 +36,34 @@ function ProductCard({
   const addItem = useCartStore((state) => state.addItem)
   const { t } = useTranslation()
   const locale = useLocale()
+  const hydrated = useHydrated()
 
   const colorOption = product.options.find((o) => o.name.includes('Color') && !o.name.includes('Necklace'))
   const necklaceOption = product.options.find((o) => o.name.includes('Necklace'))
   const currentImages = product.getImagesForColor(selectedColor)
+
+  // Translation helper for color names
+  const translateColor = (colorName: string) => {
+    const colorMap: Record<string, string> = {
+      'Red': 'red',
+      'Pink': 'pink',
+      'Blue': 'blue',
+      'Purple': 'purple',
+      'White': 'white',
+      'Gray': 'gray',
+      'Gold': 'gold',
+      'Rose Gold': 'roseGold',
+    }
+    const colorKey = colorMap[colorName]
+    if (!colorKey) return colorName
+    const translated = t(`productDetail.${colorKey}`)
+    return translated !== `productDetail.${colorKey}` ? translated : colorName
+  }
+
+  // Get translated product name
+  const translatedProductName = product.id === 'eternal-rose-bear' 
+    ? t('productDetail.productNameBear') 
+    : t('productDetail.productNameBox')
 
   const handleAddToCart = () => {
     const productForCart = {
@@ -190,7 +214,7 @@ function ProductCard({
 
           <Link href={`/${locale}/products/${product.slug}`}>
             <h3 className="text-xl font-heading font-bold text-gray-900 hover:text-[#B71C1C] transition-colors line-clamp-2">
-              {product.name}
+              {translatedProductName}
             </h3>
           </Link>
 
@@ -206,11 +230,11 @@ function ProductCard({
 
           {/* Price with enhanced styling */}
           <div className="flex items-center gap-3 flex-wrap">
-            <span className="text-3xl font-bold bg-gradient-to-r from-[#B71C1C] to-[#8B1538] bg-clip-text text-transparent">
-              {formatPrice(effectiveBasePrice)}
+            <span className="text-3xl font-bold bg-gradient-to-r from-[#B71C1C] to-[#8B1538] bg-clip-text text-transparent" suppressHydrationWarning>
+              {hydrated ? formatPrice(effectiveBasePrice) : `$${effectiveBasePrice.toFixed(2)}`}
             </span>
-            <span className="text-sm text-gray-400 line-through">
-              {formatPrice(effectiveBasePrice * 1.3)}
+            <span className="text-sm text-gray-400 line-through" suppressHydrationWarning>
+              {hydrated ? formatPrice(effectiveBasePrice * 1.3) : `$${(effectiveBasePrice * 1.3).toFixed(2)}`}
             </span>
             <span className="text-xs font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 px-2.5 py-1 rounded-full shadow-sm">
               -23% OFF
@@ -220,7 +244,7 @@ function ProductCard({
           {/* Color options */}
           {colorOption && (
             <div className="space-y-2">
-              <p className="text-sm font-medium text-gray-700">{t('product.color')}: <span className="text-[#B71C1C]">{selectedColor}</span></p>
+              <p className="text-sm font-medium text-gray-700">{t('product.color')}: <span className="text-[#B71C1C]">{translateColor(selectedColor)}</span></p>
               <div className="flex flex-wrap gap-2">
                 {colorOption.values.map((value) => (
                   <button
@@ -249,7 +273,7 @@ function ProductCard({
           {/* Necklace options */}
           {necklaceOption && (
             <div className="space-y-2">
-              <p className="text-sm font-medium text-gray-700">{t('product.necklace')}: <span className="text-[#B71C1C]">{selectedNecklace}</span></p>
+              <p className="text-sm font-medium text-gray-700">{t('product.necklace')}: <span className="text-[#B71C1C]">{translateColor(selectedNecklace)}</span></p>
               <div className="flex flex-wrap gap-2">
                 {necklaceOption.values.map((necklace) => (
                   <button

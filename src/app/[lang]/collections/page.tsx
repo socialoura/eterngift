@@ -11,7 +11,7 @@ import {
 import { Button } from '@/components/ui/Button'
 import { eternalRoseBear, eternalRoseBox, ProductVariant } from '@/lib/products-data'
 import { QuickBuyModal } from '@/components/checkout/QuickBuyModal'
-import { useCurrencyStore } from '@/store/currency'
+import { useCurrencyStore, useHydrated } from '@/store/currency'
 import { useCartStore } from '@/store/cart'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 import { cn } from '@/lib/utils'
@@ -39,6 +39,7 @@ function ProductCard({
   const addItem = useCartStore((state) => state.addItem)
   const { t } = useTranslation()
   const locale = useLocale()
+  const hydrated = useHydrated()
 
   const colorOption = product.options.find((o) => o.name.includes('Color') && !o.name.includes('Necklace'))
   const necklaceOption = product.options.find((o) => o.name.includes('Necklace'))
@@ -127,11 +128,11 @@ function ProductCard({
 
             {/* Price */}
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-bold text-[#B71C1C]">
-                {formatPrice(effectiveBasePrice)}
+              <span className="text-2xl font-bold text-[#B71C1C]" suppressHydrationWarning>
+                {hydrated ? formatPrice(effectiveBasePrice) : `$${effectiveBasePrice.toFixed(2)}`}
               </span>
-              <span className="text-sm text-gray-400 line-through">
-                {formatPrice(effectiveBasePrice * 1.3)}
+              <span className="text-sm text-gray-400 line-through" suppressHydrationWarning>
+                {hydrated ? formatPrice(effectiveBasePrice * 1.3) : `$${(effectiveBasePrice * 1.3).toFixed(2)}`}
               </span>
               <span className="text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
                 -30%

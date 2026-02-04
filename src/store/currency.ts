@@ -2,6 +2,7 @@
 
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { useEffect, useState } from 'react'
 
 interface CurrencyState {
   currency: string
@@ -53,3 +54,14 @@ export const useCurrencyStore = create<CurrencyState>()(
     }
   )
 )
+
+// Hook to check if store has hydrated from localStorage
+export function useHydrated() {
+  const [hydrated, setHydrated] = useState(false)
+  
+  useEffect(() => {
+    setHydrated(true)
+  }, [])
+  
+  return hydrated
+}
