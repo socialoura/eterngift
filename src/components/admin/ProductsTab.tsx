@@ -5,19 +5,19 @@ import { Package, Save, Loader2 } from 'lucide-react'
 import Image from 'next/image'
 
 interface Product {
-  id: string
+  id: number
   name: string
   description: string
   image_url: string
-  base_price: number
+  price_usd: number
   stock: number
 }
 
 export function ProductsTab({ token }: { token: string }) {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
-  const [saving, setSaving] = useState<string | null>(null)
-  const [editedProducts, setEditedProducts] = useState<Record<string, { basePrice: number; stock: number }>>({})
+  const [saving, setSaving] = useState<number | null>(null)
+  const [editedProducts, setEditedProducts] = useState<Record<number, { basePrice: number; stock: number }>>({})
 
   useEffect(() => {
     fetchProducts()
@@ -33,7 +33,7 @@ export function ProductsTab({ token }: { token: string }) {
         setProducts(data.products)
         const initial: Record<string, { basePrice: number; stock: number }> = {}
         data.products.forEach((p: Product) => {
-          initial[p.id] = { basePrice: Number(p.base_price), stock: p.stock }
+          initial[p.id] = { basePrice: Number(p.price_usd), stock: p.stock }
         })
         setEditedProducts(initial)
       }
@@ -44,7 +44,7 @@ export function ProductsTab({ token }: { token: string }) {
     }
   }
 
-  const handleSave = async (productId: string) => {
+  const handleSave = async (productId: number) => {
     setSaving(productId)
     try {
       await fetch(`/api/admin/products/${productId}`, {
@@ -63,7 +63,7 @@ export function ProductsTab({ token }: { token: string }) {
     }
   }
 
-  const updateField = (productId: string, field: 'basePrice' | 'stock', value: number) => {
+  const updateField = (productId: number, field: 'basePrice' | 'stock', value: number) => {
     setEditedProducts(prev => ({
       ...prev,
       [productId]: { ...prev[productId], [field]: value }

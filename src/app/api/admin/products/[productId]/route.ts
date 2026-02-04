@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { verifyAdminToken, unauthorizedResponse } from '@/lib/admin-auth'
-import { updateProduct } from '@/lib/db'
+import { sql } from '@vercel/postgres'
 
 export async function PUT(request: NextRequest, { params }: { params: Promise<{ productId: string }> }) {
   const auth = verifyAdminToken(request)
@@ -8,8 +8,9 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
 
   try {
     const { productId } = await params
-    const allowedIds = new Set(['eternal-rose-bear', 'eternal-rose-box'])
-    if (!allowedIds.has(productId)) {
+    const numericId = parseInt(productId, 10)
+    
+    if (isNaN(numericId) || numericId < 1) {
       return NextResponse.json({ error: 'Invalid product id' }, { status: 400 })
     }
 
@@ -24,7 +25,15 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
       return NextResponse.json({ error: 'Invalid stock' }, { status: 400 })
     }
 
-    await updateProduct(productId, { basePrice: parsedBasePrice, stock: parsedStock })
+    // Update product using Prisma schema columns
+    if (parsedBasePrice !== undefined && parsedStock !== undefined) {
+      await sql`UPDATE products SET price_usd = ${parsedBasePrice}, stock = ${parsedStock}, updated_at = NOW() WHERE id = ${numericId}`
+    } else if (parsedBasePrice !== undefined) {
+      await sql`UPDATE products SET price_usd = ${parsedBasePrice}, updated_at = NOW() WHERE id = ${numericId}`
+    } else if (parsedStock !== undefined) {
+      await sql`UPDATE products SET stock = ${parsedStock}, updated_at = NOW() WHERE id = ${numericId}`
+    }
+
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Error updating product:', error)
