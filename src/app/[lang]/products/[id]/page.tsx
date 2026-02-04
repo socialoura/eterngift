@@ -101,6 +101,8 @@ export default function ProductDetailPage() {
   const addItem = useCartStore((state) => state.addItem)
   const hydrated = useHydrated()
 
+  const reviewCount = product?.id === 'eternal-rose-bear' ? 128 : 96
+
   const storefront = product ? productsById[product.id] : undefined
   const effectiveBasePrice = storefront?.base_price ?? product?.basePrice ?? 0
 
@@ -149,7 +151,7 @@ export default function ProductDetailPage() {
       category: 'Gift Sets',
       stock: 100,
       rating: 4.9,
-      reviewCount: 128,
+      reviewCount,
       status: 'active',
       badge: product.badge || null,
       createdAt: new Date(),
@@ -298,7 +300,7 @@ export default function ProductDetailPage() {
               {/* Rating */}
               <div className="flex items-center gap-3">
                 <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />)}</div>
-                <span className="text-gray-600 text-sm">4.9 (128 {t('productDetail.reviews')})</span>
+                <span className="text-gray-600 text-sm">4.9 ({reviewCount} {t('productDetail.reviews')})</span>
               </div>
 
               <div>
@@ -697,7 +699,7 @@ export default function ProductDetailPage() {
                               <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
                             ))}
                           </div>
-                          <span className="text-gray-400 text-sm">(128 reviews)</span>
+                          <span className="text-gray-400 text-sm">({otherProduct.id === 'eternal-rose-bear' ? 128 : 96} {t('productDetail.reviews')})</span>
                         </div>
 
                         <h3 className="text-2xl lg:text-3xl font-heading font-bold text-white group-hover:text-[#D4AF88] transition-colors">
@@ -761,7 +763,7 @@ export default function ProductDetailPage() {
             <div className="flex items-center justify-center gap-2">
               <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-6 h-6 text-yellow-400 fill-yellow-400" />)}</div>
               <span className="text-lg font-semibold text-white">4.9/5</span>
-              <span className="text-white/70">(128 {t('productDetail.reviews')})</span>
+              <span className="text-white/70">({reviewCount} {t('productDetail.reviews')})</span>
             </div>
           </motion.div>
           <div className="relative z-10 grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">

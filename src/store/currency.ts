@@ -40,8 +40,21 @@ export const useCurrencyStore = create<CurrencyState>()(
       formatPrice: (amountUsd: number) => {
         const { currency, exchangeRate } = get()
         const convertedAmount = amountUsd * exchangeRate
+
+        const currencyLocales: Record<string, string> = {
+          USD: 'en-US',
+          EUR: 'fr-FR',
+          GBP: 'en-GB',
+          CAD: 'en-CA',
+          AUD: 'en-AU',
+          CHF: 'de-CH',
+        }
+
+        const locale =
+          currencyLocales[currency] ??
+          (typeof navigator !== 'undefined' ? navigator.language : 'en-US')
         
-        return new Intl.NumberFormat('en-US', {
+        return new Intl.NumberFormat(locale, {
           style: 'currency',
           currency: currency,
           minimumFractionDigits: 2,

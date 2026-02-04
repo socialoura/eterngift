@@ -65,6 +65,8 @@ function ProductCard({
     ? t('productDetail.productNameBear') 
     : t('productDetail.productNameBox')
 
+  const reviewCount = product.id === 'eternal-rose-bear' ? 128 : 96
+
   const handleAddToCart = () => {
     const productForCart = {
       id: product.id === 'eternal-rose-bear' ? 1 : 2,
@@ -76,7 +78,7 @@ function ProductCard({
       category: 'Gift Sets',
       stock: 100,
       rating: 4.9,
-      reviewCount: 128,
+      reviewCount,
       status: 'active',
       badge: product.badge || null,
       createdAt: new Date(),
@@ -225,7 +227,7 @@ function ProductCard({
                 <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400 drop-shadow-sm" />
               ))}
             </div>
-            <span className="text-sm text-gray-500 font-medium">(128 {t('featured.reviews')})</span>
+            <span className="text-sm text-gray-500 font-medium">({reviewCount} {t('featured.reviews')})</span>
           </div>
 
           {/* Price with enhanced styling */}

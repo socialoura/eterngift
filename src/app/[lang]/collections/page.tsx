@@ -41,6 +41,8 @@ function ProductCard({
   const locale = useLocale()
   const hydrated = useHydrated()
 
+  const reviewCount = product.id === 'eternal-rose-bear' ? 128 : 96
+
   const colorOption = product.options.find((o) => o.name.includes('Color') && !o.name.includes('Necklace'))
   const necklaceOption = product.options.find((o) => o.name.includes('Necklace'))
   const currentImages = product.getImagesForColor(selectedColor)
@@ -56,7 +58,7 @@ function ProductCard({
       category: 'Gift Sets',
       stock: 100,
       rating: 4.9,
-      reviewCount: 128,
+      reviewCount,
       status: 'active',
       badge: product.badge || null,
       createdAt: new Date(),
@@ -122,7 +124,7 @@ function ProductCard({
                     <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <span className="text-sm text-gray-500">4.9 (128 {t('featured.reviews')})</span>
+                <span className="text-sm text-gray-500">4.9 ({reviewCount} {t('featured.reviews')})</span>
               </div>
             </div>
 
