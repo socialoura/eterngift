@@ -48,7 +48,7 @@ export default function CheckoutPage() {
   const [shippingData, setShippingData] = useState<ShippingInfo | null>(null)
 
   const { items, getSubtotalUsd, clearCart } = useCartStore()
-  const { formatPrice, currency } = useCurrencyStore()
+  const { formatPrice, currency, convertFromUsd } = useCurrencyStore()
   const { t } = useTranslation()
   const locale = useLocale()
 
@@ -72,6 +72,21 @@ export default function CheckoutPage() {
   }
 
   const handlePaymentSuccess = (orderId: string) => {
+    if (typeof window !== 'undefined') {
+      try {
+        const totalLocal = convertFromUsd(totalUsd)
+        sessionStorage.setItem(
+          'eg_last_order',
+          JSON.stringify({
+            orderId,
+            value: Number(totalLocal.toFixed(2)),
+            currency,
+          })
+        )
+      } catch {
+        // ignore
+      }
+    }
     clearCart()
     router.push(`/${locale}/order-confirmation?orderId=${orderId}`)
   }

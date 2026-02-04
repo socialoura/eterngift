@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -7,11 +8,50 @@ import { CheckCircle, Heart, Mail, ShoppingBag, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void
+  }
+}
+
 export default function OrderConfirmationPage() {
   const searchParams = useSearchParams()
   const orderId = searchParams.get('orderId') || 'EG-XXXXXX'
   const { t } = useTranslation()
   const locale = useLocale()
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (!window.gtag) return
+
+    const sentKey = `eg_ads_conversion_sent_${orderId}`
+    if (sessionStorage.getItem(sentKey)) return
+
+    let value = 1.0
+    let currency = 'EUR'
+
+    try {
+      const raw = sessionStorage.getItem('eg_last_order')
+      if (raw) {
+        const parsed = JSON.parse(raw) as { orderId?: string; value?: number; currency?: string }
+        if (parsed?.orderId === orderId) {
+          if (typeof parsed.value === 'number' && Number.isFinite(parsed.value)) value = parsed.value
+          if (typeof parsed.currency === 'string' && parsed.currency) currency = parsed.currency
+        }
+      }
+    } catch {
+      // ignore
+    }
+
+    window.gtag('event', 'conversion', {
+      send_to: 'AW-17893452047/jgHjCLjalfIbEI_SodRC',
+      value,
+      currency,
+      transaction_id: orderId,
+    })
+
+    sessionStorage.setItem(sentKey, '1')
+  }, [orderId])
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-b from-white to-light-pink/30">
