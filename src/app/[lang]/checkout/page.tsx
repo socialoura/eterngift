@@ -263,26 +263,26 @@ export default function CheckoutPage() {
               {/* Totals */}
               <div className="space-y-3 text-sm border-t border-gray-100 pt-4">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Subtotal</span>
+                  <span className="text-gray-600">{t('cart.subtotal')}</span>
                   <span className="font-medium">{formatPrice(subtotalUsd)}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Shipping</span>
+                  <span className="text-gray-600">{t('cart.shipping')}</span>
                   <span className="font-medium">
                     {shippingUsd === 0 ? (
-                      <span className="text-green-600">Free</span>
+                      <span className="text-green-600">{t('cart.free')}</span>
                     ) : (
                       formatPrice(shippingUsd)
                     )}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Estimated Tax</span>
+                  <span className="text-gray-600">{t('checkout.estimatedTax')}</span>
                   <span className="font-medium">{formatPrice(taxUsd)}</span>
                 </div>
                 <div className="border-t border-gray-100 pt-3 mt-3">
                   <div className="flex justify-between text-lg font-bold">
-                    <span>Total</span>
+                    <span>{t('cart.total')}</span>
                     <span className="text-primary">{formatPrice(totalUsd)}</span>
                   </div>
                 </div>
@@ -290,35 +290,21 @@ export default function CheckoutPage() {
 
               {/* Payment Methods */}
               <div className="mt-6 pt-6 border-t border-gray-100">
-                <p className="text-sm text-gray-600 mb-3">We accept:</p>
+                <p className="text-sm text-gray-600 mb-3">{t('checkout.weAccept')}</p>
                 <div className="flex items-center gap-3">
                   <Image
-                    src="/logos/payment-methods/visa.svg"
-                    alt="Visa"
-                    width={40}
-                    height={25}
-                    className="h-6 w-auto opacity-70"
+                    src="/cb.png"
+                    alt="Cards"
+                    width={120}
+                    height={30}
+                    className="h-7 w-auto opacity-80"
                   />
                   <Image
-                    src="/logos/payment-methods/mastercard.svg"
-                    alt="Mastercard"
-                    width={40}
-                    height={25}
-                    className="h-6 w-auto opacity-70"
-                  />
-                  <Image
-                    src="/logos/payment-methods/amex.svg"
-                    alt="Amex"
-                    width={40}
-                    height={25}
-                    className="h-6 w-auto opacity-70"
-                  />
-                  <Image
-                    src="/logos/payment-methods/paypal.svg"
+                    src="/paypal.svg"
                     alt="PayPal"
                     width={40}
                     height={25}
-                    className="h-6 w-auto opacity-70"
+                    className="h-6 w-auto opacity-80"
                   />
                 </div>
               </div>

@@ -102,7 +102,10 @@
     "selectCountry": "Selecciona un país",
     "paymentFailed": "El pago falló",
     "paymentFailedRetry": "El pago falló. Por favor, inténtalo de nuevo.",
-    "paypalPaymentFailed": "El pago con PayPal falló"
+    "paypalPaymentFailed": "El pago con PayPal falló",
+    "estimatedTax": "Impuesto estimado",
+    "weAccept": "Aceptamos:",
+    "secureCheckout": "Pago seguro con cifrado de nivel industrial"
   },
   "footer": {
     "description": "Perfecto para San Valentín, aniversarios y momentos especiales.",
@@ -117,7 +120,9 @@
     "shippingInfo": "Info de envío",
     "returnsExchanges": "Devoluciones y cambios",
     "privacyPolicy": "Política de privacidad",
-    "allRightsReserved": "Todos los derechos reservados."
+    "allRightsReserved": "Todos los derechos reservados.",
+    "madeWithForLoversPrefix": "Hecho con",
+    "madeWithForLoversSuffix": "para los enamorados"
   },
   "newsletter": {
     "title": "Obtén 10% de descuento",

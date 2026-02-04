@@ -148,14 +148,12 @@ export function Footer() {
             </p>
             <div className="flex items-center space-x-4">
               <span className="text-gray-400 text-sm flex items-center">
-                Made with <Heart className="w-4 h-4 text-primary mx-1" /> for lovers
+                {t('footer.madeWithForLoversPrefix')} <Heart className="w-4 h-4 text-primary mx-1" /> {t('footer.madeWithForLoversSuffix')}
               </span>
             </div>
             <div className="flex items-center space-x-2">
-              <Image src="/logos/payment-methods/visa.svg" alt="Visa" width={40} height={25} className="h-6 w-auto opacity-60" />
-              <Image src="/logos/payment-methods/mastercard.svg" alt="Mastercard" width={40} height={25} className="h-6 w-auto opacity-60" />
-              <Image src="/logos/payment-methods/amex.svg" alt="Amex" width={40} height={25} className="h-6 w-auto opacity-60" />
-              <Image src="/logos/payment-methods/paypal.svg" alt="PayPal" width={40} height={25} className="h-6 w-auto opacity-60" />
+              <Image src="/cb.png" alt="Cards" width={120} height={30} className="h-7 w-auto opacity-70" />
+              <Image src="/paypal.svg" alt="PayPal" width={40} height={25} className="h-6 w-auto opacity-70" />
             </div>
           </div>
         </div>

@@ -205,29 +205,22 @@ export default function CartPage() {
                 <div className="mt-6 pt-6 border-t border-gray-100">
                   <div className="flex items-center justify-center gap-4 text-gray-400">
                     <Image
-                      src="/logos/payment-methods/visa.svg"
-                      alt="Visa"
-                      width={40}
-                      height={25}
-                      className="h-6 w-auto opacity-60"
+                      src="/cb.png"
+                      alt="Cards"
+                      width={120}
+                      height={30}
+                      className="h-7 w-auto opacity-70"
                     />
                     <Image
-                      src="/logos/payment-methods/mastercard.svg"
-                      alt="Mastercard"
-                      width={40}
-                      height={25}
-                      className="h-6 w-auto opacity-60"
-                    />
-                    <Image
-                      src="/logos/payment-methods/paypal.svg"
+                      src="/paypal.svg"
                       alt="PayPal"
                       width={40}
                       height={25}
-                      className="h-6 w-auto opacity-60"
+                      className="h-6 w-auto opacity-70"
                     />
                   </div>
                   <p className="text-xs text-center text-gray-500 mt-3">
-                    Secure checkout powered by industry-leading encryption
+                    {t('checkout.secureCheckout')}
                   </p>
                 </div>
               </motion.div>

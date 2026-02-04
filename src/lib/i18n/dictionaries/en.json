@@ -102,7 +102,10 @@
     "selectCountry": "Select a country",
     "paymentFailed": "Payment failed",
     "paymentFailedRetry": "Payment failed. Please try again.",
-    "paypalPaymentFailed": "PayPal payment failed"
+    "paypalPaymentFailed": "PayPal payment failed",
+    "estimatedTax": "Estimated Tax",
+    "weAccept": "We accept:",
+    "secureCheckout": "Secure checkout powered by industry-leading encryption"
   },
   "footer": {
     "description": "Perfect for Valentine's Day, anniversaries, and special moments.",
@@ -117,7 +120,9 @@
     "shippingInfo": "Shipping Info",
     "returnsExchanges": "Returns & Exchanges",
     "privacyPolicy": "Privacy Policy",
-    "allRightsReserved": "All rights reserved."
+    "allRightsReserved": "All rights reserved.",
+    "madeWithForLoversPrefix": "Made with",
+    "madeWithForLoversSuffix": "for lovers"
   },
   "newsletter": {
     "title": "Get 10% Off Your First Order",
