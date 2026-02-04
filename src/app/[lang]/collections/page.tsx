@@ -131,10 +131,10 @@ function ProductCard({
             {/* Price */}
             <div className="flex items-baseline gap-2">
               <span className="text-2xl font-bold text-[#B71C1C]" suppressHydrationWarning>
-                {hydrated ? formatPrice(effectiveBasePrice) : `$${effectiveBasePrice.toFixed(2)}`}
+                {hydrated ? formatPrice(effectiveBasePrice) : '…'}
               </span>
               <span className="text-sm text-gray-400 line-through" suppressHydrationWarning>
-                {hydrated ? formatPrice(effectiveBasePrice * 1.3) : `$${(effectiveBasePrice * 1.3).toFixed(2)}`}
+                {hydrated ? formatPrice(effectiveBasePrice * 1.3) : '…'}
               </span>
               <span className="text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
                 -30%

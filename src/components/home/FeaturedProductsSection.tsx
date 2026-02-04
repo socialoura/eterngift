@@ -233,10 +233,10 @@ function ProductCard({
           {/* Price with enhanced styling */}
           <div className="flex items-center gap-3 flex-wrap">
             <span className="text-3xl font-bold bg-gradient-to-r from-[#B71C1C] to-[#8B1538] bg-clip-text text-transparent" suppressHydrationWarning>
-              {hydrated ? formatPrice(effectiveBasePrice) : `$${effectiveBasePrice.toFixed(2)}`}
+              {hydrated ? formatPrice(effectiveBasePrice) : '…'}
             </span>
             <span className="text-sm text-gray-400 line-through" suppressHydrationWarning>
-              {hydrated ? formatPrice(effectiveBasePrice * 1.3) : `$${(effectiveBasePrice * 1.3).toFixed(2)}`}
+              {hydrated ? formatPrice(effectiveBasePrice * 1.3) : '…'}
             </span>
             <span className="text-xs font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 px-2.5 py-1 rounded-full shadow-sm">
               -23% OFF

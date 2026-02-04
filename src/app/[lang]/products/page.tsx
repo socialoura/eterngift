@@ -72,7 +72,7 @@ function ProductCard({
         </Link>
 
         <p className="text-2xl font-bold text-[#B71C1C]" suppressHydrationWarning>
-          {hydrated ? formatPrice(effectiveBasePrice) : `$${effectiveBasePrice.toFixed(2)}`}
+          {hydrated ? formatPrice(effectiveBasePrice) : '…'}
         </p>
 
         {colorOption && (

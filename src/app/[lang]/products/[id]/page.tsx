@@ -310,8 +310,8 @@ export default function ProductDetailPage() {
 
               {/* Price */}
               <div className="flex items-baseline gap-4 pb-6 border-b border-gray-100">
-                <span className="text-4xl lg:text-5xl font-bold text-[#B71C1C]" suppressHydrationWarning>{hydrated ? formatPrice(effectiveBasePrice) : `$${effectiveBasePrice.toFixed(2)}`}</span>
-                <span className="text-xl text-gray-400 line-through" suppressHydrationWarning>{hydrated ? formatPrice(effectiveBasePrice * 1.3) : `$${(effectiveBasePrice * 1.3).toFixed(2)}`}</span>
+                <span className="text-4xl lg:text-5xl font-bold text-[#B71C1C]" suppressHydrationWarning>{hydrated ? formatPrice(effectiveBasePrice) : '…'}</span>
+                <span className="text-xl text-gray-400 line-through" suppressHydrationWarning>{hydrated ? formatPrice(effectiveBasePrice * 1.3) : '…'}</span>
                 <span className="bg-green-100 text-green-700 text-sm font-semibold px-3 py-1 rounded-full">{t('productDetail.save')} 23%</span>
               </div>
 
@@ -713,10 +713,10 @@ export default function ProductDetailPage() {
                         {/* Price */}
                         <div className="flex items-baseline gap-3">
                           <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF88] to-[#FFD700]" suppressHydrationWarning>
-                            {hydrated ? formatPrice(otherEffectiveBasePrice) : `$${otherEffectiveBasePrice.toFixed(2)}`}
+                            {hydrated ? formatPrice(otherEffectiveBasePrice) : '…'}
                           </span>
                           <span className="text-gray-500 line-through text-sm" suppressHydrationWarning>
-                            {hydrated ? formatPrice(otherEffectiveBasePrice * 1.3) : `$${(otherEffectiveBasePrice * 1.3).toFixed(2)}`}
+                            {hydrated ? formatPrice(otherEffectiveBasePrice * 1.3) : '…'}
                           </span>
                         </div>
 

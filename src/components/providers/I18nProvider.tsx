@@ -25,14 +25,80 @@ export function I18nProvider({
   defaultCurrency: string
 }) {
   const setCurrency = useCurrencyStore((state) => state.setCurrency)
+  const setRates = useCurrencyStore((state) => state.setRates)
+
+  const normalizeCurrency = (value: string | undefined | null) => {
+    if (!value) return undefined
+    const upper = value.toUpperCase()
+    const allowed = new Set(['USD', 'EUR', 'GBP', 'CAD', 'AUD', 'JPY', 'CHF', 'CNY', 'INR', 'MXN'])
+    return allowed.has(upper) ? upper : undefined
+  }
+
+  const getCookie = (name: string) => {
+    if (typeof document === 'undefined') return undefined
+    const match = document.cookie.match(new RegExp(`(?:^|; )${name.replace(/([.$?*|{}()\[\]\\\/\+^])/g, '\\$1')}=([^;]*)`))
+    return match ? decodeURIComponent(match[1]) : undefined
+  }
+
+  const detectCurrencyFromNavigator = () => {
+    if (typeof navigator === 'undefined') return undefined
+    const locale = Intl.NumberFormat().resolvedOptions().locale || navigator.language
+    const region = locale.split('-')[1]?.toUpperCase()
+
+    const regionToCurrency: Record<string, string> = {
+      US: 'USD',
+      CA: 'CAD',
+      GB: 'GBP',
+      AU: 'AUD',
+      CH: 'CHF',
+      JP: 'JPY',
+      CN: 'CNY',
+      IN: 'INR',
+      MX: 'MXN',
+    }
+
+    const detected = region ? regionToCurrency[region] : undefined
+    if (detected) return detected
+
+    const euroRegions = new Set([
+      'AT', 'BE', 'CY', 'DE', 'EE', 'ES', 'FI', 'FR', 'GR', 'HR', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'PT', 'SI', 'SK',
+    ])
+    if (region && euroRegions.has(region)) return 'EUR'
+
+    return undefined
+  }
 
   // Set currency based on locale on mount
   useEffect(() => {
-    const savedCurrency = localStorage.getItem('preferred-currency')
-    if (!savedCurrency) {
-      setCurrency(defaultCurrency as 'USD' | 'EUR' | 'GBP' | 'CAD' | 'AUD')
+    let cancelled = false
+
+    const init = async () => {
+      const preferred = normalizeCurrency(getCookie('preferred-currency'))
+      const detected = normalizeCurrency(detectCurrencyFromNavigator())
+      const fallback = normalizeCurrency(defaultCurrency) || 'USD'
+      const desiredCurrency = preferred || detected || fallback
+
+      try {
+        const res = await fetch('/api/currency/rates', { cache: 'no-store' })
+        const data = await res.json()
+        if (!cancelled && data?.rates && typeof data.rates === 'object') {
+          setRates(data.rates)
+        }
+      } catch {
+        // ignore
+      } finally {
+        if (!cancelled) {
+          setCurrency(desiredCurrency)
+        }
+      }
     }
-  }, [defaultCurrency, setCurrency])
+
+    init()
+
+    return () => {
+      cancelled = true
+    }
+  }, [defaultCurrency, setCurrency, setRates])
 
   // Helper function to get nested translation
   const t = (key: string): string => {
