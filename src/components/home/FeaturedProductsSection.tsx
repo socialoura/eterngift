@@ -17,9 +17,12 @@ import { useIsMobile } from '@/hooks/useIsMobile'
 import { cn } from '@/lib/utils'
 import { useStorefrontProducts } from '@/hooks/useStorefrontProducts'
 
-const QuickBuyModal = dynamic(() => import('@/components/checkout/QuickBuyModal').then(mod => mod.QuickBuyModal), {
+const QuickBuyModal = dynamic<any>(
+  () => import('@/components/checkout/QuickBuyModal').then(mod => mod.QuickBuyModal),
+  {
   ssr: false,
-})
+  }
+)
 
 function ProductCard({
   product,
@@ -28,7 +31,7 @@ function ProductCard({
 }: {
   product: ProductVariant
   index: number
-  effectiveBasePrice: number
+  effectiveBasePrice: number | null
 }) {
   const [selectedColor, setSelectedColor] = useState(product.options[0]?.values[0]?.name || '')
   const [selectedNecklace, setSelectedNecklace] = useState(
@@ -43,6 +46,8 @@ function ProductCard({
   const addItem = useCartStore((state) => state.addItem)
   const { t } = useTranslation()
   const locale = useLocale()
+
+  const priceForCart = effectiveBasePrice ?? product.basePrice
   const hydrated = useHydrated()
 
   const colorOption = product.options.find((o) => o.name.includes('Color') && !o.name.includes('Necklace'))
@@ -79,7 +84,7 @@ function ProductCard({
       id: product.id === 'eternal-rose-bear' ? 1 : 2,
       name: `${product.name} (${selectedColor}, ${selectedNecklace})`,
       description: product.description,
-      priceUsd: effectiveBasePrice,
+      priceUsd: priceForCart,
       imageUrl: currentImages.hero,
       imagesUrl: [],
       category: 'Gift Sets',
@@ -240,10 +245,10 @@ function ProductCard({
           {/* Price with enhanced styling */}
           <div className="flex items-center gap-3 flex-wrap">
             <span className="text-3xl font-bold bg-gradient-to-r from-[#B71C1C] to-[#8B1538] bg-clip-text text-transparent" suppressHydrationWarning>
-              {hydrated ? formatPrice(effectiveBasePrice) : '…'}
+              {hydrated && effectiveBasePrice !== null ? formatPrice(effectiveBasePrice) : '…'}
             </span>
             <span className="text-sm text-gray-400 line-through" suppressHydrationWarning>
-              {hydrated ? formatPrice(effectiveBasePrice * 1.3) : '…'}
+              {hydrated && effectiveBasePrice !== null ? formatPrice(effectiveBasePrice * 1.3) : '…'}
             </span>
             <span className="text-xs font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 px-2.5 py-1 rounded-full shadow-sm">
               -23% OFF
@@ -346,12 +351,14 @@ function ProductCard({
         product={{
           id: product.id,
           name: product.name,
-          priceUsd: effectiveBasePrice,
+          priceUsd: priceForCart,
           imageUrl: currentImages.hero,
           selectedColor,
           selectedNecklace,
+          engravingLeftHeart: null,
+          engravingRightHeart: null,
         }}
-        onSuccess={(orderId) => {
+        onSuccess={(orderId: string) => {
           setIsQuickBuyOpen(false)
           router.push(`/${locale}/order-confirmation?orderId=${orderId}`)
         }}
@@ -363,7 +370,7 @@ function ProductCard({
 export function FeaturedProductsSection() {
   const { t } = useTranslation()
   const locale = useLocale()
-  const { productsById } = useStorefrontProducts()
+  const { productsById, loading: storefrontLoading } = useStorefrontProducts()
   
   return (
     <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-white via-[#FFF8F8] to-white relative overflow-hidden">
@@ -421,8 +428,16 @@ export function FeaturedProductsSection() {
 
         {/* Products grid */}
         <div className="grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 max-w-6xl mx-auto">
-          <ProductCard product={eternalRoseBear} index={0} effectiveBasePrice={productsById['eternal-rose-bear']?.base_price ?? eternalRoseBear.basePrice} />
-          <ProductCard product={eternalRoseBox} index={1} effectiveBasePrice={productsById['eternal-rose-box']?.base_price ?? eternalRoseBox.basePrice} />
+          <ProductCard
+            product={eternalRoseBear}
+            index={0}
+            effectiveBasePrice={!storefrontLoading && productsById['eternal-rose-bear']?.base_price ? productsById['eternal-rose-bear'].base_price : null}
+          />
+          <ProductCard
+            product={eternalRoseBox}
+            index={1}
+            effectiveBasePrice={!storefrontLoading && productsById['eternal-rose-box']?.base_price ? productsById['eternal-rose-box'].base_price : null}
+          />
         </div>
 
         {/* CTA */}
