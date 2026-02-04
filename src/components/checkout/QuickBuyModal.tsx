@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, CreditCard, Lock, AlertCircle, ChevronLeft, Check, Truck, Shield } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
@@ -9,6 +10,11 @@ import { Input } from '@/components/ui/Input'
 import { cn } from '@/lib/utils'
 import { useCurrencyStore } from '@/store/currency'
 import { useTranslation } from '@/components/providers/I18nProvider'
+
+const PayPalButtonWrapper = dynamic(
+  () => import('./PayPalButtonWrapper').then(mod => mod.PayPalButtonWrapper),
+  { ssr: false, loading: () => <div className="h-12 bg-gray-100 animate-pulse rounded-lg" /> }
+)
 
 interface QuickBuyModalProps {
   isOpen: boolean
@@ -459,21 +465,21 @@ export function QuickBuyModal({
                       </p>
                     </div>
 
-                    <Button
-                      className="w-full bg-[#0070ba] hover:bg-[#005ea6]"
-                      size="lg"
-                      onClick={handlePayPalPayment}
-                      isLoading={isProcessing}
-                    >
-                      <Image
-                        src="/paypal.svg"
-                        alt="PayPal"
-                        width={20}
-                        height={20}
-                        className="w-5 h-5 mr-2"
-                      />
-                      {t('checkout.payWithPaypal')}
-                    </Button>
+                    <PayPalButtonWrapper
+                      totalUsd={product.priceUsd}
+                      items={[{
+                        productId: product.id,
+                        productName: `${product.name} (${product.selectedColor}, ${product.selectedNecklace})`,
+                        priceUsd: product.priceUsd,
+                        quantity: 1,
+                        engravingLeftHeart: product.engravingLeftHeart || null,
+                        engravingRightHeart: product.engravingRightHeart || null,
+                      }]}
+                      shippingInfo={shippingInfo}
+                      currency="USD"
+                      onSuccess={onSuccess}
+                      onError={(err) => setError(err)}
+                    />
                   </div>
                 )}
 
