@@ -27,7 +27,7 @@
     "confirmationEmail": "Sie erhalten in Kürze eine Bestätigungs-E-Mail."
   },
   "header": {
-    "promo": "Valentinstag-Special: Kostenloser Versand ab 50€",
+    "promo": "Jetzt bestellen und zum Valentinstag erhalten ❤️",
     "foreverInLove": "Für immer verliebt"
   },
   "hero": {
@@ -320,6 +320,23 @@
     "reviewTitle4": "Tolles Geschenk",
     "reviewText4": "Wunderschönes Produkt, meine Frau hat es geliebt.",
     "faq": "Häufig gestellte Fragen",
+    "productNameBear": "Ewiger Rosenbär mit gravierter Halskette",
+    "productNameBox": "Ewige Rosenbox mit gravierter Halskette",
+    "productDescBear": "Ihr perfekter ewiger Begleiter. Ein atemberaubender Rosenbär mit gravierter Halskette, ein zeitloses Symbol der Liebe.",
+    "productDescBox": "Ewiger Luxus in einer Box. Ein Arrangement konservierter Rosen mit personalisierter gravierter Halskette.",
+    "mostPopular": "Beliebteste",
+    "premium": "Premium",
+    "necklaceColor": "Kettenfarbe",
+    "bearColor": "Bärenfarbe",
+    "boxColor": "Boxfarbe",
+    "gray": "Grau",
+    "gold": "Gold",
+    "roseGold": "Roségold",
+    "red": "Rot",
+    "pink": "Rosa",
+    "blue": "Blau",
+    "purple": "Lila",
+    "white": "Weiß",
     "faqQ1": "Wie lange halten die Rosen?",
     "faqA1": "Unsere ewigen Rosen sind konserviert um 2-3 Jahre oder länger zu halten.",
     "faqQ2": "Kann ich die Halskette personalisieren?",

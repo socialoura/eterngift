@@ -15,10 +15,19 @@ import { useCurrencyStore } from '@/store/currency'
 import { useCartStore } from '@/store/cart'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 import { cn } from '@/lib/utils'
+import { useStorefrontProducts } from '@/hooks/useStorefrontProducts'
 
 const products = [eternalRoseBear, eternalRoseBox]
 
-function ProductCard({ product, index }: { product: ProductVariant; index: number }) {
+function ProductCard({
+  product,
+  index,
+  effectiveBasePrice,
+}: {
+  product: ProductVariant
+  index: number
+  effectiveBasePrice: number
+}) {
   const [selectedColor, setSelectedColor] = useState(product.options[0]?.values[0]?.name || '')
   const [selectedNecklace, setSelectedNecklace] = useState(
     product.options.find(o => o.name.includes('Necklace'))?.values[0]?.name || ''
@@ -40,7 +49,7 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
       id: product.id === 'eternal-rose-bear' ? 1 : 2,
       name: `${product.name} (${selectedColor}, ${selectedNecklace})`,
       description: product.description,
-      priceUsd: product.basePrice,
+      priceUsd: effectiveBasePrice,
       imageUrl: currentImages.hero,
       imagesUrl: [],
       category: 'Gift Sets',
@@ -119,10 +128,10 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
             {/* Price */}
             <div className="flex items-baseline gap-2">
               <span className="text-2xl font-bold text-[#B71C1C]">
-                {formatPrice(product.basePrice)}
+                {formatPrice(effectiveBasePrice)}
               </span>
               <span className="text-sm text-gray-400 line-through">
-                {formatPrice(product.basePrice * 1.3)}
+                {formatPrice(effectiveBasePrice * 1.3)}
               </span>
               <span className="text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">
                 -30%
@@ -225,7 +234,7 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
         product={{
           id: product.id,
           name: product.name,
-          priceUsd: product.basePrice,
+          priceUsd: effectiveBasePrice,
           imageUrl: currentImages.hero,
           selectedColor,
           selectedNecklace,
@@ -238,6 +247,8 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
 
 export default function CollectionsPage() {
   const { t } = useTranslation()
+  const locale = useLocale()
+  const { productsById } = useStorefrontProducts()
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FFF8F8] via-white to-[#FFF5F5]">
@@ -274,7 +285,12 @@ export default function CollectionsPage() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
             {products.map((product, index) => (
-              <ProductCard key={product.id} product={product} index={index} />
+              <ProductCard
+              key={product.id}
+              product={product}
+              index={index}
+              effectiveBasePrice={productsById[product.id]?.base_price ?? product.basePrice}
+            />
             ))}
           </div>
         </div>

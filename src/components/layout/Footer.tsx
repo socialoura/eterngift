@@ -8,7 +8,7 @@ import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
-  const [logoSrc, setLogoSrc] = useState('/logo.png')
+  const [logoSrc, setLogoSrc] = useState('/logo.svg')
   const { t } = useTranslation()
   const locale = useLocale()
 

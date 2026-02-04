@@ -27,7 +27,7 @@
     "confirmationEmail": "You will receive a confirmation email shortly."
   },
   "header": {
-    "promo": "Valentine's Special: Free Shipping on Orders $50+",
+    "promo": "Order now and receive it for Valentine's Day ",
     "foreverInLove": "Forever in Love"
   },
   "hero": {
@@ -320,6 +320,23 @@
     "reviewTitle4": "Great gift",
     "reviewText4": "Beautiful product, my wife loved it. Only minor issue was shipping took a bit longer than expected.",
     "faq": "Frequently Asked Questions",
+    "productNameBear": "Eternal Rose Bear with Engraved Necklace",
+    "productNameBox": "Eternal Rose Box with Engraved Necklace",
+    "productDescBear": "Your perfect eternal companion. A stunning rose bear paired with an engraved necklace, creating a timeless symbol of love and remembrance.",
+    "productDescBox": "Eternal luxury in a box. A stunning preserved rose arrangement paired with a personalized engraved necklace.",
+    "mostPopular": "Most Popular",
+    "premium": "Premium",
+    "necklaceColor": "Necklace Color",
+    "bearColor": "Bear Color",
+    "boxColor": "Box Color",
+    "gray": "Gray",
+    "gold": "Gold",
+    "roseGold": "Rose Gold",
+    "red": "Red",
+    "pink": "Pink",
+    "blue": "Blue",
+    "purple": "Purple",
+    "white": "White",
     "faqQ1": "How long do the roses last?",
     "faqA1": "Our eternal roses are preserved to last 2-3 years or longer with proper care. Keep away from direct sunlight and humidity.",
     "faqQ2": "Can I customize the necklace?",

@@ -27,7 +27,7 @@
     "confirmationEmail": "Riceverai un'email di conferma a breve."
   },
   "header": {
-    "promo": "Speciale San Valentino: Spedizione gratuita per ordini da 50€+",
+    "promo": "Ordina ora e ricevilo per San Valentino ❤️",
     "foreverInLove": "Per sempre innamorati"
   },
   "hero": {
@@ -320,6 +320,23 @@
     "reviewTitle4": "Ottimo regalo",
     "reviewText4": "Prodotto bellissimo, mia moglie lo ha adorato.",
     "faq": "Domande frequenti",
+    "productNameBear": "Orso di Rose Eterno con Collana Incisa",
+    "productNameBox": "Scatola di Rose Eterna con Collana Incisa",
+    "productDescBear": "Il tuo compagno eterno perfetto. Un orso di rose con collana incisa, un simbolo senza tempo di amore e ricordo.",
+    "productDescBox": "Lusso eterno in una scatola. Un arrangiamento di rose preservate con collana incisa personalizzata.",
+    "mostPopular": "Più Popolare",
+    "premium": "Premium",
+    "necklaceColor": "Colore della Collana",
+    "bearColor": "Colore dell'Orso",
+    "boxColor": "Colore della Scatola",
+    "gray": "Grigio",
+    "gold": "Oro",
+    "roseGold": "Oro Rosa",
+    "red": "Rosso",
+    "pink": "Rosa",
+    "blue": "Blu",
+    "purple": "Viola",
+    "white": "Bianco",
     "faqQ1": "Quanto durano le rose?",
     "faqA1": "Le nostre rose eterne sono conservate per durare 2-3 anni o più con la cura adeguata.",
     "faqQ2": "Posso personalizzare la collana?",

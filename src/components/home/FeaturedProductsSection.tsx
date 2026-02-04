@@ -13,8 +13,17 @@ import { useCartStore } from '@/store/cart'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 import { useIsMobile } from '@/hooks/useIsMobile'
 import { cn } from '@/lib/utils'
+import { useStorefrontProducts } from '@/hooks/useStorefrontProducts'
 
-function ProductCard({ product, index }: { product: ProductVariant; index: number }) {
+function ProductCard({
+  product,
+  index,
+  effectiveBasePrice,
+}: {
+  product: ProductVariant
+  index: number
+  effectiveBasePrice: number
+}) {
   const [selectedColor, setSelectedColor] = useState(product.options[0]?.values[0]?.name || '')
   const [selectedNecklace, setSelectedNecklace] = useState(
     product.options.find(o => o.name.includes('Necklace'))?.values[0]?.name || ''
@@ -37,7 +46,7 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
       id: product.id === 'eternal-rose-bear' ? 1 : 2,
       name: `${product.name} (${selectedColor}, ${selectedNecklace})`,
       description: product.description,
-      priceUsd: product.basePrice,
+      priceUsd: effectiveBasePrice,
       imageUrl: currentImages.hero,
       imagesUrl: [],
       category: 'Gift Sets',
@@ -198,10 +207,10 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
           {/* Price with enhanced styling */}
           <div className="flex items-center gap-3 flex-wrap">
             <span className="text-3xl font-bold bg-gradient-to-r from-[#B71C1C] to-[#8B1538] bg-clip-text text-transparent">
-              {formatPrice(product.basePrice)}
+              {formatPrice(effectiveBasePrice)}
             </span>
             <span className="text-sm text-gray-400 line-through">
-              {formatPrice(product.basePrice * 1.3)}
+              {formatPrice(effectiveBasePrice * 1.3)}
             </span>
             <span className="text-xs font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 px-2.5 py-1 rounded-full shadow-sm">
               -23% OFF
@@ -304,12 +313,14 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
         product={{
           id: product.id,
           name: product.name,
-          priceUsd: product.basePrice,
+          priceUsd: effectiveBasePrice,
           imageUrl: currentImages.hero,
           selectedColor,
           selectedNecklace,
         }}
-        onSuccess={() => setIsQuickBuyOpen(false)}
+        onSuccess={() => {
+          setIsQuickBuyOpen(false)
+        }}
       />
     </motion.div>
   )
@@ -318,6 +329,7 @@ function ProductCard({ product, index }: { product: ProductVariant; index: numbe
 export function FeaturedProductsSection() {
   const { t } = useTranslation()
   const locale = useLocale()
+  const { productsById } = useStorefrontProducts()
   
   return (
     <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-b from-white via-[#FFF8F8] to-white relative overflow-hidden">
@@ -375,8 +387,8 @@ export function FeaturedProductsSection() {
 
         {/* Products grid */}
         <div className="grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 max-w-6xl mx-auto">
-          <ProductCard product={eternalRoseBear} index={0} />
-          <ProductCard product={eternalRoseBox} index={1} />
+          <ProductCard product={eternalRoseBear} index={0} effectiveBasePrice={productsById['eternal-rose-bear']?.base_price ?? eternalRoseBear.basePrice} />
+          <ProductCard product={eternalRoseBox} index={1} effectiveBasePrice={productsById['eternal-rose-box']?.base_price ?? eternalRoseBox.basePrice} />
         </div>
 
         {/* CTA */}

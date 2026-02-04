@@ -17,7 +17,7 @@ export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isCurrencyOpen, setIsCurrencyOpen] = useState(false)
   const [isLangOpen, setIsLangOpen] = useState(false)
-  const [logoSrc, setLogoSrc] = useState('/logo.png')
+  const [logoSrc, setLogoSrc] = useState('/logo.svg')
   const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
   const router = useRouter()

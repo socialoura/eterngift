@@ -27,7 +27,7 @@
     "confirmationEmail": "Vous recevrez un email de confirmation sous peu."
   },
   "header": {
-    "promo": "Spécial Saint-Valentin : Livraison gratuite dès 50€",
+    "promo": "Commandez maintenant et recevez-le pour la Saint-Valentin ❤️",
     "foreverInLove": "Pour toujours amoureux"
   },
   "hero": {
@@ -320,6 +320,23 @@
     "reviewTitle4": "Super cadeau",
     "reviewText4": "Très beau produit, ma femme a adoré. Seul petit bémol, la livraison a pris un peu plus de temps que prévu.",
     "faq": "Questions fréquentes",
+    "productNameBear": "Ours Rose Éternel avec Collier Gravé",
+    "productNameBox": "Coffret Rose Éternel avec Collier Gravé",
+    "productDescBear": "Votre compagnon éternel parfait. Un magnifique ours en roses accompagné d'un collier gravé, créant un symbole intemporel d'amour et de souvenir.",
+    "productDescBox": "Le luxe éternel dans un coffret. Un magnifique arrangement de roses préservées accompagné d'un collier gravé personnalisé.",
+    "mostPopular": "Le plus populaire",
+    "premium": "Premium",
+    "necklaceColor": "Couleur du collier",
+    "bearColor": "Couleur de l'ours",
+    "boxColor": "Couleur du coffret",
+    "gray": "Gris",
+    "gold": "Or",
+    "roseGold": "Or Rose",
+    "red": "Rouge",
+    "pink": "Rose",
+    "blue": "Bleu",
+    "purple": "Violet",
+    "white": "Blanc",
     "faqQ1": "Combien de temps durent les roses ?",
     "faqA1": "Nos roses éternelles sont préservées pour durer 2-3 ans ou plus avec un bon entretien. Gardez-les à l'abri de la lumière directe et de l'humidité.",
     "faqQ2": "Puis-je personnaliser le collier ?",

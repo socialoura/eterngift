@@ -280,9 +280,6 @@ export default function CheckoutPage() {
                     <span>Total</span>
                     <span className="text-primary">{formatPrice(totalUsd)}</span>
                   </div>
-                  <p className="text-xs text-gray-500 mt-1">
-                    Converted from ${totalUsd.toFixed(2)} USD
-                  </p>
                 </div>
               </div>
 

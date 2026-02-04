@@ -100,12 +100,42 @@ export async function initDatabase() {
       )
     `
 
+    // Migrate legacy product ids (rose-box/rose-bear) to current storefront ids (eternal-rose-*)
+    // while preserving the legacy rows for existing orders.
+    await sql`
+      INSERT INTO products (id, name, description, image_url, base_price, stock)
+      SELECT
+        'eternal-rose-bear',
+        'Eternal Rose Bear with Engraved Necklace',
+        'Your perfect eternal companion. A stunning rose bear paired with an engraved necklace, creating a timeless symbol of love and remembrance.',
+        '/products/rose-bear/rouge/1.png',
+        base_price,
+        stock
+      FROM products
+      WHERE id = 'rose-bear'
+      ON CONFLICT (id) DO NOTHING
+    `
+
+    await sql`
+      INSERT INTO products (id, name, description, image_url, base_price, stock)
+      SELECT
+        'eternal-rose-box',
+        'Eternal Rose Box with Engraved Necklace',
+        'Eternal luxury in a box. A stunning preserved rose arrangement paired with a personalized engraved necklace.',
+        '/products/rose-box/rouge/1.png',
+        base_price,
+        stock
+      FROM products
+      WHERE id = 'rose-box'
+      ON CONFLICT (id) DO NOTHING
+    `
+
     // Insert default products if not exist
     await sql`
       INSERT INTO products (id, name, description, image_url, base_price, stock)
       VALUES 
-        ('rose-box', 'Eternal Rose Box', 'Beautiful preserved rose in elegant display case with engraved necklace', '/products/rose-box/hero.webp', 49.99, 100),
-        ('rose-bear', 'Eternal Rose Bear', 'Handcrafted rose bear with personalized necklace', '/products/rose-bear/hero.webp', 59.99, 100)
+        ('eternal-rose-box', 'Eternal Rose Box with Engraved Necklace', 'Eternal luxury in a box. A stunning preserved rose arrangement paired with a personalized engraved necklace.', '/products/rose-box/rouge/1.png', 129.99, 100),
+        ('eternal-rose-bear', 'Eternal Rose Bear with Engraved Necklace', 'Your perfect eternal companion. A stunning rose bear paired with an engraved necklace, creating a timeless symbol of love and remembrance.', '/products/rose-bear/rouge/1.png', 89.99, 100)
       ON CONFLICT (id) DO NOTHING
     `
 

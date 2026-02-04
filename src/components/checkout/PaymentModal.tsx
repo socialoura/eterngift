@@ -220,9 +220,6 @@ export function PaymentModal({
                   <p className="text-2xl font-bold text-primary">
                     {formatPrice(totalUsd)}
                   </p>
-                  <p className="text-xs text-gray-500">
-                    ${totalUsd.toFixed(2)} USD
-                  </p>
                 </div>
               </div>
             </div>

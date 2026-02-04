@@ -17,6 +17,7 @@ import { useCurrencyStore } from '@/store/currency'
 import { useCartStore } from '@/store/cart'
 import { cn } from '@/lib/utils'
 import { useTranslation } from '@/components/providers/I18nProvider'
+import { useStorefrontProducts } from '@/hooks/useStorefrontProducts'
 
 function FloatingHeart({ delay, left, size }: { delay: number; left: string; size: number }) {
   return (
@@ -51,12 +52,27 @@ const productsMap: Record<string, ProductVariant> = {
   '2': eternalRoseBox,
 }
 
-const reviews = [
-  { name: 'Sarah M.', rating: 5, date: 'Jan 2026', title: 'Absolutely stunning!', text: 'My girlfriend cried when she opened this gift. The quality is incredible and the rose is so beautiful. Highly recommend!', verified: true },
-  { name: 'Michael T.', rating: 5, date: 'Jan 2026', title: 'Perfect anniversary gift', text: 'Ordered this for our 3rd anniversary. The packaging was luxurious and the product exceeded expectations. Will buy again!', verified: true },
-  { name: 'Emma L.', rating: 5, date: 'Dec 2025', title: 'Better than expected', text: 'The photos don\'t do it justice. It\'s even more beautiful in person. Fast shipping too!', verified: true },
-  { name: 'David K.', rating: 4, date: 'Dec 2025', title: 'Great gift', text: 'Beautiful product, my wife loved it. Only minor issue was shipping took a bit longer than expected.', verified: true },
+const getReviews = (t: (key: string) => string) => [
+  { name: 'Sarah M.', rating: 5, date: 'Jan 2026', title: t('productDetail.reviewTitle1'), text: t('productDetail.reviewText1'), verified: true },
+  { name: 'Michael T.', rating: 5, date: 'Jan 2026', title: t('productDetail.reviewTitle2'), text: t('productDetail.reviewText2'), verified: true },
+  { name: 'Emma L.', rating: 5, date: 'Dec 2025', title: t('productDetail.reviewTitle3'), text: t('productDetail.reviewText3'), verified: true },
+  { name: 'David K.', rating: 4, date: 'Dec 2025', title: t('productDetail.reviewTitle4'), text: t('productDetail.reviewText4'), verified: true },
 ]
+
+const translateColor = (t: (key: string) => string, color: string) => {
+  const colorMap: Record<string, string> = {
+    'Red': 'red', 'Pink': 'pink', 'Blue': 'blue', 'Purple': 'purple', 'White': 'white',
+    'Gray': 'gray', 'Gold': 'gold', 'Rose Gold': 'roseGold'
+  }
+  return t(`productDetail.${colorMap[color] || color.toLowerCase()}`)
+}
+
+const translateOptionName = (t: (key: string) => string, name: string) => {
+  if (name === 'Bear Color') return t('productDetail.bearColor')
+  if (name === 'Box Color') return t('productDetail.boxColor')
+  if (name === 'Necklace Color') return t('productDetail.necklaceColor')
+  return name
+}
 
 const getFaqs = (t: (key: string) => string) => [
   { q: t('productDetail.faqQ1'), a: t('productDetail.faqA1') },
@@ -70,6 +86,7 @@ export default function ProductDetailPage() {
   const id = params.id as string
   const product = productsMap[id]
   const { t } = useTranslation()
+  const { productsById } = useStorefrontProducts()
 
   const [selectedColor, setSelectedColor] = useState('')
   const [selectedNecklace, setSelectedNecklace] = useState('')
@@ -82,6 +99,9 @@ export default function ProductDetailPage() {
 
   const { formatPrice } = useCurrencyStore()
   const addItem = useCartStore((state) => state.addItem)
+
+  const storefront = product ? productsById[product.id] : undefined
+  const effectiveBasePrice = storefront?.base_price ?? product?.basePrice ?? 0
 
   useEffect(() => {
     if (product) {
@@ -122,7 +142,7 @@ export default function ProductDetailPage() {
       id: product.id === 'eternal-rose-bear' ? 1 : 2,
       name: `${product.name} (${selectedColor}, ${selectedNecklace})`,
       description: product.description,
-      priceUsd: product.basePrice,
+      priceUsd: effectiveBasePrice,
       imageUrl: currentImages.hero,
       imagesUrl: [],
       category: 'Gift Sets',
@@ -149,6 +169,8 @@ export default function ProductDetailPage() {
 
   const [openFaq, setOpenFaq] = useState<number | null>(null)
   const otherProduct = product.id === 'eternal-rose-bear' ? eternalRoseBox : eternalRoseBear
+  const otherStorefront = productsById[otherProduct.id]
+  const otherEffectiveBasePrice = otherStorefront?.base_price ?? otherProduct.basePrice
 
   const floatingHearts = [
     { delay: 0, left: '5%', size: 16 },
@@ -196,7 +218,7 @@ export default function ProductDetailPage() {
             <span className="text-white/40">/</span>
             <Link href="/products" className="text-white/70 hover:text-white transition-colors">{t('productDetail.products')}</Link>
             <span className="text-white/40">/</span>
-            <span className="text-white font-medium">{product.name}</span>
+            <span className="text-white font-medium">{product.id === 'eternal-rose-bear' ? t('productDetail.productNameBear') : t('productDetail.productNameBox')}</span>
           </div>
         </div>
       </div>
@@ -236,7 +258,7 @@ export default function ProductDetailPage() {
                   >
                     <div className="bg-gradient-to-r from-[#B71C1C] to-[#D4AF88] text-white text-sm font-semibold px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
                       {product.badge === 'Most Popular' ? <Star className="w-4 h-4 fill-yellow-300 text-yellow-300" /> : <Sparkles className="w-4 h-4" />}
-                      {product.badge}
+                      {product.badge === 'Most Popular' ? t('productDetail.mostPopular') : t('productDetail.premium')}
                     </div>
                   </motion.div>
                 )}
@@ -279,14 +301,14 @@ export default function ProductDetailPage() {
               </div>
 
               <div>
-                <h1 className="text-3xl lg:text-4xl font-heading font-bold text-gray-900 mb-4">{product.name}</h1>
-                <p className="text-gray-600 leading-relaxed text-lg">{product.description}</p>
+                <h1 className="text-3xl lg:text-4xl font-heading font-bold text-gray-900 mb-4">{product.id === 'eternal-rose-bear' ? t('productDetail.productNameBear') : t('productDetail.productNameBox')}</h1>
+                <p className="text-gray-600 leading-relaxed text-lg">{product.id === 'eternal-rose-bear' ? t('productDetail.productDescBear') : t('productDetail.productDescBox')}</p>
               </div>
 
               {/* Price */}
               <div className="flex items-baseline gap-4 pb-6 border-b border-gray-100">
-                <span className="text-4xl lg:text-5xl font-bold text-[#B71C1C]">{formatPrice(product.basePrice)}</span>
-                <span className="text-xl text-gray-400 line-through">{formatPrice(product.basePrice * 1.3)}</span>
+                <span className="text-4xl lg:text-5xl font-bold text-[#B71C1C]">{formatPrice(effectiveBasePrice)}</span>
+                <span className="text-xl text-gray-400 line-through">{formatPrice(effectiveBasePrice * 1.3)}</span>
                 <span className="bg-green-100 text-green-700 text-sm font-semibold px-3 py-1 rounded-full">{t('productDetail.save')} 23%</span>
               </div>
 
@@ -294,8 +316,8 @@ export default function ProductDetailPage() {
               {colorOption && (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <p className="font-semibold text-gray-900">{colorOption.name}</p>
-                    <p className="text-sm text-[#B71C1C] font-medium">{selectedColor}</p>
+                    <p className="font-semibold text-gray-900">{translateOptionName(t, colorOption.name)}</p>
+                    <p className="text-sm text-[#B71C1C] font-medium">{translateColor(t, selectedColor)}</p>
                   </div>
                   <div className="flex gap-3 flex-wrap">
                     {colorOption.values.map((value) => (
@@ -346,8 +368,8 @@ export default function ProductDetailPage() {
               {necklaceOption && (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <p className="font-semibold text-gray-900">{necklaceOption.name}</p>
-                    <p className="text-sm text-[#B71C1C] font-medium">{selectedNecklace}</p>
+                    <p className="font-semibold text-gray-900">{translateOptionName(t, necklaceOption.name)}</p>
+                    <p className="text-sm text-[#B71C1C] font-medium">{translateColor(t, selectedNecklace)}</p>
                   </div>
                   <div className="flex gap-3 flex-wrap">
                     {necklaceOption.values.map((value) => (
@@ -364,7 +386,7 @@ export default function ProductDetailPage() {
                         <span className="relative w-12 h-12 rounded-lg overflow-hidden border border-gray-200 bg-[#F5F1ED]">
                           <Image src={value.image} alt={value.name} fill className="object-cover" sizes="48px" />
                         </span>
-                        <span className="font-medium text-gray-700">{value.name}</span>
+                        <span className="font-medium text-gray-700">{translateColor(t, value.name)}</span>
                       </motion.button>
                     ))}
                   </div>
@@ -688,10 +710,10 @@ export default function ProductDetailPage() {
                         {/* Price */}
                         <div className="flex items-baseline gap-3">
                           <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF88] to-[#FFD700]">
-                            {formatPrice(otherProduct.basePrice)}
+                            {formatPrice(otherEffectiveBasePrice)}
                           </span>
                           <span className="text-gray-500 line-through text-sm">
-                            {formatPrice(otherProduct.basePrice * 1.3)}
+                            {formatPrice(otherEffectiveBasePrice * 1.3)}
                           </span>
                         </div>
 
@@ -742,7 +764,7 @@ export default function ProductDetailPage() {
             </div>
           </motion.div>
           <div className="relative z-10 grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {reviews.map((review, i) => (
+            {getReviews(t).map((review, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} whileHover={{ y: -5, scale: 1.02 }} className="bg-white rounded-2xl p-6 shadow-2xl border border-gray-100 hover:shadow-[0_20px_50px_rgba(0,0,0,0.15)] transition-all">
                 <div className="flex items-start justify-between mb-4">
                   <div>
@@ -795,7 +817,7 @@ export default function ProductDetailPage() {
         product={{
           id: product.id,
           name: product.name,
-          priceUsd: product.basePrice,
+          priceUsd: effectiveBasePrice,
           imageUrl: currentImages.hero,
           selectedColor,
           selectedNecklace,

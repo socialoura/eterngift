@@ -27,7 +27,7 @@
     "confirmationEmail": "Recibirás un email de confirmación en breve."
   },
   "header": {
-    "promo": "Especial San Valentín: Envío gratis en pedidos de 50€+",
+    "promo": "Pide ahora y recíbelo para San Valentín ❤️",
     "foreverInLove": "Por siempre enamorados"
   },
   "hero": {
@@ -320,6 +320,23 @@
     "reviewTitle4": "Gran regalo",
     "reviewText4": "Producto hermoso, a mi esposa le encantó.",
     "faq": "Preguntas frecuentes",
+    "productNameBear": "Oso de Rosas Eterno con Collar Grabado",
+    "productNameBox": "Caja de Rosas Eterna con Collar Grabado",
+    "productDescBear": "Tu compañero eterno perfecto. Un impresionante oso de rosas con collar grabado, creando un símbolo atemporal de amor y recuerdo.",
+    "productDescBox": "Lujo eterno en una caja. Un arreglo de rosas preservadas con collar grabado personalizado.",
+    "mostPopular": "Más Popular",
+    "premium": "Premium",
+    "necklaceColor": "Color del Collar",
+    "bearColor": "Color del Oso",
+    "boxColor": "Color de la Caja",
+    "gray": "Gris",
+    "gold": "Oro",
+    "roseGold": "Oro Rosa",
+    "red": "Rojo",
+    "pink": "Rosa",
+    "blue": "Azul",
+    "purple": "Morado",
+    "white": "Blanco",
     "faqQ1": "¿Cuánto duran las rosas?",
     "faqA1": "Nuestras rosas eternas están preservadas para durar 2-3 años o más con el cuidado adecuado.",
     "faqQ2": "¿Puedo personalizar el collar?",

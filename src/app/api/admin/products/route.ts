@@ -10,7 +10,9 @@ export async function GET(request: NextRequest) {
 
   try {
     const products = await getProducts()
-    return NextResponse.json({ products })
+    const allowedIds = new Set(['eternal-rose-bear', 'eternal-rose-box'])
+    const storefrontProducts = products.filter((p: any) => allowedIds.has(p.id))
+    return NextResponse.json({ products: storefrontProducts })
   } catch (error) {
     console.error('Error fetching products:', error)
     return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 })

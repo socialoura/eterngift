@@ -63,7 +63,7 @@ export function HeroSection() {
   const { scrollY } = useScroll()
   const y1 = useTransform(scrollY, [0, 500], [0, 150])
   const y2 = useTransform(scrollY, [0, 500], [0, -100])
-  const opacity = useTransform(scrollY, [0, 300], [1, 0])
+  const opacity = useTransform(scrollY, [0, 600], [1, 0])
   
   const { t } = useTranslation()
   const locale = useLocale()

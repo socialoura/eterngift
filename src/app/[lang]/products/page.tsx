@@ -10,10 +10,21 @@ import { eternalRoseBear, eternalRoseBox, ProductVariant } from '@/lib/products-
 import { useCurrencyStore } from '@/store/currency'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 import { cn } from '@/lib/utils'
+import { useStorefrontProducts } from '@/hooks/useStorefrontProducts'
 
 const allProducts: ProductVariant[] = [eternalRoseBear, eternalRoseBox]
 
-function ProductCard({ product, t, locale }: { product: ProductVariant; t: (key: string) => string; locale: string }) {
+function ProductCard({
+  product,
+  t,
+  locale,
+  effectiveBasePrice,
+}: {
+  product: ProductVariant
+  t: (key: string) => string
+  locale: string
+  effectiveBasePrice: number
+}) {
   const [selectedColor, setSelectedColor] = useState(product.options[0]?.values[0]?.name || '')
   const [isHovered, setIsHovered] = useState(false)
   
@@ -60,7 +71,7 @@ function ProductCard({ product, t, locale }: { product: ProductVariant; t: (key:
         </Link>
 
         <p className="text-2xl font-bold text-[#B71C1C]">
-          {formatPrice(product.basePrice)}
+          {formatPrice(effectiveBasePrice)}
         </p>
 
         {colorOption && (
@@ -108,6 +119,7 @@ function ProductCard({ product, t, locale }: { product: ProductVariant; t: (key:
 export default function ProductsPage() {
   const { t } = useTranslation()
   const locale = useLocale()
+  const { productsById } = useStorefrontProducts()
   
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-[#FFE5E5]/30">
@@ -132,7 +144,13 @@ export default function ProductsPage() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {allProducts.map((product) => (
-            <ProductCard key={product.id} product={product} t={t} locale={locale} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              t={t}
+              locale={locale}
+              effectiveBasePrice={productsById[product.id]?.base_price ?? product.basePrice}
+            />
           ))}
         </div>
 
