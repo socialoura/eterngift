@@ -353,21 +353,6 @@ export function HeroSection() {
                     </div>
                   </motion.div>
                 </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.4 }}
-                  className="absolute -bottom-4 left-1/2 -translate-x-1/2"
-                >
-                  <motion.div
-                    animate={{ scale: [1, 1.05, 1] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                    className="bg-[#D4AF88] rounded-full px-6 py-2 shadow-xl"
-                  >
-                    <p className="text-sm font-bold text-white">{t('hero.fromPrice')}</p>
-                  </motion.div>
-                </motion.div>
               </div>
             </motion.div>
           </div>
