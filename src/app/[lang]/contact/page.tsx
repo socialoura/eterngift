@@ -265,21 +265,19 @@ export default function ContactPage() {
             >
               <div>
                 <h2 className="text-2xl lg:text-3xl font-heading font-bold text-gray-900 mb-4">
-                  We&apos;re Here to Help
+                  {t('contactExtra.wereHereToHelp')}
                 </h2>
                 <p className="text-gray-600 leading-relaxed">
-                  At EternGift, we believe every gift should be perfect. Whether you have questions 
-                  about our products, need help with an order, or just want to share your experience, 
-                  our team is ready to assist you.
+                  {t('contactExtra.wereHereToHelpDesc')}
                 </p>
               </div>
 
               {/* Features */}
               <div className="space-y-4">
                 {[
-                  { icon: '⚡', title: 'Fast Response', text: 'We reply within 24 hours, usually much faster!' },
-                  { icon: '💝', title: 'Friendly Support', text: 'Our team truly cares about your experience.' },
-                  { icon: '🔒', title: 'Secure & Private', text: 'Your information is always protected.' },
+                  { icon: '⚡', title: t('contactExtra.fastResponse'), text: t('contactExtra.fastResponseDesc') },
+                  { icon: '💝', title: t('contactExtra.friendlySupport'), text: t('contactExtra.friendlySupportDesc') },
+                  { icon: '🔒', title: t('contactExtra.securePrivate'), text: t('contactExtra.securePrivateDesc') },
                 ].map((feature, i) => (
                   <motion.div
                     key={feature.title}
@@ -302,11 +300,10 @@ export default function ContactPage() {
               <div className="bg-gradient-to-r from-[#FFE5E5] to-pink-50 rounded-2xl p-6">
                 <div className="flex items-center gap-3 mb-3">
                   <Heart className="w-6 h-6 text-[#B71C1C] fill-[#B71C1C]" />
-                  <span className="font-bold text-gray-900">Trusted by 50,000+ Customers</span>
+                  <span className="font-bold text-gray-900">{t('contactExtra.trustedBy')}</span>
                 </div>
                 <p className="text-gray-600 text-sm">
-                  Join thousands of happy customers who have trusted EternGift for their 
-                  most special moments. Our 4.9★ rating speaks for itself!
+                  {t('contactExtra.trustedByDesc')}
                 </p>
               </div>
             </motion.div>
@@ -324,11 +321,10 @@ export default function ContactPage() {
             className="bg-gradient-to-br from-[#8B1538] to-[#B71C1C] rounded-3xl p-8 lg:p-12 text-center"
           >
             <h2 className="text-2xl lg:text-3xl font-heading font-bold text-white mb-4">
-              Follow Our Journey
+              {t('contactExtra.followOurJourney')}
             </h2>
             <p className="text-white/80 max-w-xl mx-auto mb-8">
-              Stay connected with us on social media for exclusive offers, 
-              behind-the-scenes content, and romantic gift inspiration.
+              {t('contactExtra.followOurJourneyDesc')}
             </p>
             <div className="flex justify-center gap-4">
               {['Instagram', 'Facebook', 'Pinterest', 'TikTok'].map((social) => (

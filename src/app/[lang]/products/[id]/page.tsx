@@ -16,6 +16,7 @@ import { QuickBuyModal } from '@/components/checkout/QuickBuyModal'
 import { useCurrencyStore } from '@/store/currency'
 import { useCartStore } from '@/store/cart'
 import { cn } from '@/lib/utils'
+import { useTranslation } from '@/components/providers/I18nProvider'
 
 function FloatingHeart({ delay, left, size }: { delay: number; left: string; size: number }) {
   return (
@@ -57,17 +58,18 @@ const reviews = [
   { name: 'David K.', rating: 4, date: 'Dec 2025', title: 'Great gift', text: 'Beautiful product, my wife loved it. Only minor issue was shipping took a bit longer than expected.', verified: true },
 ]
 
-const faqs = [
-  { q: 'How long do the roses last?', a: 'Our eternal roses are preserved to last 2-3 years or longer with proper care. Keep away from direct sunlight and humidity.' },
-  { q: 'Can I customize the necklace?', a: 'Currently we offer three necklace colors: Gray, Gold, and Rose Gold. Custom engraving coming soon!' },
-  { q: 'Is gift wrapping included?', a: 'Yes! Every order comes in our premium gift box with satin ribbon, ready to give.' },
-  { q: 'What if I\'m not satisfied?', a: 'We offer a 30-day satisfaction guarantee. Contact us for a full refund or exchange.' },
+const getFaqs = (t: (key: string) => string) => [
+  { q: t('productDetail.faqQ1'), a: t('productDetail.faqA1') },
+  { q: t('productDetail.faqQ2'), a: t('productDetail.faqA2') },
+  { q: t('productDetail.faqQ3'), a: t('productDetail.faqA3') },
+  { q: t('productDetail.faqQ4'), a: t('productDetail.faqA4') },
 ]
 
 export default function ProductDetailPage() {
   const params = useParams()
   const id = params.id as string
   const product = productsMap[id]
+  const { t } = useTranslation()
 
   const [selectedColor, setSelectedColor] = useState('')
   const [selectedNecklace, setSelectedNecklace] = useState('')
@@ -94,9 +96,9 @@ export default function ProductDetailPage() {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-heading font-bold text-gray-900 mb-4">Product Not Found</h1>
+          <h1 className="text-2xl font-heading font-bold text-gray-900 mb-4">{t('productDetail.productNotFound')}</h1>
           <Link href="/products">
-            <Button>Back to Products</Button>
+            <Button>{t('productDetail.backToProducts')}</Button>
           </Link>
         </div>
       </div>
@@ -190,9 +192,9 @@ export default function ProductDetailPage() {
       <div className="relative z-10 bg-gradient-to-r from-[#8B1538] via-[#B71C1C] to-[#D4AF88]">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-2 text-sm">
-            <Link href="/" className="text-white/70 hover:text-white transition-colors">Home</Link>
+            <Link href="/" className="text-white/70 hover:text-white transition-colors">{t('productDetail.home')}</Link>
             <span className="text-white/40">/</span>
-            <Link href="/products" className="text-white/70 hover:text-white transition-colors">Products</Link>
+            <Link href="/products" className="text-white/70 hover:text-white transition-colors">{t('productDetail.products')}</Link>
             <span className="text-white/40">/</span>
             <span className="text-white font-medium">{product.name}</span>
           </div>
@@ -273,7 +275,7 @@ export default function ProductDetailPage() {
               {/* Rating */}
               <div className="flex items-center gap-3">
                 <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />)}</div>
-                <span className="text-gray-600 text-sm">4.9 (128 reviews)</span>
+                <span className="text-gray-600 text-sm">4.9 (128 {t('productDetail.reviews')})</span>
               </div>
 
               <div>
@@ -285,7 +287,7 @@ export default function ProductDetailPage() {
               <div className="flex items-baseline gap-4 pb-6 border-b border-gray-100">
                 <span className="text-4xl lg:text-5xl font-bold text-[#B71C1C]">{formatPrice(product.basePrice)}</span>
                 <span className="text-xl text-gray-400 line-through">{formatPrice(product.basePrice * 1.3)}</span>
-                <span className="bg-green-100 text-green-700 text-sm font-semibold px-3 py-1 rounded-full">Save 23%</span>
+                <span className="bg-green-100 text-green-700 text-sm font-semibold px-3 py-1 rounded-full">{t('productDetail.save')} 23%</span>
               </div>
 
               {/* Color Options */}
@@ -318,25 +320,25 @@ export default function ProductDetailPage() {
               {/* Engraving */}
               <div className="space-y-3 pt-2">
                 <div className="flex items-center justify-between">
-                  <p className="font-semibold text-gray-900">Engraving</p>
-                  <p className="text-xs text-gray-500">Optional • Max 20 characters</p>
+                  <p className="font-semibold text-gray-900">{t('productDetail.engraving')}</p>
+                  <p className="text-xs text-gray-500">{t('productDetail.optionalMax')}</p>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Input
-                    label="Left Heart Engraving"
-                    placeholder="e.g. I love you"
+                    label={t('productDetail.leftHeartEngraving')}
+                    placeholder={t('productDetail.leftPlaceholder')}
                     value={engravingLeftHeart}
                     onChange={(e) => setEngravingLeftHeart(e.target.value.slice(0, 20))}
                   />
                   <Input
-                    label="Right Heart Engraving"
-                    placeholder="e.g. Forever"
+                    label={t('productDetail.rightHeartEngraving')}
+                    placeholder={t('productDetail.rightPlaceholder')}
                     value={engravingRightHeart}
                     onChange={(e) => setEngravingRightHeart(e.target.value.slice(0, 20))}
                   />
                 </div>
                 <p className="text-xs text-gray-500">
-                  Tip: if you order multiple gifts, different engravings will be treated as separate items in the cart.
+                  {t('productDetail.engravingTip')}
                 </p>
               </div>
 
@@ -377,7 +379,7 @@ export default function ProductDetailPage() {
                   className="w-full py-7 text-xl font-bold bg-gradient-to-r from-[#B71C1C] via-[#D4AF88] to-[#B71C1C] hover:from-[#8B1538] hover:via-[#C49B6D] hover:to-[#8B1538] shadow-xl shadow-[#B71C1C]/30 transition-all"
                 >
                   <Sparkles className="w-6 h-6 mr-2" />
-                  Buy Now
+                  {t('productDetail.buyNow')}
                 </Button>
               </motion.div>
 
@@ -385,7 +387,7 @@ export default function ProductDetailPage() {
               <div className="flex gap-4">
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex-1">
                   <Button onClick={handleAddToCart} size="lg" variant="outline" className={cn('w-full py-5 text-base font-semibold transition-all border-2', isAddedToCart ? 'bg-green-600 hover:bg-green-700 text-white border-green-600' : 'border-[#B71C1C] text-[#B71C1C] hover:bg-[#B71C1C] hover:text-white')}>
-                    {isAddedToCart ? <><Check className="w-5 h-5 mr-2" />Added!</> : <><ShoppingCart className="w-5 h-5 mr-2" />Add to Cart</>}
+                    {isAddedToCart ? <><Check className="w-5 h-5 mr-2" />{t('productDetail.added')}</> : <><ShoppingCart className="w-5 h-5 mr-2" />{t('productDetail.addToCart')}</>}
                   </Button>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -398,10 +400,10 @@ export default function ProductDetailPage() {
               {/* Trust Badges */}
               <div className="grid grid-cols-4 gap-3 pt-6">
                 {[
-                  { icon: Truck, label: 'Free Shipping' },
-                  { icon: RefreshCw, label: '30-Day Returns' },
-                  { icon: Shield, label: 'Secure Payment' },
-                  { icon: Gift, label: 'Gift Ready' },
+                  { icon: Truck, label: t('productDetail.freeShipping') },
+                  { icon: RefreshCw, label: t('productDetail.returns') },
+                  { icon: Shield, label: t('productDetail.securePayment') },
+                  { icon: Gift, label: t('productDetail.giftReady') },
                 ].map((item, i) => (
                   <div key={i} className="text-center">
                     <div className="w-12 h-12 bg-gradient-to-br from-[#FFE5E5] to-pink-50 rounded-xl flex items-center justify-center mx-auto mb-2">
@@ -473,33 +475,33 @@ export default function ProductDetailPage() {
             >
               <div>
                 <span className="inline-block bg-gradient-to-r from-[#B71C1C] to-[#D4AF88] text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-                  ✨ Handcrafted with Love
+                  ✨ {t('productDetail.handcraftedWithLove')}
                 </span>
                 <h2 className="text-3xl lg:text-4xl font-heading font-bold text-gray-900 mb-4">
-                  {product.id === 'eternal-rose-bear' ? 'The Perfect Rose Bear' : 'Elegant Rose Box'}
+                  {product.id === 'eternal-rose-bear' ? t('productDetail.thePerfectRoseBear') : t('productDetail.elegantRoseBox')}
                 </h2>
               </div>
 
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
                   {product.id === 'eternal-rose-bear' 
-                    ? 'Our Eternal Rose Bear is a stunning handcrafted masterpiece, made with over 200 preserved roses that will last for years. Each bear is carefully assembled by skilled artisans to create a unique symbol of everlasting love.'
-                    : 'Our Eternal Rose Box features a beautiful preserved rose arrangement in an elegant display case. The roses are carefully selected and preserved to maintain their natural beauty for years to come.'}
+                    ? t('productDetail.roseBearDesc1')
+                    : t('productDetail.roseBoxDesc1')}
                 </p>
                 <p>
                   {product.id === 'eternal-rose-bear'
-                    ? 'Paired with a personalized engraved necklace, this gift set is perfect for Valentine\'s Day, anniversaries, birthdays, or any special occasion where you want to express your deepest feelings.'
-                    : 'Combined with a stunning engraved heart necklace, this premium gift set makes the perfect present for someone special. Express your love with a gift that truly lasts forever.'}
+                    ? t('productDetail.roseBearDesc2')
+                    : t('productDetail.roseBoxDesc2')}
                 </p>
               </div>
 
               {/* Features list */}
               <div className="grid grid-cols-2 gap-4 pt-4">
                 {[
-                  { icon: '🌹', text: 'Real Preserved Roses' },
-                  { icon: '💎', text: 'Engraved Necklace' },
-                  { icon: '🎁', text: 'Premium Gift Box' },
-                  { icon: '💝', text: 'Lasts 2-3 Years' },
+                  { icon: '🌹', text: t('productDetail.realPreservedRoses') },
+                  { icon: '💎', text: t('productDetail.engravedNecklace') },
+                  { icon: '🎁', text: t('productDetail.premiumGiftBox') },
+                  { icon: '💝', text: t('productDetail.lasts2to3Years') },
                 ].map((feature, i) => (
                   <motion.div
                     key={i}
@@ -523,14 +525,14 @@ export default function ProductDetailPage() {
       <section className="relative z-10 py-16 bg-white">
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-heading font-bold text-gray-900 mb-4">What&apos;s <span className="text-[#B71C1C]">Included</span></h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">Every order is carefully packaged with love and attention to detail</p>
+            <h2 className="text-3xl lg:text-4xl font-heading font-bold text-gray-900 mb-4">{t('productDetail.whatsIncluded')}</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">{t('productDetail.everyOrderPackaged')}</p>
           </motion.div>
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              { icon: '🌹', title: product.id === 'eternal-rose-bear' ? 'Rose Bear' : 'Rose Box', desc: 'Handcrafted with preserved eternal roses' },
-              { icon: '💎', title: 'Engraved Necklace', desc: 'Beautiful heart pendant in your choice of color' },
-              { icon: '🎁', title: 'Premium Gift Box', desc: 'Luxurious packaging with satin ribbon' },
+              { icon: '🌹', title: product.id === 'eternal-rose-bear' ? t('productDetail.roseBear') : t('productDetail.roseBox'), desc: t('productDetail.roseBearItemDesc') },
+              { icon: '💎', title: t('productDetail.engravedNecklace'), desc: t('productDetail.engravedNecklaceItemDesc') },
+              { icon: '🎁', title: t('productDetail.premiumGiftBox'), desc: t('productDetail.premiumGiftBoxItemDesc') },
             ].map((item, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-gradient-to-br from-[#FFF8F8] to-white rounded-2xl p-6 text-center shadow-lg border border-pink-100">
                 <span className="text-5xl mb-4 block">{item.icon}</span>
@@ -593,9 +595,9 @@ export default function ProductDetailPage() {
               <Heart className="w-8 h-8 text-white fill-white" />
             </motion.div>
             <h2 className="text-3xl lg:text-5xl font-heading font-bold text-white mb-4">
-              You May Also <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF88] to-[#FFD700]">Love</span>
+              {t('productDetail.youMayAlsoLove')}
             </h2>
-            <p className="text-gray-400 max-w-xl mx-auto">Complete your collection with our other stunning eternal gift</p>
+            <p className="text-gray-400 max-w-xl mx-auto">{t('productDetail.completeCollection')}</p>
           </motion.div>
 
           {/* Product Card - Premium */}
@@ -700,7 +702,7 @@ export default function ProductDetailPage() {
                           className="pt-2"
                         >
                           <div className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#B71C1C] to-[#D4AF88] text-white font-semibold py-3 px-6 rounded-xl group-hover:shadow-lg group-hover:shadow-[#B71C1C]/30 transition-all">
-                            <span>Discover Now</span>
+                            <span>{t('productDetail.discoverNow')}</span>
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                           </div>
                         </motion.div>
@@ -732,11 +734,11 @@ export default function ProductDetailPage() {
         </div>
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative z-10 text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-heading font-bold text-white mb-4">Customer <span className="text-[#D4AF88]">Reviews</span></h2>
+            <h2 className="text-3xl lg:text-4xl font-heading font-bold text-white mb-4">{t('productDetail.customerReviews')}</h2>
             <div className="flex items-center justify-center gap-2">
               <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className="w-6 h-6 text-yellow-400 fill-yellow-400" />)}</div>
               <span className="text-lg font-semibold text-white">4.9/5</span>
-              <span className="text-white/70">(128 reviews)</span>
+              <span className="text-white/70">(128 {t('productDetail.reviews')})</span>
             </div>
           </motion.div>
           <div className="relative z-10 grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
@@ -747,7 +749,7 @@ export default function ProductDetailPage() {
                     <div className="flex gap-1 mb-2">{[...Array(review.rating)].map((_, j) => <Star key={j} className="w-4 h-4 text-yellow-400 fill-yellow-400" />)}</div>
                     <h4 className="font-bold text-gray-900">{review.title}</h4>
                   </div>
-                  {review.verified && <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">✓ Verified</span>}
+                  {review.verified && <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-medium">✓ {t('productDetail.verified')}</span>}
                 </div>
                 <p className="text-gray-600 mb-4 leading-relaxed">{review.text}</p>
                 <div className="flex items-center justify-between text-sm text-gray-500">
@@ -764,10 +766,10 @@ export default function ProductDetailPage() {
       <section className="relative z-10 py-16 bg-gradient-to-b from-white via-[#FFF8F8] to-[#FFE5E5]/50">
         <div className="container mx-auto px-4">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-heading font-bold text-gray-900 mb-4">Frequently Asked <span className="text-[#B71C1C]">Questions</span></h2>
+            <h2 className="text-3xl lg:text-4xl font-heading font-bold text-gray-900 mb-4">{t('productDetail.faq')}</h2>
           </motion.div>
           <div className="max-w-3xl mx-auto space-y-4">
-            {faqs.map((faq, i) => (
+            {getFaqs(t).map((faq, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-[#FFF8F8] rounded-xl overflow-hidden border border-pink-100">
                 <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between p-5 text-left">
                   <span className="font-semibold text-gray-900">{faq.q}</span>
@@ -828,12 +830,12 @@ export default function ProductDetailPage() {
               >
                 <Check className="w-10 h-10 text-green-600" />
               </motion.div>
-              <h2 className="text-2xl font-heading font-bold text-gray-900 mb-2">Order Confirmed!</h2>
-              <p className="text-gray-600 mb-4">Thank you for your purchase. Your order number is:</p>
+              <h2 className="text-2xl font-heading font-bold text-gray-900 mb-2">{t('common.orderConfirmed')}</h2>
+              <p className="text-gray-600 mb-4">{t('common.thankYou')}</p>
               <p className="text-xl font-bold text-[#B71C1C] mb-6">{orderSuccess}</p>
-              <p className="text-sm text-gray-500 mb-6">You will receive a confirmation email shortly.</p>
+              <p className="text-sm text-gray-500 mb-6">{t('common.confirmationEmail')}</p>
               <Button onClick={() => setOrderSuccess(null)} className="w-full">
-                Continue Shopping
+                {t('common.continueShopping')}
               </Button>
             </motion.div>
           </div>
