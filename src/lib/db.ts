@@ -220,39 +220,80 @@ export interface CreateOrderData {
 }
 
 export async function createOrder(data: CreateOrderData) {
-  // Insert order
-  await sql`
+  // Insert order using Prisma schema columns
+  const result = await sql`
     INSERT INTO orders (
-      order_id, email, customer_name, price, cost, status, 
-      stripe_transaction_id, created_at, updated_at
+      order_number, 
+      customer_email, 
+      customer_name, 
+      customer_currency,
+      subtotal_usd,
+      tax_usd,
+      total_usd,
+      shipping_address_street,
+      shipping_address_city,
+      shipping_address_postal,
+      shipping_address_country,
+      payment_method,
+      payment_id,
+      status,
+      email_sent,
+      discord_notified,
+      created_at, 
+      updated_at
     )
     VALUES (
       ${data.orderNumber}, 
       ${data.customerEmail}, 
       ${data.customerName}, 
-      ${data.totalUsd}, 
-      0, 
-      'confirmed',
+      ${data.customerCurrency},
+      ${data.subtotalUsd},
+      ${data.taxUsd},
+      ${data.totalUsd},
+      ${data.shippingAddress.street},
+      ${data.shippingAddress.city},
+      ${data.shippingAddress.postalCode},
+      ${data.shippingAddress.country},
+      ${data.paymentMethod},
       ${data.paymentId || null},
+      'confirmed',
+      true,
+      true,
       NOW(), 
       NOW()
     )
+    RETURNING id
   `
 
-  // Insert order items
-  for (const item of data.items) {
-    const itemId = `${data.orderNumber}-${item.productId}-${Date.now()}`
-    await sql`
-      INSERT INTO order_items (id, order_id, product_id, rose_color, necklace_color, quantity)
-      VALUES (
-        ${itemId},
-        ${data.orderNumber}, 
-        ${item.productId}, 
-        ${item.roseColor || null}, 
-        ${item.necklaceColor || null}, 
-        ${item.quantity}
-      )
-    `
+  const orderId = result.rows[0]?.id
+
+  // Insert order items if we got an order ID
+  if (orderId) {
+    for (const item of data.items) {
+      // Map product string ID to numeric ID (1 = eternal-rose-bear, 2 = eternal-rose-box)
+      const numericProductId = item.productId === 'eternal-rose-bear' ? 1 : 
+                               item.productId === 'eternal-rose-box' ? 2 : 1
+      const itemTotal = item.priceUsd * item.quantity
+      
+      await sql`
+        INSERT INTO order_items (
+          order_id, 
+          product_id, 
+          product_name, 
+          price_usd, 
+          quantity, 
+          total_usd
+        )
+        VALUES (
+          ${orderId},
+          ${numericProductId}, 
+          ${item.productName}, 
+          ${item.priceUsd},
+          ${item.quantity},
+          ${itemTotal}
+        )
+      `
+    }
   }
 
   return data.orderNumber
