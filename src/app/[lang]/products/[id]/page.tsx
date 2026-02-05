@@ -105,6 +105,10 @@ export default function ProductDetailPage() {
 
   const reviewCount = product?.id === 'eternal-rose-bear' ? 128 : 96
 
+  const translatedProductDescription = product?.id === 'eternal-rose-bear'
+    ? t('productDetail.productDescBear')
+    : t('productDetail.productDescBox')
+
   const storefront = product ? productsById[product.id] : undefined
   const effectiveBasePriceForCart = storefront?.base_price ?? product?.basePrice ?? 0
   const displayBasePrice = !storefrontLoading && storefront?.base_price ? storefront.base_price : null
@@ -147,7 +151,7 @@ export default function ProductDetailPage() {
     const productForCart = {
       id: product.id === 'eternal-rose-bear' ? 1 : 2,
       name: `${product.name} (${selectedColor}, ${selectedNecklace})`,
-      description: product.description,
+      description: translatedProductDescription,
       priceUsd: effectiveBasePriceForCart,
       imageUrl: currentImages.hero,
       imagesUrl: [],
@@ -178,6 +182,9 @@ export default function ProductDetailPage() {
   const otherStorefront = productsById[otherProduct.id]
   const otherEffectiveBasePriceForCart = otherStorefront?.base_price ?? otherProduct.basePrice
   const otherDisplayBasePrice = !storefrontLoading && otherStorefront?.base_price ? otherStorefront.base_price : null
+  const otherTranslatedDescription = otherProduct.id === 'eternal-rose-bear'
+    ? t('productDetail.productDescBear')
+    : t('productDetail.productDescBox')
 
   const floatingHearts = [
     { delay: 0, left: '5%', size: 16 },
@@ -711,7 +718,7 @@ export default function ProductDetailPage() {
                         </h3>
 
                         <p className="text-gray-400 text-sm leading-relaxed">
-                          {otherProduct.description.substring(0, 120)}...
+                          {otherTranslatedDescription.substring(0, 120)}...
                         </p>
 
                         {/* Price */}
