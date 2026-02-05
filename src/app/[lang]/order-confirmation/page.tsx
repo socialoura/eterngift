@@ -11,6 +11,7 @@ import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 declare global {
   interface Window {
     gtag?: (...args: any[]) => void
+    fbq?: (...args: any[]) => void
   }
 }
 
@@ -48,6 +49,37 @@ export default function OrderConfirmationPage() {
       value,
       currency,
       transaction_id: orderId,
+    })
+
+    sessionStorage.setItem(sentKey, '1')
+  }, [orderId])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    if (!window.fbq) return
+
+    const sentKey = `eg_meta_purchase_sent_${orderId}`
+    if (sessionStorage.getItem(sentKey)) return
+
+    let value = 1.0
+    let currency = 'EUR'
+
+    try {
+      const raw = sessionStorage.getItem('eg_last_order')
+      if (raw) {
+        const parsed = JSON.parse(raw) as { orderId?: string; value?: number; currency?: string }
+        if (parsed?.orderId === orderId) {
+          if (typeof parsed.value === 'number' && Number.isFinite(parsed.value)) value = parsed.value
+          if (typeof parsed.currency === 'string' && parsed.currency) currency = parsed.currency
+        }
+      }
+    } catch {
+      // ignore
+    }
+
+    window.fbq('track', 'Purchase', {
+      value,
+      currency,
     })
 
     sessionStorage.setItem(sentKey, '1')
