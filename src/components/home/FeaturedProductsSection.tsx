@@ -77,13 +77,17 @@ function ProductCard({
     ? t('productDetail.productNameBear') 
     : t('productDetail.productNameBox')
 
+  const translatedProductDescription = product.id === 'eternal-rose-bear'
+    ? t('productDetail.productDescBear')
+    : t('productDetail.productDescBox')
+
   const reviewCount = product.id === 'eternal-rose-bear' ? 128 : 96
 
   const handleAddToCart = () => {
     const productForCart = {
       id: product.id === 'eternal-rose-bear' ? 1 : 2,
       name: `${product.name} (${selectedColor}, ${selectedNecklace})`,
-      description: product.description,
+      description: translatedProductDescription,
       priceUsd: priceForCart,
       imageUrl: currentImages.hero,
       imagesUrl: [],

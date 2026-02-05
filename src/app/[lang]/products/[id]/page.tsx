@@ -247,7 +247,7 @@ export default function ProductDetailPage() {
               animate={{ opacity: 1, x: 0 }}
               className="space-y-4"
             >
-              <div className="relative aspect-square bg-gradient-to-br from-[#FFF5F5] to-[#F5F1ED] rounded-3xl overflow-hidden shadow-xl">
+              <div className="relative aspect-[4/3] sm:aspect-square bg-gradient-to-br from-[#FFF5F5] to-[#F5F1ED] rounded-3xl overflow-hidden shadow-xl">
                 <motion.div
                   key={galleryImages[selectedImageIndex].src}
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -259,7 +259,7 @@ export default function ProductDetailPage() {
                     src={galleryImages[selectedImageIndex].src}
                     alt={product.name}
                     fill
-                    className="object-contain p-8"
+                    className="object-contain p-4 sm:p-8"
                     priority
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />

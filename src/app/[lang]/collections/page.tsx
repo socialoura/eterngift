@@ -47,11 +47,15 @@ function ProductCard({
   const necklaceOption = product.options.find((o) => o.name.includes('Necklace'))
   const currentImages = product.getImagesForColor(selectedColor)
 
+  const translatedProductDescription = product.id === 'eternal-rose-bear'
+    ? t('productDetail.productDescBear')
+    : t('productDetail.productDescBox')
+
   const handleAddToCart = () => {
     const productForCart = {
       id: product.id === 'eternal-rose-bear' ? 1 : 2,
       name: `${product.name} (${selectedColor}, ${selectedNecklace})`,
-      description: product.description,
+      description: translatedProductDescription,
       priceUsd: effectiveBasePrice,
       imageUrl: currentImages.hero,
       imagesUrl: [],
