@@ -360,6 +360,14 @@ export async function getStripeSettings() {
   }
 }
 
+export async function getStripeSecretKey(): Promise<string | null> {
+  return process.env.STRIPE_SECRET_KEY || await getSetting('stripe_secret_key')
+}
+
+export async function getStripePublishableKey(): Promise<string | null> {
+  return process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || await getSetting('stripe_publishable_key')
+}
+
 export async function updateStripeSettings(secretKey: string, publishableKey: string) {
   await setSetting('stripe_secret_key', secretKey)
   await setSetting('stripe_publishable_key', publishableKey)

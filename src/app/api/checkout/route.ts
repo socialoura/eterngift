@@ -1,18 +1,47 @@
 import { NextRequest, NextResponse } from 'next/server'
+import Stripe from 'stripe'
 import { generateOrderNumber } from '@/lib/utils'
 import { sendOrderConfirmationEmail, sendDiscordNotification } from '@/lib/email'
-import { createOrder } from '@/lib/db'
+import { createOrder, getStripeSecretKey } from '@/lib/db'
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { items, shippingInfo, totalUsd, currency, paymentMethod } = body
+    const { items, shippingInfo, totalUsd, currency, paymentMethod, paymentIntentId } = body
 
     if (!items || !shippingInfo || !totalUsd) {
       return NextResponse.json(
         { error: 'Missing required fields' },
         { status: 400 }
       )
+    }
+
+    // Verify Stripe payment if paymentMethod is stripe
+    if (paymentMethod === 'stripe') {
+      if (!paymentIntentId) {
+        return NextResponse.json(
+          { error: 'Missing Stripe payment intent ID' },
+          { status: 400 }
+        )
+      }
+
+      const secretKey = await getStripeSecretKey()
+      if (!secretKey) {
+        return NextResponse.json(
+          { error: 'Stripe is not configured' },
+          { status: 500 }
+        )
+      }
+
+      const stripe = new Stripe(secretKey)
+      const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId)
+
+      if (paymentIntent.status !== 'succeeded') {
+        return NextResponse.json(
+          { error: `Payment not completed. Status: ${paymentIntent.status}` },
+          { status: 400 }
+        )
+      }
     }
 
     const orderNumber = generateOrderNumber()
@@ -34,6 +63,7 @@ export async function POST(request: NextRequest) {
           country: shippingInfo.country,
         },
         paymentMethod: paymentMethod || 'card',
+        paymentId: paymentIntentId || undefined,
         items: items.map((item: any) => ({
           productId: item.productId || 'unknown',
           productName: item.productName,

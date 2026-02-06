@@ -16,6 +16,11 @@ const PayPalButtonWrapper = dynamic(
   { ssr: false, loading: () => <div className="h-12 bg-gray-100 animate-pulse rounded-lg" /> }
 )
 
+const StripeCardForm = dynamic(
+  () => import('./StripeCardForm').then(mod => mod.StripeCardForm),
+  { ssr: false, loading: () => <div className="h-20 bg-gray-100 animate-pulse rounded-lg" /> }
+)
+
 interface QuickBuyModalProps {
   isOpen: boolean
   onClose: () => void
@@ -56,11 +61,6 @@ export function QuickBuyModal({
   const [postalCode, setPostalCode] = useState('')
   const [country, setCountry] = useState('')
 
-  // Card info
-  const [cardNumber, setCardNumber] = useState('')
-  const [expiryDate, setExpiryDate] = useState('')
-  const [cvc, setCvc] = useState('')
-  const [cardName, setCardName] = useState('')
 
   const { formatPrice } = useCurrencyStore()
   const { t } = useTranslation()
@@ -78,99 +78,14 @@ export function QuickBuyModal({
 
   const isShippingValid = firstName && lastName && email && address && city && postalCode && country
 
-  const handleCardPayment = async () => {
-    setIsProcessing(true)
-    setError(null)
-
-    try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          items: [{
-            productId: product.id,
-            productName: `${product.name} (${product.selectedColor}, ${product.selectedNecklace})`,
-            priceUsd: product.priceUsd,
-            quantity: 1,
-            engravingLeftHeart: product.engravingLeftHeart || null,
-            engravingRightHeart: product.engravingRightHeart || null,
-          }],
-          shippingInfo,
-          totalUsd: product.priceUsd,
-          currency: 'USD',
-          paymentMethod: 'stripe',
-        }),
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || t('checkout.paymentFailed'))
-      }
-
-      onSuccess(data.orderNumber)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : t('checkout.paymentFailedRetry'))
-    } finally {
-      setIsProcessing(false)
-    }
-  }
-
-  const handlePayPalPayment = async () => {
-    setIsProcessing(true)
-    setError(null)
-
-    try {
-      const response = await fetch('/api/paypal/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          items: [{
-            productId: product.id,
-            productName: `${product.name} (${product.selectedColor}, ${product.selectedNecklace})`,
-            priceUsd: product.priceUsd,
-            quantity: 1,
-            engravingLeftHeart: product.engravingLeftHeart || null,
-            engravingRightHeart: product.engravingRightHeart || null,
-          }],
-          shippingInfo,
-          totalUsd: product.priceUsd,
-          currency: 'USD',
-        }),
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || t('checkout.paypalPaymentFailed'))
-      }
-
-      onSuccess(data.orderNumber)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : t('checkout.paymentFailedRetry'))
-    } finally {
-      setIsProcessing(false)
-    }
-  }
-
-  const formatCardNumber = (value: string) => {
-    const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
-    const matches = v.match(/\d{4,16}/g)
-    const match = (matches && matches[0]) || ''
-    const parts = []
-    for (let i = 0, len = match.length; i < len; i += 4) {
-      parts.push(match.substring(i, i + 4))
-    }
-    return parts.length ? parts.join(' ') : value
-  }
-
-  const formatExpiryDate = (value: string) => {
-    const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
-    if (v.length >= 2) {
-      return v.substring(0, 2) + '/' + v.substring(2, 4)
-    }
-    return v
-  }
+  const stripeItems = [{
+    productId: product.id,
+    productName: `${product.name} (${product.selectedColor}, ${product.selectedNecklace})`,
+    priceUsd: product.priceUsd,
+    quantity: 1,
+    engravingLeftHeart: product.engravingLeftHeart || null,
+    engravingRightHeart: product.engravingRightHeart || null,
+  }]
 
   const handleClose = () => {
     setStep('shipping')
@@ -414,48 +329,14 @@ export function QuickBuyModal({
                       </div>
                     </div>
 
-                    <Input
-                      label={t('checkout.nameOnCard')}
-                      placeholder="John Doe"
-                      value={cardName}
-                      onChange={(e) => setCardName(e.target.value)}
+                    <StripeCardForm
+                      totalUsd={product.priceUsd}
+                      items={stripeItems}
+                      shippingInfo={shippingInfo}
+                      currency="USD"
+                      onSuccess={onSuccess}
+                      onError={(err) => setError(err || null)}
                     />
-
-                    <Input
-                      label={t('checkout.cardNumber')}
-                      placeholder="1234 5678 9012 3456"
-                      value={cardNumber}
-                      onChange={(e) => setCardNumber(formatCardNumber(e.target.value))}
-                      maxLength={19}
-                    />
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <Input
-                        label={t('checkout.expiryDate')}
-                        placeholder="MM/YY"
-                        value={expiryDate}
-                        onChange={(e) => setExpiryDate(formatExpiryDate(e.target.value))}
-                        maxLength={5}
-                      />
-                      <Input
-                        label={t('checkout.cvc')}
-                        placeholder="123"
-                        value={cvc}
-                        onChange={(e) => setCvc(e.target.value.replace(/\D/g, '').slice(0, 4))}
-                        maxLength={4}
-                      />
-                    </div>
-
-                    <Button
-                      className="w-full"
-                      size="lg"
-                      onClick={handleCardPayment}
-                      isLoading={isProcessing}
-                      disabled={!cardNumber || !expiryDate || !cvc || !cardName}
-                    >
-                      <Lock className="w-4 h-4 mr-2" />
-                      {t('checkout.payNow')} {formatPrice(product.priceUsd)}
-                    </Button>
                   </div>
                 ) : (
                   <div className="space-y-4">

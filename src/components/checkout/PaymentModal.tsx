@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, CreditCard, Lock, AlertCircle } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/Input'
 import { ShippingInfo } from '@/lib/types'
 import { cn } from '@/lib/utils'
 import { useCartStore } from '@/store/cart'
@@ -16,6 +15,11 @@ import { useTranslation } from '@/components/providers/I18nProvider'
 const PayPalButtonWrapper = dynamic(
   () => import('./PayPalButtonWrapper').then(mod => mod.PayPalButtonWrapper),
   { ssr: false, loading: () => <div className="h-12 bg-gray-100 animate-pulse rounded-lg" /> }
+)
+
+const StripeCardForm = dynamic(
+  () => import('./StripeCardForm').then(mod => mod.StripeCardForm),
+  { ssr: false, loading: () => <div className="h-20 bg-gray-100 animate-pulse rounded-lg" /> }
 )
 
 interface PaymentModalProps {
@@ -38,111 +42,20 @@ export function PaymentModal({
   onSuccess,
 }: PaymentModalProps) {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('card')
-  const [isProcessing, setIsProcessing] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  
-  const [cardNumber, setCardNumber] = useState('')
-  const [expiryDate, setExpiryDate] = useState('')
-  const [cvc, setCvc] = useState('')
-  const [cardName, setCardName] = useState('')
 
   const { items } = useCartStore()
   const { formatPrice } = useCurrencyStore()
   const { t } = useTranslation()
 
-  const handleCardPayment = async () => {
-    setIsProcessing(true)
-    setError(null)
-
-    try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          items: items.map((item) => ({
-            productId: item.product.id,
-            productName: item.product.name,
-            priceUsd: item.product.priceUsd,
-            quantity: item.quantity,
-            engravingLeftHeart: item.engravingLeftHeart || null,
-            engravingRightHeart: item.engravingRightHeart || null,
-          })),
-          shippingInfo,
-          totalUsd,
-          currency,
-          paymentMethod: 'stripe',
-        }),
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Payment failed')
-      }
-
-      onSuccess(data.orderNumber)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Payment failed. Please try again.')
-    } finally {
-      setIsProcessing(false)
-    }
-  }
-
-  const handlePayPalPayment = async () => {
-    setIsProcessing(true)
-    setError(null)
-
-    try {
-      const response = await fetch('/api/paypal/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          items: items.map((item) => ({
-            productId: item.product.id,
-            productName: item.product.name,
-            priceUsd: item.product.priceUsd,
-            quantity: item.quantity,
-            engravingLeftHeart: item.engravingLeftHeart || null,
-            engravingRightHeart: item.engravingRightHeart || null,
-          })),
-          shippingInfo,
-          totalUsd,
-          currency,
-        }),
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || 'PayPal payment failed')
-      }
-
-      onSuccess(data.orderNumber)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Payment failed. Please try again.')
-    } finally {
-      setIsProcessing(false)
-    }
-  }
-
-  const formatCardNumber = (value: string) => {
-    const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
-    const matches = v.match(/\d{4,16}/g)
-    const match = (matches && matches[0]) || ''
-    const parts = []
-    for (let i = 0, len = match.length; i < len; i += 4) {
-      parts.push(match.substring(i, i + 4))
-    }
-    return parts.length ? parts.join(' ') : value
-  }
-
-  const formatExpiryDate = (value: string) => {
-    const v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
-    if (v.length >= 2) {
-      return v.substring(0, 2) + '/' + v.substring(2, 4)
-    }
-    return v
-  }
+  const stripeItems = items.map((item) => ({
+    productId: item.product.id,
+    productName: item.product.name,
+    priceUsd: item.product.priceUsd,
+    quantity: item.quantity,
+    engravingLeftHeart: item.engravingLeftHeart || null,
+    engravingRightHeart: item.engravingRightHeart || null,
+  }))
 
   if (!isOpen) return null
 
@@ -249,48 +162,14 @@ export function PaymentModal({
                   </div>
                 </div>
 
-                <Input
-                  label={t('checkout.nameOnCard')}
-                  placeholder="John Doe"
-                  value={cardName}
-                  onChange={(e) => setCardName(e.target.value)}
+                <StripeCardForm
+                  totalUsd={totalUsd}
+                  items={stripeItems}
+                  shippingInfo={shippingInfo}
+                  currency={currency}
+                  onSuccess={onSuccess}
+                  onError={(err) => setError(err || null)}
                 />
-
-                <Input
-                  label={t('checkout.cardNumber')}
-                  placeholder="1234 5678 9012 3456"
-                  value={cardNumber}
-                  onChange={(e) => setCardNumber(formatCardNumber(e.target.value))}
-                  maxLength={19}
-                />
-
-                <div className="grid grid-cols-2 gap-4">
-                  <Input
-                    label={t('checkout.expiryDate')}
-                    placeholder="MM/YY"
-                    value={expiryDate}
-                    onChange={(e) => setExpiryDate(formatExpiryDate(e.target.value))}
-                    maxLength={5}
-                  />
-                  <Input
-                    label={t('checkout.cvc')}
-                    placeholder="123"
-                    value={cvc}
-                    onChange={(e) => setCvc(e.target.value.replace(/\D/g, '').slice(0, 4))}
-                    maxLength={4}
-                  />
-                </div>
-
-                <Button
-                  className="w-full"
-                  size="lg"
-                  onClick={handleCardPayment}
-                  isLoading={isProcessing}
-                  disabled={!cardNumber || !expiryDate || !cvc || !cardName}
-                >
-                  <Lock className="w-4 h-4 mr-2" />
-                  {t('checkout.payNow')} {formatPrice(totalUsd)}
-                </Button>
               </div>
             ) : (
               <div className="space-y-4">
