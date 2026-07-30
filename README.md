@@ -48,28 +48,37 @@ A beautiful, romantic e-commerce website for premium Valentine's Day gifts inclu
 
 ```
 src/
+├── middleware.ts       # Locale redirect + currency cookies
 ├── app/                 # Next.js App Router pages
-│   ├── api/            # API routes
-│   ├── cart/           # Shopping cart
-│   ├── checkout/       # Checkout flow
-│   ├── dashboard/      # Admin dashboard
-│   ├── products/       # Product pages
-│   └── order-confirmation/
+│   ├── api/            # API routes (checkout, stripe, paypal, admin, products, currency)
+│   ├── [lang]/         # All public pages (locale-prefixed: en/fr/es/de/it)
+│   │   ├── cart/       # Shopping cart
+│   │   ├── checkout/   # Checkout flow
+│   │   ├── products/   # Product pages
+│   │   └── order-confirmation/
+│   └── admin/          # Admin login + dashboard (/admin, /admin/dashboard)
 ├── components/         # React components
-│   ├── checkout/       # Payment modal
+│   ├── checkout/       # Payment modal (Stripe Payment Element + PayPal buttons)
 │   ├── home/           # Homepage sections
 │   ├── layout/         # Header, Footer
 │   ├── products/       # Product cards
+│   ├── admin/          # Dashboard tabs
 │   └── ui/             # Reusable UI components
 ├── lib/                # Utilities
+│   ├── db.ts           # All DB access (raw SQL via @vercel/postgres)
 │   ├── currency.ts     # Currency conversion
-│   ├── prisma.ts       # Database client
+│   ├── email.ts        # Resend + Discord notifications
+│   ├── product-ids.ts  # Product slug <-> numeric ID mapping
 │   ├── types.ts        # TypeScript types
 │   └── utils.ts        # Helper functions
 └── store/              # Zustand stores
-    ├── cart.ts         # Cart state
+    ├── cart.ts         # Cart state (persisted to localStorage)
     └── currency.ts     # Currency state
 ```
+
+> Note: Prisma (`prisma/schema.prisma`) defines the DB schema, but the code queries
+> the database exclusively with raw SQL through `@vercel/postgres`.
+> See `AGENTS.md` for the full architecture and known pitfalls.
 
 ## 🎨 Design System
 

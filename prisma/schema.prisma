@@ -56,6 +56,8 @@ model Order {
   paymentMethod         String      @map("payment_method")
   paymentId             String?     @map("payment_id")
   status                String      @default("pending")
+  cost                  Decimal     @default(0) @db.Decimal(10, 2)
+  notes                 String?
   emailSent             Boolean     @default(false) @map("email_sent")
   discordNotified       Boolean     @default(false) @map("discord_notified")
   createdAt             DateTime    @default(now()) @map("created_at")

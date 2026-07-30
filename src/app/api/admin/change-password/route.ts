@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import bcrypt from 'bcryptjs'
 import { verifyAdminToken, unauthorizedResponse } from '@/lib/admin-auth'
+import { initDatabase, getAdminUser, updateAdminPassword } from '@/lib/db'
+
+initDatabase().catch(console.error)
 
 export async function POST(request: NextRequest) {
   const auth = verifyAdminToken(request)
@@ -7,19 +11,32 @@ export async function POST(request: NextRequest) {
 
   try {
     const { currentPassword, newPassword } = await request.json()
-    const adminPassword = process.env.ADMIN_PASSWORD
 
-    if (currentPassword !== adminPassword) {
-      return NextResponse.json({ error: 'Current password is incorrect' }, { status: 400 })
+    if (!currentPassword || !newPassword) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    if (newPassword.length < 8) {
+    if (typeof newPassword !== 'string' || newPassword.length < 8) {
       return NextResponse.json({ error: 'Password must be at least 8 characters' }, { status: 400 })
     }
 
-    // Note: In production, you would update an environment variable or database
-    // For now, we return success but the password change would need to be done manually
-    return NextResponse.json({ success: true, message: 'Please update ADMIN_PASSWORD in environment variables' })
+    const username = auth.token!.username
+
+    // Verify current password: DB hash first (if a password was previously changed),
+    // otherwise the ADMIN_PASSWORD env var.
+    const dbUser = await getAdminUser(username)
+    const currentValid = dbUser?.password_hash
+      ? bcrypt.compareSync(currentPassword, dbUser.password_hash)
+      : currentPassword === process.env.ADMIN_PASSWORD
+
+    if (!currentValid) {
+      return NextResponse.json({ error: 'Current password is incorrect' }, { status: 400 })
+    }
+
+    const passwordHash = bcrypt.hashSync(newPassword, 10)
+    await updateAdminPassword(username, passwordHash)
+
+    return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Error changing password:', error)
     return NextResponse.json({ error: 'Failed to change password' }, { status: 500 })

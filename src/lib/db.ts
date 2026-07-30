@@ -1,6 +1,10 @@
 import { sql } from '@vercel/postgres'
+import { productSlugToId } from '@/lib/product-ids'
 
 // Initialize database tables
+// NOTE: products / orders / order_items / users / currency_rates are owned by
+// the Prisma schema (prisma/schema.prisma, applied via `prisma db push`).
+// Only the auxiliary tables that do NOT exist in the Prisma schema are created here.
 export async function initDatabase() {
   try {
     // Admin users table
@@ -9,60 +13,6 @@ export async function initDatabase() {
         username TEXT PRIMARY KEY,
         password_hash TEXT NOT NULL,
         created_at TIMESTAMP DEFAULT NOW()
-      )
-    `
-
-    // Products table
-    await sql`
-      CREATE TABLE IF NOT EXISTS products (
-        id TEXT PRIMARY KEY,
-        name TEXT NOT NULL,
-        description TEXT,
-        image_url TEXT,
-        base_price DECIMAL NOT NULL DEFAULT 0,
-        stock INT DEFAULT 0,
-        created_at TIMESTAMP DEFAULT NOW()
-      )
-    `
-
-    // Product variants table
-    await sql`
-      CREATE TABLE IF NOT EXISTS product_variants (
-        id TEXT PRIMARY KEY,
-        product_id TEXT REFERENCES products(id),
-        variant_type TEXT,
-        variant_value TEXT,
-        created_at TIMESTAMP DEFAULT NOW()
-      )
-    `
-
-    // Orders table
-    await sql`
-      CREATE TABLE IF NOT EXISTS orders (
-        order_id TEXT PRIMARY KEY,
-        email TEXT NOT NULL,
-        customer_name TEXT,
-        price DECIMAL NOT NULL DEFAULT 0,
-        cost DECIMAL DEFAULT 0,
-        status TEXT DEFAULT 'pending',
-        notes TEXT,
-        stripe_transaction_id TEXT,
-        promo_code TEXT,
-        discount_amount DECIMAL DEFAULT 0,
-        created_at TIMESTAMP DEFAULT NOW(),
-        updated_at TIMESTAMP DEFAULT NOW()
-      )
-    `
-
-    // Order items table
-    await sql`
-      CREATE TABLE IF NOT EXISTS order_items (
-        id TEXT PRIMARY KEY,
-        order_id TEXT REFERENCES orders(order_id),
-        product_id TEXT,
-        rose_color TEXT,
-        necklace_color TEXT,
-        quantity INT DEFAULT 1
       )
     `
 
@@ -100,48 +50,6 @@ export async function initDatabase() {
       )
     `
 
-    // Migrate legacy product ids (rose-box/rose-bear) to current storefront ids (eternal-rose-*)
-    // while preserving the legacy rows for existing orders.
-    await sql`
-      INSERT INTO products (id, name, description, image_url, base_price, stock)
-      SELECT
-        'eternal-rose-bear',
-        'Eternal Rose Bear with Engraved Necklace',
-        'Your perfect eternal companion. A stunning rose bear paired with an engraved necklace, creating a timeless symbol of love and remembrance.',
-        '/products/rose-bear/rouge/1.png',
-        base_price,
-        stock
-      FROM products
-      WHERE id = 'rose-bear'
-      ON CONFLICT (id) DO NOTHING
-    `
-
-    await sql`
-      INSERT INTO products (id, name, description, image_url, base_price, stock)
-      SELECT
-        'eternal-rose-box',
-        'Eternal Rose Box with Engraved Necklace',
-        'Eternal luxury in a box. A stunning preserved rose arrangement paired with a personalized engraved necklace.',
-        '/products/rose-box/rouge/1.png',
-        base_price,
-        stock
-      FROM products
-      WHERE id = 'rose-box'
-      ON CONFLICT (id) DO NOTHING
-    `
-
-    // Insert or update default products with correct prices
-    await sql`
-      INSERT INTO products (id, name, description, image_url, base_price, stock)
-      VALUES ('eternal-rose-box', 'Eternal Rose Box with Engraved Necklace', 'Eternal luxury in a box. A stunning preserved rose arrangement paired with a personalized engraved necklace.', '/products/rose-box/rouge/1.png', 19.99, 100)
-      ON CONFLICT (id) DO UPDATE SET base_price = 19.99
-    `
-    await sql`
-      INSERT INTO products (id, name, description, image_url, base_price, stock)
-      VALUES ('eternal-rose-bear', 'Eternal Rose Bear with Engraved Necklace', 'Your perfect eternal companion. A stunning rose bear paired with an engraved necklace, creating a timeless symbol of love and remembrance.', '/products/rose-bear/rouge/1.png', 29.99, 100)
-      ON CONFLICT (id) DO UPDATE SET base_price = 29.99
-    `
-
     console.log('Database initialized successfully')
   } catch (error) {
     console.error('Error initializing database:', error)
@@ -161,33 +69,6 @@ export async function updateAdminPassword(username: string, passwordHash: string
     VALUES (${username}, ${passwordHash})
     ON CONFLICT (username) DO UPDATE SET password_hash = ${passwordHash}
   `
-}
-
-// Products functions
-export async function getProducts() {
-  const result = await sql`SELECT * FROM products ORDER BY name`
-  return result.rows
-}
-
-export async function getProduct(id: string) {
-  const result = await sql`SELECT * FROM products WHERE id = ${id}`
-  return result.rows[0]
-}
-
-export async function updateProduct(id: string, data: { basePrice?: number; stock?: number }) {
-  const { basePrice, stock } = data
-  if (basePrice !== undefined && stock !== undefined) {
-    await sql`UPDATE products SET base_price = ${basePrice}, stock = ${stock} WHERE id = ${id}`
-  } else if (basePrice !== undefined) {
-    await sql`UPDATE products SET base_price = ${basePrice} WHERE id = ${id}`
-  } else if (stock !== undefined) {
-    await sql`UPDATE products SET stock = ${stock} WHERE id = ${id}`
-  }
-}
-
-export async function getProductVariants(productId: string) {
-  const result = await sql`SELECT * FROM product_variants WHERE product_id = ${productId}`
-  return result.rows
 }
 
 // Orders functions
@@ -270,9 +151,12 @@ export async function createOrder(data: CreateOrderData) {
   // Insert order items if we got an order ID
   if (orderId) {
     for (const item of data.items) {
-      // Map product string ID to numeric ID (1 = eternal-rose-bear, 2 = eternal-rose-box)
-      const numericProductId = item.productId === 'eternal-rose-bear' ? 1 : 
-                               item.productId === 'eternal-rose-box' ? 2 : 1
+      // Map product slug to numeric DB ID (single source: src/lib/product-ids.ts)
+      const numericProductId = productSlugToId(item.productId)
+      if (numericProductId === null) {
+        console.warn(`Unknown product slug "${item.productId}", skipping order item`)
+        continue
+      }
       const itemTotal = item.priceUsd * item.quantity
       
       await sql`
@@ -307,33 +191,28 @@ export async function getAllOrders(filters?: { status?: string; product?: string
   return result.rows
 }
 
-export async function getOrder(orderId: string) {
-  const result = await sql`SELECT * FROM orders WHERE order_id = ${orderId}`
+export async function getOrder(orderNumber: string) {
+  const result = await sql`SELECT * FROM orders WHERE order_number = ${orderNumber}`
   return result.rows[0]
 }
 
-export async function getOrderItems(orderId: string) {
-  const result = await sql`SELECT * FROM order_items WHERE order_id = ${orderId}`
-  return result.rows
-}
-
-export async function updateOrder(orderId: string, data: { status?: string; cost?: number; notes?: string }) {
+export async function updateOrder(orderNumber: string, data: { status?: string; cost?: number; notes?: string }) {
   const { status, cost, notes } = data
-  
+
   if (status !== undefined) {
-    await sql`UPDATE orders SET status = ${status}, updated_at = NOW() WHERE order_id = ${orderId}`
+    await sql`UPDATE orders SET status = ${status}, updated_at = NOW() WHERE order_number = ${orderNumber}`
   }
   if (cost !== undefined) {
-    await sql`UPDATE orders SET cost = ${cost}, updated_at = NOW() WHERE order_id = ${orderId}`
+    await sql`UPDATE orders SET cost = ${cost}, updated_at = NOW() WHERE order_number = ${orderNumber}`
   }
   if (notes !== undefined) {
-    await sql`UPDATE orders SET notes = ${notes}, updated_at = NOW() WHERE order_id = ${orderId}`
+    await sql`UPDATE orders SET notes = ${notes}, updated_at = NOW() WHERE order_number = ${orderNumber}`
   }
 }
 
-export async function deleteOrder(orderId: string) {
-  await sql`DELETE FROM order_items WHERE order_id = ${orderId}`
-  await sql`DELETE FROM orders WHERE order_id = ${orderId}`
+export async function deleteOrder(orderNumber: string) {
+  // order_items rows are removed by the ON DELETE CASCADE FK on order_items.order_id
+  await sql`DELETE FROM orders WHERE order_number = ${orderNumber}`
 }
 
 // Settings functions
