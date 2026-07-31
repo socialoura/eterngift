@@ -355,6 +355,52 @@ export async function sendDiscordNotification(data: OrderConfirmationData): Prom
   }
 }
 
+export async function sendEngravingSubmittedNotification(data: {
+  orderNumber: string
+  customerName: string
+  customerEmail: string
+  productName: string
+  engravingLeftHeart: string | null
+  engravingRightHeart: string | null
+}): Promise<boolean> {
+  const token = process.env.TELEGRAM_BOT_TOKEN
+  const chatId = process.env.TELEGRAM_CHAT_ID
+
+  if (!token || !chatId) {
+    console.warn('TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID not configured, skipping engraving submission notification')
+    return false
+  }
+
+  const fmt = (s: string | null) => (s && s.trim() ? `"${s}"` : '(vide)')
+
+  const text = [
+    '✍️ *Engraving submitted* — EternGift',
+    '',
+    `*Order #${data.orderNumber}*`,
+    `👤 ${data.customerName} (${data.customerEmail})`,
+    `📦 ${data.productName}`,
+    '',
+    `L: ${fmt(data.engravingLeftHeart)}`,
+    `R: ${fmt(data.engravingRightHeart)}`,
+  ].join('\n')
+
+  try {
+    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: chatId, text, parse_mode: 'Markdown' }),
+    })
+    if (!res.ok) {
+      console.error('Telegram engraving notification failed:', await res.text())
+      return false
+    }
+    return true
+  } catch (error) {
+    console.error('Failed to send Telegram engraving notification:', error)
+    return false
+  }
+}
+
 export async function sendEngravingRecoveryEmail(data: {
   to: string
   customerName: string

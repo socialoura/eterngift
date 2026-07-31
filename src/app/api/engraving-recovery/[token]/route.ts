@@ -6,6 +6,7 @@ import {
   markRecoveryTokenUsed,
   updateOrderItemEngraving,
 } from '@/lib/db'
+import { sendEngravingSubmittedNotification } from '@/lib/email'
 
 const Body = z.object({
   left: z.string().max(15).optional().default(''),
@@ -58,13 +59,23 @@ export async function POST(
 
   // Update the FIRST order_item for this order (1 product per order so far).
   const items = await sql`
-    SELECT id FROM order_items WHERE order_id = ${row.order_id} ORDER BY id ASC LIMIT 1
+    SELECT id, product_name FROM order_items WHERE order_id = ${row.order_id} ORDER BY id ASC LIMIT 1
   `
   const item = items.rows[0]
   if (!item) return NextResponse.json({ error: 'no_item' }, { status: 400 })
 
   await updateOrderItemEngraving(item.id, left, right)
   await markRecoveryTokenUsed(row.id)
+
+  // Notify the owner via Telegram (best-effort, never fails the submission)
+  sendEngravingSubmittedNotification({
+    orderNumber: row.order_number,
+    customerName: row.customer_name || '',
+    customerEmail: row.customer_email || '',
+    productName: item.product_name,
+    engravingLeftHeart: left,
+    engravingRightHeart: right,
+  }).catch((e) => console.error('Telegram submit notification error:', e))
 
   return NextResponse.json({ success: true })
 }
