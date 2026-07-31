@@ -147,6 +147,20 @@ export function OrdersTab({ token }: { token: string }) {
                   <td className="px-4 py-3">
                     <div className="text-sm font-medium text-gray-900">{order.customer_name || 'N/A'}</div>
                     <div className="text-xs text-gray-500">{order.customer_email}</div>
+                    {order.items?.length > 0 && (
+                      <div className="mt-1 space-y-1">
+                        {order.items.map((it: any, i: number) => (
+                          <div key={i} className="text-xs text-gray-600">
+                            <span className="font-medium">{it.product_name}</span> × {it.quantity}
+                            {(it.engraving_left_heart || it.engraving_right_heart) && (
+                              <span className="ml-2 text-[#B71C1C]">
+                                ✨ L: "{it.engraving_left_heart || '-'}" | R: "{it.engraving_right_heart || '-'}"
+                              </span>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </td>
                   <td className="px-4 py-3 text-sm font-medium">€{Number(order.total_usd || 0).toFixed(2)}</td>
                   <td className="px-4 py-3">

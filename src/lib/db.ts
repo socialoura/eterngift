@@ -161,20 +161,24 @@ export async function createOrder(data: CreateOrderData) {
       
       await sql`
         INSERT INTO order_items (
-          order_id, 
-          product_id, 
-          product_name, 
-          price_usd, 
-          quantity, 
-          total_usd
+          order_id,
+          product_id,
+          product_name,
+          price_usd,
+          quantity,
+          total_usd,
+          engraving_left_heart,
+          engraving_right_heart
         )
         VALUES (
           ${orderId},
-          ${numericProductId}, 
-          ${item.productName}, 
+          ${numericProductId},
+          ${item.productName},
           ${item.priceUsd},
           ${item.quantity},
-          ${itemTotal}
+          ${itemTotal},
+          ${item.engravingLeftHeart || null},
+          ${item.engravingRightHeart || null}
         )
       `
     }
@@ -185,10 +189,29 @@ export async function createOrder(data: CreateOrderData) {
 
 export async function getAllOrders(filters?: { status?: string; product?: string; dateRange?: string }) {
   let query = sql`SELECT * FROM orders ORDER BY created_at DESC`
-  
+
   // For now, return all orders - filtering can be added later
   const result = await query
-  return result.rows
+  const orders = result.rows
+
+  // Attach items (incl. engraving) for each order in a single batched query
+  if (orders.length > 0) {
+    const items = await sql`
+      SELECT order_id, product_name, quantity, price_usd, total_usd,
+             engraving_left_heart, engraving_right_heart
+      FROM order_items
+      WHERE order_id = ANY(${orders.map((o: { id: number }) => o.id) as unknown as number})
+    `
+    const byOrder = new Map<number, unknown[]>()
+    for (const it of items.rows) {
+      const arr = byOrder.get(it.order_id) || []
+      arr.push(it)
+      byOrder.set(it.order_id, arr)
+    }
+    for (const o of orders) o.items = byOrder.get(o.id) || []
+  }
+
+  return orders
 }
 
 export async function getOrder(orderNumber: string) {
