@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
 import { inter, playfair } from '@/lib/fonts'
+import { PostHogProvider } from '@/components/providers/PostHogProvider'
 import './globals.css'
 
 const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || '1434519064736453'
@@ -113,7 +114,7 @@ fbq('track', 'PageView');`}
             src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
           />
         </noscript>
-        {children}
+        <PostHogProvider>{children}</PostHogProvider>
       </body>
     </html>
   )

@@ -18,6 +18,11 @@ export function generateOrderNumber(): string {
   return `EG-${timestamp}-${random}`
 }
 
+export function formatVariantName(baseName: string, ...variants: (string | undefined | null)[]): string {
+  const parts = variants.filter((v): v is string => Boolean(v && v.trim()))
+  return parts.length > 0 ? `${baseName} (${parts.join(', ')})` : baseName
+}
+
 export function slugify(text: string): string {
   return text
     .toLowerCase()

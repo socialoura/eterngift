@@ -27,7 +27,7 @@
     "confirmationEmail": "Vous recevrez un email de confirmation sous peu."
   },
   "header": {
-    "promo": "Commandez maintenant et recevez-le pour la Saint-Valentin ❤️",
+    "promo": "Livraison gratuite dans le monde entier — fabriqué avec amour",
     "foreverInLove": "Pour toujours amoureux"
   },
   "hero": {
@@ -150,10 +150,10 @@
     "review4Title": "Un cadeau qui dure éternellement",
     "review4Text": "Contrairement aux vraies fleurs qui fanent après une semaine, cette rose éternelle est toujours aussi belle que le jour où je l'ai reçue. Mon fiancé savait exactement ce que je voulais. Le collier en or est magnifique !",
     "review4Product": "Coffret Rose Éternel",
-    "happyCouples": "Couples heureux",
     "averageRating": "Note moyenne",
-    "satisfaction": "Satisfaction",
-    "support": "Support"
+    "handcrafted": "Fait main",
+    "guarantee": "Garantie",
+    "shipping": "Livraison"
   },
   "whyUs": {
     "title": "Pourquoi choisir",
@@ -169,10 +169,10 @@
     "freeShippingDesc": "Nous livrons l'amour dans le monde entier avec la livraison express gratuite.",
     "guarantee": "Garantie 30 jours",
     "guaranteeDesc": "Pas satisfait ? Nous offrons des retours sans tracas sous 30 jours.",
-    "support": "Support 24/7",
-    "supportDesc": "Notre équipe dévouée est toujours là pour vous aider.",
+    "support": "Support réactif",
+    "supportDesc": "Nous répondons sous 24 heures, à chaque fois.",
     "ctaTitle": "Prêt à rendre quelqu'un heureux ?",
-    "ctaSubtitle": "Rejoignez plus de 50 000 clients satisfaits qui ont choisi EternGift pour exprimer leur amour."
+    "ctaSubtitle": "Fabriqué avec amour et expédié avec soin — découvrez pourquoi nos clients reviennent."
   },
   "cart": {
     "yourCart": "Votre panier",
@@ -375,8 +375,8 @@
     "friendlySupportDesc": "Notre équipe se soucie vraiment de votre expérience.",
     "securePrivate": "Sécurisé et privé",
     "securePrivateDesc": "Vos informations sont toujours protégées.",
-    "trustedBy": "Plus de 50 000 clients nous font confiance",
-    "trustedByDesc": "Rejoignez des milliers de clients satisfaits qui ont fait confiance à EternGift pour leurs moments les plus spéciaux. Notre note de 4.9★ parle d'elle-même !",
+    "trustedBy": "Fabriqué avec soin",
+    "trustedByDesc": "Chaque pièce est fabriquée sur commande et vérifiée à la main avant expédition.",
     "followOurJourney": "Suivez notre aventure",
     "followOurJourneyDesc": "Restez connectés sur les réseaux sociaux pour des offres exclusives, des coulisses et de l'inspiration cadeaux romantiques."
   }

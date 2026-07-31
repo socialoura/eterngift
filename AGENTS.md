@@ -17,7 +17,7 @@ EternGift est une boutique e-commerce mono-produit (2 SKU : « Eternal Rose Bear
 - **Email** : `resend` (PAS SendGrid)
 - **Charts admin** : `recharts`
 - **i18n** : maison, 5 locales `en/fr/es/de/it` (`src/lib/i18n/`), middleware de redirection locale + devise
-- **Analytics** : `@vercel/analytics`, `@vercel/speed-insights`, Meta Pixel (`NEXT_PUBLIC_META_PIXEL_ID`, fallback en dur `1434519064736453` dans `layout.tsx` — identifiant public, pas un secret)
+- **Analytics** : `@vercel/analytics`, `@vercel/speed-insights`, Meta Pixel (`NEXT_PUBLIC_META_PIXEL_ID`, fallback en dur `1434519064736453` dans `layout.tsx` — identifiant public, pas un secret), Google Ads gtag (conversions), PostHog (`posthog-js`, provider `src/components/providers/PostHogProvider.tsx`, monté dans `src/app/layout.tsx` — pageviews + autocapture + événements `add_to_cart`/`checkout_started`/`purchase_completed`, clé/host `NEXT_PUBLIC_POSTHOG_KEY`/`NEXT_PUBLIC_POSTHOG_HOST` avec fallback en dur, projet EU Cloud)
 - **Dépendances mortes restantes** : `jose`, `dinero.js`, `zod`, `react-hook-form`, `@hookform/resolvers` — installées mais non utilisées.
 
 ## 3. Structure des dossiers

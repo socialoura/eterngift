@@ -27,7 +27,7 @@
     "confirmationEmail": "Riceverai un'email di conferma a breve."
   },
   "header": {
-    "promo": "Ordina ora e ricevilo per San Valentino ❤️",
+    "promo": "Spedizione gratuita in tutto il mondo — realizzato con amore",
     "foreverInLove": "Per sempre innamorati"
   },
   "hero": {
@@ -150,10 +150,10 @@
     "review4Title": "Un regalo che dura per sempre",
     "review4Text": "A differenza dei fiori veri che appassiscono dopo una settimana, questa rosa eterna è ancora bella come il giorno in cui l'ho ricevuta. Il mio fidanzato sapeva esattamente cosa volevo. La collana d'oro è splendida!",
     "review4Product": "Scatola di Rose Eterna",
-    "happyCouples": "Coppie felici",
     "averageRating": "Valutazione media",
-    "satisfaction": "Soddisfazione",
-    "support": "Supporto"
+    "handcrafted": "Fatto a mano",
+    "guarantee": "Garanzia",
+    "shipping": "Spedizione"
   },
   "whyUs": {
     "title": "Perché scegliere",
@@ -169,10 +169,10 @@
     "freeShippingDesc": "Consegniamo amore in tutto il mondo con spedizione express gratuita.",
     "guarantee": "Garanzia 30 giorni",
     "guaranteeDesc": "Non soddisfatto? Offriamo resi senza problemi entro 30 giorni.",
-    "support": "Supporto 24/7",
-    "supportDesc": "Il nostro team dedicato è sempre qui per aiutarti.",
+    "support": "Assistenza rapida",
+    "supportDesc": "Rispondiamo entro 24 ore, sempre.",
     "ctaTitle": "Pronto a rendere felice qualcuno?",
-    "ctaSubtitle": "Unisciti a oltre 50.000 clienti felici che hanno scelto EternGift per esprimere il loro amore."
+    "ctaSubtitle": "Realizzato con amore e spedito con cura — scopri perché i nostri clienti tornano."
   },
   "cart": {
     "yourCart": "Il tuo carrello",
@@ -375,8 +375,8 @@
     "friendlySupportDesc": "Il nostro team si prende cura della tua esperienza.",
     "securePrivate": "Sicuro e privato",
     "securePrivateDesc": "Le tue informazioni sono sempre protette.",
-    "trustedBy": "Oltre 50.000 clienti si fidano di noi",
-    "trustedByDesc": "Unisciti a migliaia di clienti soddisfatti. La nostra valutazione 4.9★ parla da sola!",
+    "trustedBy": "Realizzato con cura",
+    "trustedByDesc": "Ogni pezzo è realizzato su ordinazione e controllato a mano prima della spedizione.",
     "followOurJourney": "Seguici",
     "followOurJourneyDesc": "Connettiti sui social per offerte esclusive e ispirazione."
   }

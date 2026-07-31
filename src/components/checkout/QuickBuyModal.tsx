@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { X, CreditCard, Lock, AlertCircle, ChevronLeft, Check, Truck, Shield } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
-import { cn } from '@/lib/utils'
+import { cn, formatVariantName } from '@/lib/utils'
 import { useCurrencyStore } from '@/store/currency'
 import { useTranslation } from '@/components/providers/I18nProvider'
 
@@ -80,7 +80,7 @@ export function QuickBuyModal({
 
   const stripeItems = [{
     productId: product.id,
-    productName: `${product.name} (${product.selectedColor}, ${product.selectedNecklace})`,
+    productName: formatVariantName(product.name, product.selectedColor, product.selectedNecklace),
     priceUsd: product.priceUsd,
     quantity: 1,
     engravingLeftHeart: product.engravingLeftHeart || null,
@@ -350,7 +350,7 @@ export function QuickBuyModal({
                       totalUsd={product.priceUsd}
                       items={[{
                         productId: product.id,
-                        productName: `${product.name} (${product.selectedColor}, ${product.selectedNecklace})`,
+                        productName: formatVariantName(product.name, product.selectedColor, product.selectedNecklace),
                         priceUsd: product.priceUsd,
                         quantity: 1,
                         engravingLeftHeart: product.engravingLeftHeart || null,

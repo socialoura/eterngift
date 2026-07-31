@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Clock, Send, Heart, MessageCircle, CheckCircle } from 'lucide-react'
+import { Mail, Phone, MapPin, Clock, Send, Heart, MessageCircle, CheckCircle, Zap, Lock } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { useTranslation } from '@/components/providers/I18nProvider'
@@ -165,7 +165,7 @@ export default function ContactPage() {
                     <CheckCircle className="w-10 h-10 text-green-600" />
                   </motion.div>
                   <h3 className="text-2xl font-heading font-bold text-gray-900 mb-2">
-                    {t('contactPage.messageSent')} 💕
+                    {t('contactPage.messageSent')}
                   </h3>
                   <p className="text-gray-600 mb-6">
                     {t('contactPage.thankYou')}
@@ -275,9 +275,9 @@ export default function ContactPage() {
               {/* Features */}
               <div className="space-y-4">
                 {[
-                  { icon: '⚡', title: t('contactExtra.fastResponse'), text: t('contactExtra.fastResponseDesc') },
-                  { icon: '💝', title: t('contactExtra.friendlySupport'), text: t('contactExtra.friendlySupportDesc') },
-                  { icon: '🔒', title: t('contactExtra.securePrivate'), text: t('contactExtra.securePrivateDesc') },
+                  { Icon: Zap, title: t('contactExtra.fastResponse'), text: t('contactExtra.fastResponseDesc') },
+                  { Icon: Heart, title: t('contactExtra.friendlySupport'), text: t('contactExtra.friendlySupportDesc') },
+                  { Icon: Lock, title: t('contactExtra.securePrivate'), text: t('contactExtra.securePrivateDesc') },
                 ].map((feature, i) => (
                   <motion.div
                     key={feature.title}
@@ -287,7 +287,9 @@ export default function ContactPage() {
                     transition={{ delay: i * 0.1 }}
                     className="flex items-start gap-4 bg-white rounded-xl p-4 shadow-md"
                   >
-                    <span className="text-2xl">{feature.icon}</span>
+                    <div className="flex items-center justify-center w-10 h-10 shrink-0 rounded-lg bg-gradient-to-br from-[#FFE5E5] to-pink-100">
+                      <feature.Icon className="w-5 h-5 text-[#B71C1C]" />
+                    </div>
                     <div>
                       <h4 className="font-semibold text-gray-900">{feature.title}</h4>
                       <p className="text-sm text-gray-500">{feature.text}</p>

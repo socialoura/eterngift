@@ -27,7 +27,7 @@
     "confirmationEmail": "Sie erhalten in Kürze eine Bestätigungs-E-Mail."
   },
   "header": {
-    "promo": "Jetzt bestellen und zum Valentinstag erhalten ❤️",
+    "promo": "Kostenloser weltweiter Versand — mit Liebe handgefertigt",
     "foreverInLove": "Für immer verliebt"
   },
   "hero": {
@@ -150,10 +150,10 @@
     "review4Title": "Ein Geschenk, das ewig hält",
     "review4Text": "Im Gegensatz zu echten Blumen, die nach einer Woche welken, ist diese ewige Rose immer noch so schön wie am Tag, als ich sie bekommen habe. Mein Verlobter wusste genau, was ich wollte. Die goldene Halskette ist wunderschön!",
     "review4Product": "Ewige Rosenbox",
-    "happyCouples": "Glückliche Paare",
     "averageRating": "Durchschnittsbewertung",
-    "satisfaction": "Zufriedenheit",
-    "support": "Support"
+    "handcrafted": "Handgefertigt",
+    "guarantee": "Garantie",
+    "shipping": "Versand"
   },
   "whyUs": {
     "title": "Warum",
@@ -169,10 +169,10 @@
     "freeShippingDesc": "Wir liefern Liebe weltweit mit kostenlosem Expressversand.",
     "guarantee": "30-Tage-Garantie",
     "guaranteeDesc": "Nicht zufrieden? Wir bieten problemlose Rücksendungen innerhalb von 30 Tagen.",
-    "support": "24/7 Support",
-    "supportDesc": "Unser engagiertes Team ist immer für Sie da.",
+    "support": "Schneller Support",
+    "supportDesc": "Wir antworten innerhalb von 24 Stunden, jedes Mal.",
     "ctaTitle": "Bereit, jemandem eine Freude zu machen?",
-    "ctaSubtitle": "Schließen Sie sich über 50.000 zufriedenen Kunden an, die EternGift gewählt haben."
+    "ctaSubtitle": "Mit Liebe handgefertigt und mit Sorgfalt versandt — erfahren Sie, warum unsere Kunden wiederkommen."
   },
   "cart": {
     "yourCart": "Ihr Warenkorb",
@@ -375,8 +375,8 @@
     "friendlySupportDesc": "Unser Team kümmert sich um Ihre Erfahrung.",
     "securePrivate": "Sicher & Privat",
     "securePrivateDesc": "Ihre Daten sind immer geschützt.",
-    "trustedBy": "Über 50.000 Kunden vertrauen uns",
-    "trustedByDesc": "Schließen Sie sich tausenden zufriedenen Kunden an. Unsere 4,9★-Bewertung spricht für sich!",
+    "trustedBy": "Mit Sorgfalt gefertigt",
+    "trustedByDesc": "Jedes Stück wird auf Bestellung gefertigt und vor dem Versand von Hand geprüft.",
     "followOurJourney": "Folgen Sie uns",
     "followOurJourneyDesc": "Verbinden Sie sich auf Social Media für exklusive Angebote und Inspiration."
   }

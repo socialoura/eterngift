@@ -78,9 +78,9 @@ export function Header() {
           : 'bg-gradient-to-r from-[#8B1538] via-[#B71C1C] to-[#D4AF88]'
       )}>
         <p className="flex items-center justify-center gap-2">
-          <span>💝</span>
+          <Heart className="w-4 h-4 fill-current" />
           <span className="font-medium">{t('header.promo')}</span>
-          <span>💝</span>
+          <Heart className="w-4 h-4 fill-current" />
         </p>
       </div>
 

@@ -27,7 +27,7 @@
     "confirmationEmail": "You will receive a confirmation email shortly."
   },
   "header": {
-    "promo": "Order now and receive it for Valentine's Day ",
+    "promo": "Free worldwide shipping — handcrafted with love",
     "foreverInLove": "Forever in Love"
   },
   "hero": {
@@ -150,10 +150,10 @@
     "review4Title": "A gift that lasts forever",
     "review4Text": "Unlike real flowers that wilt after a week, this eternal rose is still as beautiful as the day I received it. My fiancé knew exactly what I wanted. The gold necklace is gorgeous!",
     "review4Product": "Eternal Rose Box",
-    "happyCouples": "Happy Couples",
     "averageRating": "Average Rating",
-    "satisfaction": "Satisfaction",
-    "support": "Support"
+    "handcrafted": "Handcrafted",
+    "guarantee": "Guarantee",
+    "shipping": "Shipping"
   },
   "whyUs": {
     "title": "Why Choose",
@@ -169,10 +169,10 @@
     "freeShippingDesc": "We deliver love globally with free express shipping.",
     "guarantee": "30-Day Guarantee",
     "guaranteeDesc": "Not satisfied? We offer hassle-free returns within 30 days.",
-    "support": "24/7 Support",
-    "supportDesc": "Our dedicated team is always here to help you.",
+    "support": "Fast Support",
+    "supportDesc": "We reply within 24 hours, every time.",
     "ctaTitle": "Ready to Make Someone's Day Special?",
-    "ctaSubtitle": "Join over 50,000 happy customers who have chosen EternGift to express their love."
+    "ctaSubtitle": "Handcrafted with love and shipped with care — see why our customers keep coming back."
   },
   "cart": {
     "yourCart": "Your Cart",
@@ -375,8 +375,8 @@
     "friendlySupportDesc": "Our team truly cares about your experience.",
     "securePrivate": "Secure & Private",
     "securePrivateDesc": "Your information is always protected.",
-    "trustedBy": "Trusted by 50,000+ Customers",
-    "trustedByDesc": "Join thousands of happy customers who have trusted EternGift for their most special moments. Our 4.9★ rating speaks for itself!",
+    "trustedBy": "Handcrafted With Care",
+    "trustedByDesc": "Every piece is made to order and checked by hand before it ships to you.",
     "followOurJourney": "Follow Our Journey",
     "followOurJourneyDesc": "Stay connected with us on social media for exclusive offers, behind-the-scenes content, and romantic gift inspiration."
   }

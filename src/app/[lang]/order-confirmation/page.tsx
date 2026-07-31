@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { CheckCircle, Heart, Mail, ShoppingBag, ArrowRight } from 'lucide-react'
+import posthog from 'posthog-js'
 import { Button } from '@/components/ui/Button'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 
@@ -78,6 +79,37 @@ export default function OrderConfirmationPage() {
     }
 
     window.fbq('track', 'Purchase', {
+      value,
+      currency,
+    })
+
+    sessionStorage.setItem(sentKey, '1')
+  }, [orderId])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const sentKey = `eg_posthog_purchase_sent_${orderId}`
+    if (sessionStorage.getItem(sentKey)) return
+
+    let value = 1.0
+    let currency = 'EUR'
+
+    try {
+      const raw = sessionStorage.getItem('eg_last_order')
+      if (raw) {
+        const parsed = JSON.parse(raw) as { orderId?: string; value?: number; currency?: string }
+        if (parsed?.orderId === orderId) {
+          if (typeof parsed.value === 'number' && Number.isFinite(parsed.value)) value = parsed.value
+          if (typeof parsed.currency === 'string' && parsed.currency) currency = parsed.currency
+        }
+      }
+    } catch {
+      // ignore
+    }
+
+    posthog.capture('purchase_completed', {
+      order_id: orderId,
       value,
       currency,
     })

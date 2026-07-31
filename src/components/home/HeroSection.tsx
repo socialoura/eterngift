@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Heart, Sparkles, Gift } from 'lucide-react'
+import { Heart, Sparkles, Gift, Truck, Gem } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 import { useIsMobile, useReducedMotion } from '@/hooks/useIsMobile'
@@ -218,12 +218,12 @@ export function HeroSection() {
                 className="mt-8 md:mt-12 flex flex-wrap gap-4 md:gap-6 justify-center lg:justify-start"
               >
                 {[
-                  { icon: '🚚', textKey: 'common.freeShipping' },
-                  { icon: '💎', textKey: 'common.handcraftedQuality' },
-                  { icon: '🎁', textKey: 'common.giftWrapping' },
+                  { Icon: Truck, textKey: 'common.freeShipping' },
+                  { Icon: Gem, textKey: 'common.handcraftedQuality' },
+                  { Icon: Gift, textKey: 'common.giftWrapping' },
                 ].map((badge, i) => (
                   <div key={i} className="flex items-center gap-2 text-white/70 text-sm">
-                    <span className="text-lg">{badge.icon}</span>
+                    <badge.Icon className="w-4 h-4" />
                     <span>{t(badge.textKey)}</span>
                   </div>
                 ))}
@@ -327,7 +327,7 @@ export function HeroSection() {
                       <span className="text-2xl">⭐</span>
                       <div>
                         <p className="text-sm font-bold text-gray-900">4.9/5</p>
-                        <p className="text-xs text-gray-500">2,847 {t('featured.reviews')}</p>
+                        <p className="text-xs text-gray-500">128 {t('featured.reviews')}</p>
                       </div>
                     </div>
                   </motion.div>

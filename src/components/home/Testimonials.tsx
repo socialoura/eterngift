@@ -11,7 +11,7 @@ const testimonialData = [
     id: 1,
     name: 'Sarah & Michael',
     location: 'New York, USA',
-    avatar: '👩‍❤️‍👨',
+    avatar: 'SM',
     rating: 5,
     titleKey: 'testimonials.review1Title',
     contentKey: 'testimonials.review1Text',
@@ -22,7 +22,7 @@ const testimonialData = [
     id: 2,
     name: 'Emma Thompson',
     location: 'London, UK',
-    avatar: '👩',
+    avatar: 'ET',
     rating: 5,
     titleKey: 'testimonials.review2Title',
     contentKey: 'testimonials.review2Text',
@@ -33,7 +33,7 @@ const testimonialData = [
     id: 3,
     name: 'David & Lisa',
     location: 'Toronto, Canada',
-    avatar: '💑',
+    avatar: 'DL',
     rating: 5,
     titleKey: 'testimonials.review3Title',
     contentKey: 'testimonials.review3Text',
@@ -44,7 +44,7 @@ const testimonialData = [
     id: 4,
     name: 'Jessica Martinez',
     location: 'Miami, USA',
-    avatar: '👧',
+    avatar: 'JM',
     rating: 5,
     titleKey: 'testimonials.review4Title',
     contentKey: 'testimonials.review4Text',
@@ -173,7 +173,7 @@ export function Testimonials() {
                   <div className="grid md:grid-cols-3 gap-8 items-center">
                     {/* Left side - Avatar and info */}
                     <div className="text-center md:text-left">
-                      <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#FFE5E5] to-pink-100 rounded-full text-4xl mb-4">
+                      <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#B71C1C] to-[#D4AF88] rounded-full text-2xl font-heading font-bold text-white mb-4">
                         {testimonials[currentIndex].avatar}
                       </div>
                       <h4 className="text-xl font-bold text-gray-900">
@@ -237,10 +237,10 @@ export function Testimonials() {
           className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 max-w-4xl mx-auto"
         >
           {[
-            { value: '50K+', labelKey: 'testimonials.happyCouples' },
             { value: '4.9', labelKey: 'testimonials.averageRating' },
-            { value: '99%', labelKey: 'testimonials.satisfaction' },
-            { value: '24/7', labelKey: 'testimonials.support' },
+            { value: '100%', labelKey: 'testimonials.handcrafted' },
+            { value: '30-Day', labelKey: 'testimonials.guarantee' },
+            { value: 'Free', labelKey: 'testimonials.shipping' },
           ].map((stat, i) => (
             <motion.div
               key={i}

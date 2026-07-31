@@ -2,6 +2,7 @@
 
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import posthog from 'posthog-js'
 import { Product, CartItem } from '@/lib/types'
 
 interface CartState {
@@ -69,6 +70,13 @@ export const useCartStore = create<CartState>()(
               },
             ],
           }
+        })
+
+        posthog.capture('add_to_cart', {
+          product_id: product.id,
+          product_name: product.name,
+          price_usd: product.priceUsd,
+          quantity,
         })
       },
 

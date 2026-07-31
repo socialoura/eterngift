@@ -14,7 +14,7 @@ import { QuickBuyModal } from '@/components/checkout/QuickBuyModal'
 import { useCurrencyStore, useHydrated } from '@/store/currency'
 import { useCartStore } from '@/store/cart'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
-import { cn } from '@/lib/utils'
+import { cn, formatVariantName } from '@/lib/utils'
 import { useStorefrontProducts } from '@/hooks/useStorefrontProducts'
 
 const products = [eternalRoseBear, eternalRoseBox]
@@ -54,7 +54,7 @@ function ProductCard({
   const handleAddToCart = () => {
     const productForCart = {
       id: product.id === 'eternal-rose-bear' ? 1 : 2,
-      name: `${product.name} (${selectedColor}, ${selectedNecklace})`,
+      name: formatVariantName(product.name, selectedColor, selectedNecklace),
       description: translatedProductDescription,
       priceUsd: effectiveBasePrice,
       imageUrl: currentImages.hero,

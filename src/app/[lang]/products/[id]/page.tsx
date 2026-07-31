@@ -5,9 +5,10 @@ import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  ShoppingCart, Heart, Check, Star, Truck, Shield, 
-  RefreshCw, Gift, Sparkles, ChevronDown, ArrowRight
+import {
+  ShoppingCart, Heart, Check, Star, Truck, Shield,
+  RefreshCw, Gift, Sparkles, ChevronDown, ArrowRight,
+  Flower2, Gem
 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
@@ -15,7 +16,7 @@ import { eternalRoseBear, eternalRoseBox, ProductVariant } from '@/lib/products-
 import { QuickBuyModal } from '@/components/checkout/QuickBuyModal'
 import { useCurrencyStore, useHydrated } from '@/store/currency'
 import { useCartStore } from '@/store/cart'
-import { cn } from '@/lib/utils'
+import { cn, formatVariantName } from '@/lib/utils'
 import { useTranslation, useLocale } from '@/components/providers/I18nProvider'
 import { useStorefrontProducts } from '@/hooks/useStorefrontProducts'
 
@@ -150,7 +151,7 @@ export default function ProductDetailPage() {
   const handleAddToCart = () => {
     const productForCart = {
       id: product.id === 'eternal-rose-bear' ? 1 : 2,
-      name: `${product.name} (${selectedColor}, ${selectedNecklace})`,
+      name: formatVariantName(product.name, selectedColor, selectedNecklace),
       description: translatedProductDescription,
       priceUsd: effectiveBasePriceForCart,
       imageUrl: currentImages.hero,
@@ -510,8 +511,9 @@ export default function ProductDetailPage() {
               className="space-y-6"
             >
               <div>
-                <span className="inline-block bg-gradient-to-r from-[#B71C1C] to-[#D4AF88] text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-                  ✨ {t('productDetail.handcraftedWithLove')}
+                <span className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#B71C1C] to-[#D4AF88] text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+                  <Sparkles className="w-4 h-4" />
+                  {t('productDetail.handcraftedWithLove')}
                 </span>
                 <h2 className="text-3xl lg:text-4xl font-heading font-bold text-gray-900 mb-4">
                   {product.id === 'eternal-rose-bear' ? t('productDetail.thePerfectRoseBear') : t('productDetail.elegantRoseBox')}
@@ -534,10 +536,10 @@ export default function ProductDetailPage() {
               {/* Features list */}
               <div className="grid grid-cols-2 gap-4 pt-4">
                 {[
-                  { icon: '🌹', text: t('productDetail.realPreservedRoses') },
-                  { icon: '💎', text: t('productDetail.engravedNecklace') },
-                  { icon: '🎁', text: t('productDetail.premiumGiftBox') },
-                  { icon: '💝', text: t('productDetail.lasts2to3Years') },
+                  { Icon: Flower2, text: t('productDetail.realPreservedRoses') },
+                  { Icon: Gem, text: t('productDetail.engravedNecklace') },
+                  { Icon: Gift, text: t('productDetail.premiumGiftBox') },
+                  { Icon: Heart, text: t('productDetail.lasts2to3Years') },
                 ].map((feature, i) => (
                   <motion.div
                     key={i}
@@ -547,7 +549,9 @@ export default function ProductDetailPage() {
                     transition={{ delay: i * 0.1 }}
                     className="flex items-center gap-3 bg-white rounded-xl p-3 shadow-md border border-pink-50"
                   >
-                    <span className="text-2xl">{feature.icon}</span>
+                    <div className="flex items-center justify-center w-9 h-9 shrink-0 rounded-lg bg-gradient-to-br from-[#FFE5E5] to-pink-100">
+                      <feature.Icon className="w-4 h-4 text-[#B71C1C]" />
+                    </div>
                     <span className="text-sm font-medium text-gray-700">{feature.text}</span>
                   </motion.div>
                 ))}
@@ -566,12 +570,14 @@ export default function ProductDetailPage() {
           </motion.div>
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              { icon: '🌹', title: product.id === 'eternal-rose-bear' ? t('productDetail.roseBear') : t('productDetail.roseBox'), desc: t('productDetail.roseBearItemDesc') },
-              { icon: '💎', title: t('productDetail.engravedNecklace'), desc: t('productDetail.engravedNecklaceItemDesc') },
-              { icon: '🎁', title: t('productDetail.premiumGiftBox'), desc: t('productDetail.premiumGiftBoxItemDesc') },
+              { Icon: Flower2, title: product.id === 'eternal-rose-bear' ? t('productDetail.roseBear') : t('productDetail.roseBox'), desc: t('productDetail.roseBearItemDesc') },
+              { Icon: Gem, title: t('productDetail.engravedNecklace'), desc: t('productDetail.engravedNecklaceItemDesc') },
+              { Icon: Gift, title: t('productDetail.premiumGiftBox'), desc: t('productDetail.premiumGiftBoxItemDesc') },
             ].map((item, i) => (
               <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-gradient-to-br from-[#FFF8F8] to-white rounded-2xl p-6 text-center shadow-lg border border-pink-100">
-                <span className="text-5xl mb-4 block">{item.icon}</span>
+                <div className="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-2xl bg-gradient-to-br from-[#B71C1C] to-[#D4AF88]">
+                  <item.Icon className="w-8 h-8 text-white" />
+                </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
                 <p className="text-gray-600 text-sm">{item.desc}</p>
               </motion.div>

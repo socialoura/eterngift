@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
@@ -10,6 +10,7 @@ import { z } from 'zod'
 import { ArrowLeft, CreditCard, Lock } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import posthog from 'posthog-js'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 
@@ -62,6 +63,17 @@ export default function CheckoutPage() {
   const taxUsd = 0
   const totalUsd = subtotalUsd + shippingUsd + taxUsd
 
+  const checkoutStartedSent = useRef(false)
+  useEffect(() => {
+    if (checkoutStartedSent.current || items.length === 0) return
+    checkoutStartedSent.current = true
+    posthog.capture('checkout_started', {
+      value: totalUsd,
+      currency: 'USD',
+      item_count: items.length,
+    })
+  }, [items.length, totalUsd])
+
   const {
     register,
     handleSubmit,
@@ -96,8 +108,13 @@ export default function CheckoutPage() {
     router.push(`/${locale}/order-confirmation?orderId=${orderId}`)
   }
 
+  useEffect(() => {
+    if (items.length === 0) {
+      router.push(`/${locale}/cart`)
+    }
+  }, [items.length, locale, router])
+
   if (items.length === 0) {
-    router.push(`/${locale}/cart`)
     return null
   }
 

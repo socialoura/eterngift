@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Heart } from 'lucide-react'
+import { Heart, Star, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { eternalRoseBear, eternalRoseBox, ProductVariant } from '@/lib/products-data'
 import { useCurrencyStore, useHydrated } from '@/store/currency'
@@ -46,8 +46,18 @@ function ProductCard({
       )}
     >
       {product.badge && (
-        <div className="absolute top-4 left-4 z-10 bg-[#B71C1C] text-white text-xs font-semibold px-3 py-1.5 rounded-full">
-          {product.badge === 'Most Popular' ? `⭐ ${t('product.mostPopular')}` : `✨ ${t('product.premium')}`}
+        <div className="absolute top-4 left-4 z-10 inline-flex items-center gap-1 bg-[#B71C1C] text-white text-xs font-semibold px-3 py-1.5 rounded-full">
+          {product.badge === 'Most Popular' ? (
+            <>
+              <Star className="w-3 h-3 fill-current" />
+              {t('product.mostPopular')}
+            </>
+          ) : (
+            <>
+              <Sparkles className="w-3 h-3" />
+              {t('product.premium')}
+            </>
+          )}
         </div>
       )}
 

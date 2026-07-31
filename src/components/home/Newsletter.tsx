@@ -100,12 +100,13 @@ export function Newsletter() {
 
                 <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                   {[
-                    { icon: '💝', key: 'newsletter.earlyAccess' },
-                    { icon: '🎁', key: 'newsletter.exclusiveDeals' },
-                    { icon: '💌', key: 'newsletter.giftIdeas' }
+                    { Icon: Heart, key: 'newsletter.earlyAccess' },
+                    { Icon: Gift, key: 'newsletter.exclusiveDeals' },
+                    { Icon: Mail, key: 'newsletter.giftIdeas' }
                   ].map((item, i) => (
-                    <span key={i} className="text-white/70 text-sm bg-white/10 px-3 py-1 rounded-full">
-                      {item.icon} {t(item.key)}
+                    <span key={i} className="inline-flex items-center gap-1.5 text-white/70 text-sm bg-white/10 px-3 py-1 rounded-full">
+                      <item.Icon className="w-3.5 h-3.5" />
+                      {t(item.key)}
                     </span>
                   ))}
                 </div>
@@ -126,7 +127,7 @@ export function Newsletter() {
                       <Heart className="w-16 h-16 text-[#B71C1C] fill-[#B71C1C] mx-auto mb-4" />
                     </motion.div>
                     <h3 className="text-2xl font-heading font-bold text-gray-900 mb-2">
-                      Welcome to the Family! 💕
+                      Welcome to the Family!
                     </h3>
                     <p className="text-gray-600">
                       Check your email for your exclusive 10% discount code.
