@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { generateOrderNumber } from '@/lib/utils'
-import { sendOrderConfirmationEmail, sendDiscordNotification } from '@/lib/email'
+import { sendOrderConfirmationEmail, sendDiscordNotification, sendTelegramNotification } from '@/lib/email'
 import { createOrder, getStripeSecretKey } from '@/lib/db'
 
 export async function POST(request: NextRequest) {
@@ -93,6 +93,16 @@ export async function POST(request: NextRequest) {
 
     // Send Discord notification to you
     await sendDiscordNotification({
+      orderNumber,
+      items,
+      shippingInfo,
+      totalUsd,
+      currency,
+      paymentMethod: paymentMethod || 'card',
+    })
+
+    // Send Telegram notification
+    await sendTelegramNotification({
       orderNumber,
       items,
       shippingInfo,

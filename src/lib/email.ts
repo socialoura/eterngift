@@ -221,6 +221,73 @@ export async function sendOrderConfirmationEmail(data: OrderConfirmationData): P
   }
 }
 
+export async function sendTelegramNotification(data: OrderConfirmationData): Promise<boolean> {
+  const token = process.env.TELEGRAM_BOT_TOKEN
+  const chatId = process.env.TELEGRAM_CHAT_ID
+
+  if (!token || !chatId) {
+    console.warn('TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID not configured, skipping Telegram notification')
+    return false
+  }
+
+  try {
+    const { orderNumber, items, shippingInfo, totalUsd, paymentMethod } = data
+
+    const itemsList = items
+      .map((item) => {
+        const engr =
+          item.engravingLeftHeart || item.engravingRightHeart
+            ? ` ✨ L: "${item.engravingLeftHeart || '-'}" | R: "${item.engravingRightHeart || '-'}"`
+            : ''
+        return `• ${item.productName} x${item.quantity} — $${(item.priceUsd * item.quantity).toFixed(2)}${engr}`
+      })
+      .join('\n')
+
+    const text = [
+      '🎉 *NEW ORDER* — EternGift',
+      '',
+      `*Order #${orderNumber}*`,
+      `💳 ${paymentMethod === 'paypal' ? 'PayPal' : 'Credit Card'}`,
+      '',
+      `👤 *${shippingInfo.firstName} ${shippingInfo.lastName}*`,
+      `📧 ${shippingInfo.email}`,
+      `📱 ${shippingInfo.phone || 'N/A'}`,
+      '',
+      `💰 *$${totalUsd.toFixed(2)} USD*`,
+      '',
+      '📦 *Items*',
+      itemsList,
+      '',
+      '🏠 *Shipping*',
+      `${shippingInfo.address}`,
+      `${shippingInfo.city}, ${shippingInfo.postalCode}`,
+      `${shippingInfo.country}`,
+    ].join('\n')
+
+    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text,
+        parse_mode: 'Markdown',
+      }),
+    })
+
+    if (!res.ok) {
+      const err = await res.text()
+      console.error('Telegram notification failed:', err)
+      return false
+    }
+
+    console.log('Telegram notification sent')
+    return true
+  } catch (error) {
+    console.error('Failed to send Telegram notification:', error)
+    return false
+  }
+}
+
 export async function sendDiscordNotification(data: OrderConfirmationData): Promise<boolean> {
   if (!process.env.DISCORD_WEBHOOK_URL) {
     console.warn('DISCORD_WEBHOOK_URL not configured, skipping Discord notification')

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { generateOrderNumber } from '@/lib/utils'
-import { sendOrderConfirmationEmail, sendDiscordNotification } from '@/lib/email'
+import { sendOrderConfirmationEmail, sendDiscordNotification, sendTelegramNotification } from '@/lib/email'
 import { createOrder } from '@/lib/db'
 
 const PAYPAL_API_URL = process.env.NODE_ENV === 'production' 
@@ -121,6 +121,16 @@ export async function POST(request: NextRequest) {
 
     // Send Discord notification
     await sendDiscordNotification({
+      orderNumber,
+      items,
+      shippingInfo,
+      totalUsd,
+      currency,
+      paymentMethod: 'paypal',
+    })
+
+    // Send Telegram notification
+    await sendTelegramNotification({
       orderNumber,
       items,
       shippingInfo,
