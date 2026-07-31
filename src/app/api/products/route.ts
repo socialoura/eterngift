@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
         ${description || null},
         ${Number(priceUsd)},
         ${imageUrl || null},
-        ${imageUrl ? [imageUrl] : []},
+        ${(imageUrl ? [imageUrl] : []) as unknown as string},
         ${category || null},
         ${stock !== undefined ? Number(stock) : 0},
         'active',
