@@ -10,9 +10,8 @@ import { sendEngravingRecoveryEmail } from '@/lib/email'
  * Body: { orderNumber: string, lang?: 'en' | 'fr' }
  */
 export async function POST(request: NextRequest) {
-  // TEMP: auth disabled to trigger Pablo's recovery email E2E test.
-  // const auth = verifyAdminToken(request)
-  // if (!auth.valid) return unauthorizedResponse(auth.error)
+  const auth = verifyAdminToken(request)
+  if (!auth.valid) return unauthorizedResponse(auth.error)
 
   try {
     const { orderNumber, lang } = await request.json()
