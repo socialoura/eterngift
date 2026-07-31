@@ -192,11 +192,11 @@ export async function getAllOrders(filters?: { status?: string; product?: string
 
   // For now, return all orders - filtering can be added later
   const result = await query
-  const orders = result.rows
+  const orders: { id: number; [key: string]: unknown }[] = result.rows
 
   // Attach items (incl. engraving) for each order in a single batched query
   if (orders.length > 0) {
-    const orderIds: number[] = orders.map((o: { id: number }) => o.id)
+    const orderIds = orders.map((o) => o.id)
     const items = await sql`
       SELECT order_id, product_name, quantity, price_usd, total_usd,
              engraving_left_heart, engraving_right_heart
