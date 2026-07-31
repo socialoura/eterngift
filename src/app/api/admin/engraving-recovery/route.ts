@@ -42,7 +42,9 @@ export async function POST(request: NextRequest) {
     await createRecoveryToken(order.id, token, expiresAt)
 
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://eterngift.com'
-    const recoveryUrl = `${baseUrl}/recover/${token}`
+    // Force language: explicit param > currency heuristic > en
+    const resolvedLang = lang ?? (order.customer_currency === 'EUR' ? 'fr' : 'en')
+    const recoveryUrl = `${baseUrl}/recover/${token}?lang=${resolvedLang}`
 
     const sent = await sendEngravingRecoveryEmail({
       to: order.customer_email,
@@ -50,7 +52,7 @@ export async function POST(request: NextRequest) {
       orderNumber: order.order_number,
       productName: item.product_name,
       recoveryUrl,
-      lang: (order.customer_currency === 'EUR' ? 'fr' : lang) ?? 'en',
+      lang: resolvedLang as 'en' | 'fr',
     })
 
     return NextResponse.json({

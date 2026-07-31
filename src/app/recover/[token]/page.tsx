@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, FormEvent } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useSearchParams } from 'next/navigation'
 
 type Status = 'loading' | 'not_found' | 'expired' | 'already_used' | 'ready' | 'submitting' | 'done' | 'error'
 
@@ -12,6 +12,7 @@ interface RecoveryInfo {
 
 export default function RecoverPage() {
   const params = useParams<{ token: string }>()
+  const searchParams = useSearchParams()
   const token = params?.token ?? ''
   const [status, setStatus] = useState<Status>('loading')
   const [info, setInfo] = useState<RecoveryInfo | null>(null)
@@ -19,8 +20,12 @@ export default function RecoverPage() {
   const [right, setRight] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
 
-  // Auto-detect lang from navigator
-  const isFr = typeof navigator !== 'undefined' && /^fr/i.test(navigator.language || 'en')
+  // Force lang from ?lang= query param; fall back to navigator.language; default 'en'.
+  const langParam = (searchParams?.get('lang') || '').toLowerCase()
+  const forcedLang: 'en' | 'fr' = langParam === 'fr' || langParam === 'en'
+    ? langParam
+    : (typeof navigator !== 'undefined' && /^fr/i.test(navigator.language || 'en') ? 'fr' : 'en')
+  const isFr = forcedLang === 'fr'
 
   useEffect(() => {
     let cancelled = false
