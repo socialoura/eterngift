@@ -3,6 +3,15 @@
 import { useState, useEffect } from 'react'
 import { ShoppingCart, Search, Trash2, ExternalLink, Loader2, Edit2, Check, X } from 'lucide-react'
 
+interface OrderItem {
+  product_name: string
+  quantity: number
+  price_usd: number | string
+  total_usd: number | string
+  engraving_left_heart: string | null
+  engraving_right_heart: string | null
+}
+
 interface Order {
   id: number
   order_number: string
@@ -14,6 +23,7 @@ interface Order {
   payment_method: string
   payment_id: string | null
   created_at: string
+  items?: OrderItem[]
 }
 
 const STATUS_OPTIONS = ['pending', 'processing', 'completed', 'cancelled', 'refunded']
@@ -147,9 +157,9 @@ export function OrdersTab({ token }: { token: string }) {
                   <td className="px-4 py-3">
                     <div className="text-sm font-medium text-gray-900">{order.customer_name || 'N/A'}</div>
                     <div className="text-xs text-gray-500">{order.customer_email}</div>
-                    {order.items?.length > 0 && (
+                    {order.items && order.items.length > 0 && (
                       <div className="mt-1 space-y-1">
-                        {order.items.map((it: any, i: number) => (
+                        {order.items.map((it, i) => (
                           <div key={i} className="text-xs text-gray-600">
                             <span className="font-medium">{it.product_name}</span> × {it.quantity}
                             {(it.engraving_left_heart || it.engraving_right_heart) && (
