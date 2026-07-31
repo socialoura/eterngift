@@ -192,7 +192,7 @@ export async function getAllOrders(filters?: { status?: string; product?: string
 
   // For now, return all orders - filtering can be added later
   const result = await query
-  const orders: { id: number; [key: string]: unknown }[] = result.rows
+  const orders = result.rows as unknown as { id: number; items?: unknown[] }[]
 
   // Attach items (incl. engraving) for each order in a single batched query
   if (orders.length > 0) {
