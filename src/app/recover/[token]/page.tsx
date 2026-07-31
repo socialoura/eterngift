@@ -159,12 +159,9 @@ export default function RecoverPage() {
 
                 <button
                   type="submit"
-                  disabled={status === 'submitting'}
-                  className="w-full bg-gradient-to-r from-[#B71C1C] to-[#8B1538] text-white font-bold py-3 rounded-lg hover:opacity-95 disabled:opacity-50 transition"
+                  className="w-full bg-gradient-to-r from-[#B71C1C] to-[#8B1538] text-white font-bold py-3 rounded-lg hover:opacity-95 transition"
                 >
-                  {status === 'submitting'
-                    ? t('Saving…', 'Enregistrement…')
-                    : t('💝 Save my engraving', '💝 Enregistrer ma gravure')}
+                  {t('💝 Save my engraving', '💝 Enregistrer ma gravure')}
                 </button>
               </div>
 
