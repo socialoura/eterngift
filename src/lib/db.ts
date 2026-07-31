@@ -366,7 +366,7 @@ export async function setPromoFieldEnabled(enabled: boolean) {
 export async function createRecoveryToken(orderId: number, token: string, expiresAt: Date) {
   await sql`
     INSERT INTO engraving_recovery_tokens (order_id, token, expires_at)
-    VALUES (${orderId}, ${token}, ${expiresAt.toISOString() as unknown as Date})
+    VALUES (${orderId}, ${token}, ${expiresAt.toISOString()})
   `
 }
 
