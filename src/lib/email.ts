@@ -354,3 +354,103 @@ export async function sendDiscordNotification(data: OrderConfirmationData): Prom
     return false
   }
 }
+
+export async function sendEngravingRecoveryEmail(data: {
+  to: string
+  customerName: string
+  orderNumber: string
+  productName: string
+  recoveryUrl: string
+  lang?: 'en' | 'fr'
+}): Promise<boolean> {
+  if (!process.env.RESEND_API_KEY) {
+    console.warn('RESEND_API_KEY not configured, skipping engraving recovery email')
+    return false
+  }
+
+  const lang = data.lang ?? 'en'
+  const isFr = lang === 'fr'
+  const firstName = data.customerName.split(' ')[0] || data.customerName
+
+  const subject = isFr
+    ? `💝 EternGift — Une dernière étape pour votre commande #${data.orderNumber}`
+    : `💝 EternGift — One last step for your order #${data.orderNumber}`
+
+  const html = `
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"></head>
+<body style="margin:0;padding:0;font-family:'Segoe UI',Tahoma,sans-serif;background:#f8f4f4;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8f4f4;padding:40px 20px;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.08);">
+        <tr>
+          <td style="background:linear-gradient(135deg,#8B1538 0%,#B71C1C 50%,#D4AF88 100%);padding:40px;text-align:center;">
+            <h1 style="color:#fff;margin:0;font-size:28px;">EternGift</h1>
+            <p style="color:rgba(255,255,255,0.9);margin:6px 0 0 0;font-size:12px;letter-spacing:2px;">FOREVER IN LOVE</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:40px 40px 10px 40px;">
+            <h2 style="color:#333;margin:0;font-size:22px;">
+              ${isFr ? `Bonjour ${firstName},` : `Hi ${firstName},`}
+            </h2>
+            <p style="color:#555;margin:14px 0 0 0;font-size:15px;line-height:1.6;">
+              ${isFr
+                ? `Merci encore pour votre commande <strong>#${data.orderNumber}</strong> ! Il semble que la gravure sur votre <strong>${data.productName}</strong> n'ait pas été finalisée. Sans gravure de votre part, le collier sera préparé vierge.`
+                : `Thanks again for your order <strong>#${data.orderNumber}</strong>! It looks like the engraving on your <strong>${data.productName}</strong> wasn't finalized. If we don't hear from you, the necklace will be prepared blank.`}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:10px 40px 30px 40px;text-align:center;">
+            <a href="${data.recoveryUrl}" style="display:inline-block;background:linear-gradient(135deg,#B71C1C,#8B1538);color:#fff;text-decoration:none;font-weight:bold;padding:16px 36px;border-radius:10px;font-size:16px;">
+              ${isFr ? '✍️ Choisir ma gravure' : '✍️ Choose my engraving'}
+            </a>
+            <p style="color:#888;margin:16px 0 0 0;font-size:12px;">
+              ${isFr ? 'Le lien est valide 30 jours. Vous pouvez répondre à cet email si vous préférez.' : 'This link is valid for 30 days. You can also reply to this email if you prefer.'}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 40px 40px 40px;">
+            <p style="color:#666;margin:0;font-size:13px;line-height:1.6;">
+              ${isFr
+                ? '💡 Astuce : indiquez un texte court pour chaque face (jusqu\'à 15 caractères). Exemples : un prénom, une date, "I love you", "Mon ange", etc.'
+                : '💡 Tip: keep each side short (up to 15 characters). Examples: a first name, a date, "I love you", "My angel", etc.'}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="background:#333;padding:24px 40px;text-align:center;">
+            <p style="color:#fff;margin:0 0 6px 0;font-size:14px;font-weight:bold;">EternGift</p>
+            <p style="color:#888;margin:0;font-size:11px;">
+              ${isFr ? 'Une question ? Répondez à cet email.' : 'Questions? Just reply to this email.'}
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>
+  `.trim()
+
+  try {
+    const { error } = await resend!.emails.send({
+      from: process.env.RESEND_FROM_EMAIL || 'EternGift <orders@eterngift.com>',
+      to: data.to,
+      subject,
+      html,
+    })
+    if (error) {
+      console.error('Failed to send engraving recovery email:', error)
+      return false
+    }
+    console.log(`Engraving recovery email sent to ${data.to}`)
+    return true
+  } catch (error) {
+    console.error('Error sending engraving recovery email:', error)
+    return false
+  }
+}

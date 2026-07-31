@@ -91,3 +91,14 @@ model CurrencyRate {
 
   @@map("currency_rates")
 }
+
+model EngravingRecoveryToken {
+  id          Int       @id @default(autoincrement())
+  orderId     Int       @map("order_id")
+  token       String    @unique
+  expiresAt   DateTime  @map("expires_at")
+  usedAt      DateTime? @map("used_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  @@map("engraving_recovery_tokens")
+}

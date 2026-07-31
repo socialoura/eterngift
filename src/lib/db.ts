@@ -361,3 +361,29 @@ export async function getPromoFieldEnabled() {
 export async function setPromoFieldEnabled(enabled: boolean) {
   await setSetting('promo_field_enabled', enabled ? 'true' : 'false')
 }
+
+// Engraving recovery tokens
+export async function createRecoveryToken(orderId: number, token: string, expiresAt: Date) {
+  await sql`
+    INSERT INTO engraving_recovery_tokens (order_id, token, expires_at)
+    VALUES (${orderId}, ${token}, ${expiresAt.toISOString() as unknown as Date})
+  `
+}
+
+export async function getRecoveryToken(token: string) {
+  const result = await sql`
+    SELECT t.id, t.order_id, t.expires_at, t.used_at, o.order_number, o.customer_email, o.customer_name
+    FROM engraving_recovery_tokens t
+    JOIN orders o ON o.id = t.order_id
+    WHERE t.token = ${token}
+  `
+  return result.rows[0]
+}
+
+export async function markRecoveryTokenUsed(tokenId: number) {
+  await sql`UPDATE engraving_recovery_tokens SET used_at = NOW() WHERE id = ${tokenId}`
+}
+
+export async function updateOrderItemEngraving(itemId: number, left: string | null, right: string | null) {
+  await sql`UPDATE order_items SET engraving_left_heart = ${left}, engraving_right_heart = ${right} WHERE id = ${itemId}`
+}

@@ -42,6 +42,7 @@ export function middleware(request: NextRequest) {
     pathname.startsWith('/dashboard') ||
     pathname.startsWith('/sitemap') ||
     pathname.startsWith('/robots') ||
+    pathname.startsWith('/recover') ||
     pathname.includes('.') // Static files like .png, .svg, etc.
   ) {
     return NextResponse.next()
