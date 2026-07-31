@@ -196,11 +196,12 @@ export async function getAllOrders(filters?: { status?: string; product?: string
 
   // Attach items (incl. engraving) for each order in a single batched query
   if (orders.length > 0) {
+    const orderIds: number[] = orders.map((o: { id: number }) => o.id)
     const items = await sql`
       SELECT order_id, product_name, quantity, price_usd, total_usd,
              engraving_left_heart, engraving_right_heart
       FROM order_items
-      WHERE order_id = ANY(${orders.map((o: { id: number }) => o.id) as unknown as number})
+      WHERE order_id = ANY(${orderIds as unknown as number})
     `
     const byOrder = new Map<number, unknown[]>()
     for (const it of items.rows) {
